@@ -1,13 +1,13 @@
-# Solvers-Soen6011summer2023
+# Career Services Application
 
-Project Description: 
+### Project Description: 
 
 The objective of this project is to develop a career services platform that serves as a hub for job-seeking students and employers. The platform enables students to create and update their portfolios, while employers can post job openings. This online system facilitates efficient job hunting and benefits both candidates and employers by allowing them to identify potential matches easily. The platform also enables employers to search for candidates who meet their specific requirements, while job seekers can tailor their profiles to align with market demands. Accessible through a PC or mobile device with an internet connection, the platform provides a user-friendly interface for seamless navigation and interaction.
 
-The core features of the project include:
+#### The core features of the project include:
 
 - User Registration and Login: Students and employers will create accounts using their email and password. They can then log in to access the platform's features and functionalities.
-
+- 
 - Student/Candidate Profile Management: Students will have the ability to create, modify, and update their profiles. They can showcase their skills, education, work experience, and other relevant information to attract potential employers.
 
 - Job Posting and Management: Employers can create job offers, specifying the requirements, job description, and other relevant details. They can manage and track their job posts, review applications from candidates, and select suitable candidates for interviews.
@@ -18,11 +18,11 @@ The core features of the project include:
 
 - Admin Management: An administrator will have the authority to manage all user profiles, job postings, and track the system's overall performance. They will ensure the system's smooth operation and handle any administrative tasks.
 
-Team Members and Roles:
+### Team Members and Roles:
 
 
 
-Project approach and technologies:
+### Project approach and technologies:
 
 
 
