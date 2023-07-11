@@ -7,7 +7,7 @@ The objective of this project is to develop a career services platform that serv
 #### The core features of the project include:
 
 - User Registration and Login: Students and employers will create accounts using their email and password. They can then log in to access the platform's features and functionalities.
-- 
+
 - Student/Candidate Profile Management: Students will have the ability to create, modify, and update their profiles. They can showcase their skills, education, work experience, and other relevant information to attract potential employers.
 
 - Job Posting and Management: Employers can create job offers, specifying the requirements, job description, and other relevant details. They can manage and track their job posts, review applications from candidates, and select suitable candidates for interviews.
