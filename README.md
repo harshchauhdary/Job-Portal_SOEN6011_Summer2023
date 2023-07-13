@@ -33,7 +33,7 @@ The objective of this project is to develop a career services platform that serv
 
 
 
-We will use the following development tools/technologies to develop the System:
+For the development of the system, we have adopted a comprehensive project approach, utilizing various tools and technologies. The following tools and technologies have been selected to ensure efficient and effective development:
 
 | Tools | Name | 
 | ------- | ------- |
