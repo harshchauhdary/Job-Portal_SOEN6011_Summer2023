@@ -11,6 +11,6 @@ urlpatterns = [
     path('createResume/form', views.create_Resume, name="Create_Resume"),
     path('createResume/file', views.upload_Resume, name="Upload_Resume"),
     path('resume', views.view_Resume, name="View_Resume"),
-    path('downloadResume', views.download, name="Download_Resume")
-
+    path('downloadResume', views.download, name="Download_Resume"),
+    path('login', views.login, name="login")
 ]

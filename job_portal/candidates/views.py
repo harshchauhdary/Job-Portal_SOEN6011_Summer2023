@@ -243,3 +243,6 @@ def update_Resume(request):
     }
 
     return render(request, 'updateResumeTemplate.html', context)
+
+def login(request):
+    return render(request, 'login.html')

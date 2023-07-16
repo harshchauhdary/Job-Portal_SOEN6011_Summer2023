@@ -1,0 +1,67 @@
+<!-- base.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Your Job Board</title>
+  <!-- Add your CSS stylesheets and other necessary dependencies here -->
+  <style>
+    /* Add your custom CSS styles here */
+    body {
+      font-family: Arial, sans-serif;
+    }
+    header {
+      background-color: #f5f5f5;
+      padding: 20px;
+    }
+    nav ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+    nav ul li {
+      display: inline;
+      margin-right: 10px;
+    }
+    nav ul li a {
+      text-decoration: none;
+      color: #333;
+      padding: 5px;
+    }
+    main {
+      padding: 20px;
+    }
+    footer {
+      background-color: #f5f5f5;
+      padding: 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <!-- Add your header content here -->
+    <h1>Your Job Board</h1>
+    <nav>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/login">Login</a></li>
+        <li><a href="/register">Register</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    {% block content %}
+    <!-- Content specific to child templates will be rendered here -->
+    {% endblock %}
+  </main>
+
+  <footer>
+    <!-- Add your footer content here -->
+    <p>&copy; 2023 Your Job Board. All rights reserved.</p>
+  </footer>
+
+  <!-- Add your JavaScript files and other necessary dependencies here -->
+</body>
+</html>
