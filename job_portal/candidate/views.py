@@ -28,7 +28,7 @@ def apply_Job(request, jpK):
     if 'user_id' in request.session:
         cpk = request.session['user_id']
     else:
-        return render(request, 'authentication/login.html')
+        return render(request, 'users/login.html')
 
     user = get_object_or_404(User, pk=cpk)
     job = get_object_or_404(Job, pk=jpK)
@@ -55,7 +55,7 @@ def view_Resume(request):
     if 'user_id' in request.session:
         cpk = request.session['user_id']
     else:
-        return render(request, 'authentication/login.html')
+        return render(request, 'users/login.html')
 
     user = get_object_or_404(User, pk=cpk)
     # get resume id from candidate
@@ -72,7 +72,7 @@ def download(request):
     if 'user_id' in request.session:
         cpk = request.session['user_id']
     else:
-        return render(request, 'authentication/login.html')
+        return render(request, 'users/login.html')
 
     user = get_object_or_404(User, pk=cpk)
     # get resume id from candidate
@@ -91,7 +91,7 @@ def create_Resume(request):
     if 'user_id' in request.session:
         cpk = request.session['user_id']
     else:
-        return render(request, 'authentication/login.html')
+        return render(request, 'users/login.html')
 
     if request.method == 'POST':
 
@@ -126,7 +126,7 @@ def upload_Resume(request):
     if 'user_id' in request.session:
         cpk = request.session['user_id']
     else:
-        return render(request, 'authentication/login.html')
+        return render(request, 'users/login.html')
 
     if request.method == 'POST':
 
@@ -167,7 +167,7 @@ def update_Resume(request):
     if 'user_id' in request.session:
         cpk = request.session['user_id']
     else:
-        return render(request, 'authentication/login.html')
+        return render(request, 'users/login.html')
 
     user = get_object_or_404(User, pk=cpk)
     # get resume id from candidate

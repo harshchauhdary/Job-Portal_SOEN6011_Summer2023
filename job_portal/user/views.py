@@ -19,11 +19,11 @@ def login(request):
             request.session["is_authenticated"] = True
             return render(request, 'candidates/candidateDetailTemplate.html', context={'candidate': c})
         else:
-            return render(request, 'authentication/login.html')
+            return render(request, 'users/login.html')
 
     else:
 
-        return render(request, 'authentication/login.html')
+        return render(request, 'users/login.html')
 
 
 # View and Save profile data
@@ -57,7 +57,7 @@ def update_profile(request):
     if 'user_id' in request.session:
         cpk = request.session['user_id']
     else:
-        return render(request, 'authentication/login.html')
+        return render(request, 'users/login.html')
 
     user = get_object_or_404(User, pk=cpk)
 
@@ -94,6 +94,6 @@ def view_Profile(request):
     if 'user_id' in request.session:
         cpk = request.session['user_id']
     else:
-        return render(request, 'authentication/login.html')
+        return render(request, 'users/login.html')
     user = get_object_or_404(User, pk=cpk)
     return render(request, 'users/userDetailTemplate.html', context={'user': user})
