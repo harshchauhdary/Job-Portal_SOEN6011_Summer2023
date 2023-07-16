@@ -1,13 +1,54 @@
-
-]
+{% extends "shared/base.html" %}
 
 {% block content %}
-  
-  <form action="createProfile" method="post">
-    {% csrf_token %}
-    <table>
-    {{ form.as_table }}
-    </table>
-    <input type="submit" value="Submit">
-  </form>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card mt-4">
+        <div class="card-body">
+          <h5 class="card-title">Create Profile</h5>
+          <form method="post" class="login-form" action="createProfile">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label for="id_firstname" class="form-label">First Name</label>
+              {{ form.firstname }}
+              {% if form.firstname.errors %}
+                <span class="error-message">{{ form.firstname.errors }}</span>
+              {% endif %}
+            </div>
+            <div class="mb-3">
+              <label for="id_lastname" class="form-label">Last Name</label>
+              {{ form.lastname }}
+              {% if form.lastname.errors %}
+                <span class="error-message">{{ form.lastname.errors }}</span>
+              {% endif %}
+            </div>
+            <div class="mb-3">
+              <label for="id_username" class="form-label">Username</label>
+              {{ form.username }}
+              {% if form.username.errors %}
+                <span class="error-message">{{ form.username.errors }}</span>
+              {% endif %}
+            </div>
+            <div class="mb-3">
+              <label for="id_password" class="form-label">Password</label>
+              {{ form.password }}
+              {% if form.password.errors %}
+                <span class="error-message">{{ form.password.errors }}</span>
+              {% endif %}
+            </div>
+            <div class="mb-3">
+              <label for="id_userType" class="form-label">User Type</label>
+              {{ form.userType }}
+              {% if form.userType.errors %}
+                <span class="error-message">{{ form.userType.errors }}</span>
+              {% endif %}
+            </div>
+            <button type="submit" class="btn btn-primary">Create Profile</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

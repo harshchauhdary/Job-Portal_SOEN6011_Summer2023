@@ -17,7 +17,7 @@ def login(request):
         if c.password == password:
             request.session["user_id"] = c.id
             request.session["is_authenticated"] = True
-            return render(request, 'candidates/candidateDetailTemplate.html', context={'candidate': c})
+            return render(request, 'users/userDetailTemplate.html', context={'candidate': c})
         else:
             return render(request, 'users/login.html')
 

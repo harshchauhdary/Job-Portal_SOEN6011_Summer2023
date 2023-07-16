@@ -106,7 +106,7 @@ def create_Resume(request):
             user.save()
 
             # redirect to a new URL:
-            return HttpResponseRedirect('/candidates/resume/')
+            return HttpResponseRedirect('/candidates/resume')
 
     else:
 
