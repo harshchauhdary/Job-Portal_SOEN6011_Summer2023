@@ -1,4 +1,4 @@
-from django.http import FileResponse, HttpResponseRedirect
+from django.http import FileResponse, HttpResponseForbidden, HttpResponseRedirect
 from django.shortcuts import render
 from .models import Candidate, Job, Resume
 from django.views import generic
@@ -9,9 +9,12 @@ from .forms import CandidateProfileForm, ResumeForm
 # view profile
 def view_Profile(request):
     # get candidate id from session
-    cpk = 1
+    if 'user_id' in request.session:
+        cpk = request.session['user_id']
+    else:
+        return render(request, 'authentication/login.html')
     candidate = get_object_or_404(Candidate, pk=cpk)
-    return render(request, 'candidateDetailTemplate.html', context={'candidate': candidate})
+    return render(request, 'candidates/candidateDetailTemplate.html', context={'candidate': candidate})
 
 
 # View and Save profile data
@@ -36,13 +39,17 @@ def create_Profile(request):
         'form': form,
     }
 
-    return render(request, 'profileFormTemplate.html', context)
+    return render(request, 'candidates/profileFormTemplate.html', context)
 
 
 # Update profile
 def update_profile(request):
     # get candidate id from session
-    cpk = 1
+    if 'user_id' in request.session:
+        cpk = request.session['user_id']
+    else:
+        return render(request, 'authentication/login.html')
+
     candidate = get_object_or_404(Candidate, pk=cpk)
 
     if request.method == 'POST':
@@ -69,7 +76,7 @@ def update_profile(request):
 
     }
 
-    return render(request, 'updateProfileTemplate.html', context)
+    return render(request, 'candidates/updateProfileTemplate.html', context)
 
 
 # View Job Offers
@@ -85,13 +92,17 @@ class Job_List_View(generic.ListView):
         context = super(Job_List_View, self).get_context_data(**kwargs)
         return context
 
-    template_name = 'ViewJobTemplate.html'
+    template_name = 'candidates/ViewJobTemplate.html'
 
 
 # Apply Job Offers
 def apply_Job(request, jpK):
     # get candidate id from session
-    cpk = 1
+    if 'user_id' in request.session:
+        cpk = request.session['user_id']
+    else:
+        return render(request, 'authentication/login.html')
+
     candidate = get_object_or_404(Candidate, pk=cpk)
     job = get_object_or_404(Job, pk=jpK)
 
@@ -108,18 +119,22 @@ def apply_Job(request, jpK):
         'job': job
     }
 
-    return render(request, "appliedSuccessTemplate.html", context)
+    return render(request, "candidates/appliedSuccessTemplate.html", context)
 
 
 # view Resume
 def view_Resume(request):
     # get candidate id from session
-    cpk = 1
+    if 'user_id' in request.session:
+        cpk = request.session['user_id']
+    else:
+        return render(request, 'authentication/login.html')
+
     candidate = get_object_or_404(Candidate, pk=cpk)
     # get resume id from candidate
     rpk = 2
     resume = get_object_or_404(Resume, pk=rpk)
-    return render(request, 'resumeDetailTemplate.html', context={'resume': resume})
+    return render(request, 'candidates/resumeDetailTemplate.html', context={'resume': resume})
 
 # download Resume
 
@@ -127,7 +142,11 @@ def view_Resume(request):
 def download(request):
 
     # get candidate id from session
-    cpk = 1
+    if 'user_id' in request.session:
+        cpk = request.session['user_id']
+    else:
+        return render(request, 'authentication/login.html')
+
     candidate = get_object_or_404(Candidate, pk=cpk)
     # get resume id from candidate
     rpk = 2
@@ -142,7 +161,10 @@ def download(request):
 def create_Resume(request):
 
     # get candidate id from session
-    cpk = 1
+    if 'user_id' in request.session:
+        cpk = request.session['user_id']
+    else:
+        return render(request, 'authentication/login.html')
 
     if request.method == 'POST':
 
@@ -167,14 +189,17 @@ def create_Resume(request):
         'form': form,
     }
 
-    return render(request, 'resumeFormTemplate.html', context)
+    return render(request, 'candidates/resumeFormTemplate.html', context)
 
 
 # File resume upload
 def upload_Resume(request):
 
     # get candidate id from session
-    cpk = 1
+    if 'user_id' in request.session:
+        cpk = request.session['user_id']
+    else:
+        return render(request, 'authentication/login.html')
 
     if request.method == 'POST':
 
@@ -203,7 +228,7 @@ def upload_Resume(request):
         'form': form,
     }
 
-    return render(request, 'resumeFileFormTemplate.html', context)
+    return render(request, 'candidates/resumeFileFormTemplate.html', context)
 
 
 # Update Resume form
@@ -212,7 +237,11 @@ def upload_Resume(request):
 def update_Resume(request):
 
     # get candidate id from session
-    cpk = 1
+    if 'user_id' in request.session:
+        cpk = request.session['user_id']
+    else:
+        return render(request, 'authentication/login.html')
+
     candidate = get_object_or_404(Candidate, pk=cpk)
     # get resume id from candidate
     rpk = 2
@@ -242,7 +271,4 @@ def update_Resume(request):
 
     }
 
-    return render(request, 'updateResumeTemplate.html', context)
-
-def login(request):
-    return render(request, 'login.html')
+    return render(request, 'candidates/updateResumeTemplate.html', context)

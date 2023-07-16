@@ -3,8 +3,10 @@ from django.db import models
 
 class Candidate(models.Model):
     # add more fields
-    firstname = models.CharField(max_length=255)
-    lastname = models.CharField(max_length=255)
+    firstname = models.CharField(max_length=255, null=True)
+    lastname = models.CharField(max_length=255, null=True)
+    username = models.CharField(max_length=255, unique=True, null=True)
+    password = models.CharField(max_length=255, null=True)
 
 
 class Job(models.Model):
