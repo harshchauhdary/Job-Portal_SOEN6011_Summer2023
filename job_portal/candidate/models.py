@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class User(models.Model):
+class App_user(models.Model):
     # add more fields
     firstname = models.CharField(max_length=255, null=True)
     lastname = models.CharField(max_length=255, null=True)

@@ -1,11 +1,11 @@
 from django import forms
-from .models import User
+from .models import App_user
 
 
 class UserProfileForm(forms.ModelForm):
     # add more fields
     class Meta:
-        model = User
+        model = App_user
         fields = ["firstname", "lastname", "username", "password"]
         
         widgets = {
