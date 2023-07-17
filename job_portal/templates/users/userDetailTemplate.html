@@ -1,8 +1,28 @@
+{% extends "shared/base.html" %}
 
 {% block content %}
-
 {{ request.session.user_id}}
- 
-
-  {{user}}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card mt-4">
+        <div class="card-body">
+          <h5 class="card-title">View Profile</h5>
+          <div class="mb-3">
+            <label class="form-label">First Name</label>
+            <p class="form-control-static">{{ user.firstname }}</p>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Last Name</label>
+            <p class="form-control-static">{{ user.lastname }}</p>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Username</label>
+            <p class="form-control-static">{{ user.username }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

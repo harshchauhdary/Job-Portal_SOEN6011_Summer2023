@@ -1,7 +1,31 @@
+
+{% extends "shared/base.html" %}
+
 {% block content %}
+{{ request.session.user_id}}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card mt-4">
+        <div class="card-body">
+          <h5 class="card-title">View Resume</h5>
+          <div class="mb-3">
+            <label class="form-label">Graduation Year</label>
+            <p class="form-control-static">{{ resume.graduation_Year }}</p>
+          </div>
+          
+          {% if resume.file %}
+          <div class="mb-3">
+            <label class="form-label">Resume</label>
+            <p class="form-control-static">
+              <a href="downloadResume" target="_blank">View Resume</a>
+            </p>
+          </div>
+          {% endif %}
 
-
-
-
-
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

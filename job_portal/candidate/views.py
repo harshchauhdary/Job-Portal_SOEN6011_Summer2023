@@ -120,42 +120,42 @@ def create_Resume(request):
 
 
 # File resume upload
-def upload_Resume(request):
+# def upload_Resume(request):
 
-    # get candidate id from session
-    if 'user_id' in request.session:
-        cpk = request.session['user_id']
-    else:
-        return render(request, 'users/login.html')
+#     # get candidate id from session
+#     if 'user_id' in request.session:
+#         cpk = request.session['user_id']
+#     else:
+#         return render(request, 'users/login.html')
 
-    if request.method == 'POST':
+#     if request.method == 'POST':
 
-        form = ResumeForm(request.POST, request.FILES)
+#         form = ResumeForm(request.POST, request.FILES)
 
-        if form.is_valid():
-            user = get_object_or_404(User, pk=cpk)
-            if user.resume != None:
-                # get resume id from candidate
-                rpk = 2
-                resume = get_object_or_404(Resume, pk=rpk)
-                resume.delete()
-            # save profile data
-            form.save()
-            # add resume to candidate
-            user.save()
+#         if form.is_valid():
+#             user = get_object_or_404(User, pk=cpk)
+#             if user.resume != None:
+#                 # get resume id from candidate
+#                 rpk = 2
+#                 resume = get_object_or_404(Resume, pk=rpk)
+#                 resume.delete()
+#             # save profile data
+#             form.save()
+#             # add resume to candidate
+#             user.save()
 
-            # redirect to a new URL:
-            return HttpResponseRedirect('/candidates/resume/')
+#             # redirect to a new URL:
+#             return HttpResponseRedirect('/candidates/resume/')
 
-    else:
+#     else:
 
-        form = ResumeForm()
+#         form = ResumeForm()
 
-    context = {
-        'form': form,
-    }
+#     context = {
+#         'form': form,
+#     }
 
-    return render(request, 'candidates/resumeFileFormTemplate.html', context)
+#     return render(request, 'candidates/resumeFileFormTemplate.html', context)
 
 
 # Update Resume form
