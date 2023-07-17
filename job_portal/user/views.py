@@ -1,6 +1,6 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
-from .models import App_user
+from .models import User
 from .forms import UserProfileForm
 
 
@@ -13,11 +13,13 @@ def login(request):
         password = login_data.get("password")
         user_type = login_data.get("user_type")
 
-        c = App_user.objects.get(username=username)
+        c = User.objects.get(username=username)
+
         if c.password == password:
             request.session["user_id"] = c.id
             request.session["is_authenticated"] = True
-            return render(request, 'users/userDetailTemplate.html', context={'candidate': c})
+            print(c)
+            return render(request, 'users/userDetailTemplate.html', context={'user': c})
         else:
             return render(request, 'users/login.html')
 
@@ -59,7 +61,7 @@ def update_profile(request):
     else:
         return render(request, 'users/login.html')
 
-    user = get_object_or_404(App_user, pk=cpk)
+    user = get_object_or_404(User, pk=cpk)
 
     if request.method == 'POST':
 
@@ -95,5 +97,6 @@ def view_Profile(request):
         cpk = request.session['user_id']
     else:
         return render(request, 'users/login.html')
-    user = get_object_or_404(App_user, pk=cpk)
-    return render(request, 'users/userDetailTemplate.html', context={'app_user': user})
+    user = get_object_or_404(User, pk=cpk)
+
+    return render(request, 'users/userDetailTemplate.html', context={'user': user})

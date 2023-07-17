@@ -1,6 +1,6 @@
 from django.http import FileResponse, HttpResponseForbidden, HttpResponseRedirect
 from django.shortcuts import render
-from .models import App_user, Job, Resume
+from .models import User, Job, Resume
 from django.views import generic
 from django.shortcuts import get_object_or_404
 from .forms import ResumeForm
@@ -30,7 +30,7 @@ def apply_Job(request, jpK):
     else:
         return render(request, 'users/login.html')
 
-    user = get_object_or_404(App_user, pk=cpk)
+    user = get_object_or_404(User, pk=cpk)
     job = get_object_or_404(Job, pk=jpK)
 
     # add candidate to job's applied candidates list
@@ -57,7 +57,7 @@ def view_Resume(request):
     else:
         return render(request, 'users/login.html')
 
-    user = get_object_or_404(App_user, pk=cpk)
+    user = get_object_or_404(User, pk=cpk)
     # get resume id from candidate
     rpk = 4
     resume = get_object_or_404(Resume, pk=rpk)
@@ -74,7 +74,7 @@ def download(request):
     else:
         return render(request, 'users/login.html')
 
-    user = get_object_or_404(App_user, pk=cpk)
+    user = get_object_or_404(User, pk=cpk)
     # get resume id from candidate
     rpk = 2
     obj = Resume.objects.get(id=rpk)
@@ -100,7 +100,7 @@ def create_Resume(request):
         if form.is_valid():
             # save profile data
             form.save()
-            user = get_object_or_404(App_user, pk=cpk)
+            user = get_object_or_404(User, pk=cpk)
             # add resume to candidate
 
             user.save()
@@ -169,7 +169,7 @@ def update_Resume(request):
     else:
         return render(request, 'users/login.html')
 
-    user = get_object_or_404(App_user, pk=cpk)
+    user = get_object_or_404(User, pk=cpk)
     # get resume id from candidate
     rpk = 3
 
@@ -178,7 +178,7 @@ def update_Resume(request):
     if request.method == 'POST':
 
         form = ResumeForm(request.POST, request.FILES)
-        if form.is_valid():        
+        if form.is_valid():
             resume.delete()
             # save profile data
             form.save()

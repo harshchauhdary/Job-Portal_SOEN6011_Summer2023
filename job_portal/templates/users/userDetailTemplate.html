@@ -1,7 +1,7 @@
 {% extends "shared/base.html" %}
 
 {% block content %}
-{{ request.session.user_id}}
+
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-6">
@@ -10,15 +10,15 @@
           <h5 class="card-title">View Profile</h5>
           <div class="mb-3">
             <label class="form-label">First Name</label>
-            <p class="form-control-static">{{ app_user.firstname }}</p>
+            <p class="form-control-static">{{ user.firstname }}</p>
           </div>
           <div class="mb-3">
             <label class="form-label">Last Name</label>
-            <p class="form-control-static">{{ app_user.lastname }}</p>
+            <p class="form-control-static">{{ user.lastname }}</p>
           </div>
           <div class="mb-3">
             <label class="form-label">Username</label>
-            <p class="form-control-static">{{ app_user.username }}</p>
+            <p class="form-control-static">{{ user.username }}</p>
           </div>
         </div>
       </div>
