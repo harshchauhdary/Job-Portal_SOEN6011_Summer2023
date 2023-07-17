@@ -1,3 +1,4 @@
+
 {% extends "shared/base.html" %}
 
 {% block content %}
@@ -7,7 +8,7 @@
       <div class="card mt-4">
         <div class="card-body">
           <h5 class="card-title">Update Resume</h5>
-          <form method="post" class="login-form" action="createProfile">
+          <form method="post" enctype="multipart/form-data" action="updateResume">
             {% csrf_token %}
             {% for field in form %}
             <div class="mb-3">

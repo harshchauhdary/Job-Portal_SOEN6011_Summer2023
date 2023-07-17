@@ -59,7 +59,7 @@ def view_Resume(request):
 
     user = get_object_or_404(User, pk=cpk)
     # get resume id from candidate
-    rpk = 2
+    rpk = 4
     resume = get_object_or_404(Resume, pk=rpk)
     return render(request, 'candidates/resumeDetailTemplate.html', context={'resume': resume})
 
@@ -171,26 +171,35 @@ def update_Resume(request):
 
     user = get_object_or_404(User, pk=cpk)
     # get resume id from candidate
-    rpk = 2
+    rpk = 3
 
     resume = get_object_or_404(Resume, pk=rpk)
 
     if request.method == 'POST':
 
-        form = ResumeForm(request.POST)
+        form = ResumeForm(request.POST, request.FILES)
+        if form.is_valid():        
+            resume.delete()
+            # save profile data
+            form.save()
+            # add resume to candidate
+            user.save()
 
-        if form.is_valid():
-            # save resume data
-            resume.graduation_Year = form.cleaned_data['graduation_Year']
-            resume.save()
+#             # redirect to a new URL:
+            return HttpResponseRedirect('/candidates/resume')
 
-            # redirect to a new URL:
-            return HttpResponseRedirect('/candidates/resume/')
+        # if form.is_valid():
+        #     # save resume data
+        #     resume.graduation_Year = form.cleaned_data['graduation_Year']
+        #     resume.save()
+
+        #     # redirect to a new URL:
+        #     return HttpResponseRedirect('/candidates/resume/')
 
     else:
 
         form = ResumeForm(
-            initial={'graduation_Year': resume.graduation_Year})
+            initial={'graduation_Year': resume.graduation_Year, 'file': resume.file})
 
     context = {
         'form': form,
