@@ -1,0 +1,28 @@
+{% extends "shared/base.html" %}
+
+{% block content %}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card mt-4">
+        <div class="card-body">
+          <h5 class="card-title">{{ job.position }}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">{{ job.employer.companyName }}</h6>
+          <p class="card-text">{{ job.description }}</p>
+          <p class="card-text">Application Deadline: {{ job.applicationDeadline }}</p>
+          <p class="card-text">Status: {{ job.status }}</p>
+          <!-- Add any other job details you want to display -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8 text-center">
+      <a href="apply/{{job.id}}" class="btn btn-primary">Apply</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

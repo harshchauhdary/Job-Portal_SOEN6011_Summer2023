@@ -1,0 +1,45 @@
+{% extends "shared/base.html" %}
+
+{% block content %}
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card mt-4">
+        <div class="card-body">
+          <div class="d-flex align-items-center mb-3">
+            <h5 class="card-title m-0">View Profile</h5>
+            <small class="text-muted ms-2 align-self-end">| Candidate</small>
+          </div>
+          <div class="mb-3">
+            <label class="form-label"><strong>First Name</strong></label>
+            <p class="form-control-static">{{ candidate.firstName }}</p>
+          </div>
+          <div class="mb-3">
+            <label class="form-label"><strong>Last Name</strong></label>
+            <p class="form-control-static">{{ candidate.lastName }}</p>
+          </div>
+          <div class="mb-3">
+            <label class="form-label"><strong>Phone</strong></label>
+            <p class="form-control-static">{{ candidate.phone }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Add the "View Resume" and "Edit Profile" buttons outside the card -->
+  <div class="row justify-content-center mt-3">
+    <div class="col-md-6">
+      <div class="text-center">
+        <a href="updateProfile" class="btn btn-primary mx-3">Edit Profile</a>
+        {% if candidate.resume %}
+          <a href="resume" class="btn btn-primary">View Resume</a>
+        {% else %}
+          <a href="createResume" class="btn btn-primary">Create Resume</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <!-- End of "View Resume" and "Edit Profile" buttons section -->
+</div>
+{% endblock %}

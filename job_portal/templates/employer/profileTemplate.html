@@ -1,0 +1,48 @@
+{% extends "shared/base.html" %}
+
+{% block content %}
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card mt-4">
+        <div class="card-body">
+          <div class="d-flex align-items-center mb-3">
+            <h5 class="card-title m-0">View Profile</h5>
+            <small class="text-muted ms-2 align-self-end">| Employer</small>
+          </div>
+          <div class="mb-3">
+            <label class="form-label"><strong>Company Name</strong></label>
+            <p class="form-control-static">{{ employer.companyName }}</p>
+          </div>
+          <div class="mb-3">
+            <label class="form-label"><strong>Company Email</strong></label>
+            <p class="form-control-static">{{ employer.companyEmail }}</p>
+          </div>
+          <div class="mb-3">
+            <label class="form-label"><strong>First Name</strong></label>
+            <p class="form-control-static">{{ employer.firstName }}</p>
+          </div>
+          <div class="mb-3">
+            <label class="form-label"><strong>Last Name</strong></label>
+            <p class="form-control-static">{{ employer.lastName }}</p>
+          </div>
+          <div class="mb-3">
+            <label class="form-label"><strong>Phone</strong></label>
+            <p class="form-control-static">{{ employer.phone }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Add the "Edit Profile" button outside the card -->
+  <div class="row justify-content-center mt-3">
+    <div class="col-md-6">
+      <div class="text-center">
+        <a href="update" class="btn btn-primary mx-3">Edit Profile</a>
+      </div>
+    </div>
+  </div>
+  <!-- End of "Edit Profile" button section -->
+</div>
+{% endblock %}
