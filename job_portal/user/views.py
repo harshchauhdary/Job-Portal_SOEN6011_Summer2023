@@ -29,8 +29,13 @@ def login(request):
                 except Exception:
                     return HttpResponseRedirect('/candidates/createProfile')
             else:
-                # employer Detail page
-                return ""
+                try:
+                    # employer Detail page
+                    request.session["e_id"] = u.id
+                    del request.session["user_id"]
+                    return HttpResponseRedirect("/employer/profile/")
+                except Exception:
+                    return HttpResponseRedirect('/employer/profile/create')
         else:
             return render(request, 'users/login.html')
 
@@ -58,7 +63,8 @@ def registration(request):
                 return HttpResponseRedirect('/candidates/createProfile')
             else:
                 # employer Detail page
-                return ""
+                # request.session["e_id"] = u.id
+                return HttpResponseRedirect('/employer/profile/create/')
     else:
 
         form = UserProfileForm()

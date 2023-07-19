@@ -1,11 +1,7 @@
 from django.db import models
 
 from user.models import User
-
-
-class Job(models.Model):
-    pos = models.CharField(max_length=255)
-    status = models.CharField(max_length=255)
+from employer.models import Job
 
 
 class Resume(models.Model):
