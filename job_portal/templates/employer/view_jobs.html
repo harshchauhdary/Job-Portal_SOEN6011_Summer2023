@@ -3,13 +3,16 @@
 {% block content %}
 <div class="container">
   <div class="row mt-4"> <!-- Add top margin to create space -->
+    <div class="col-md-12">
+      <a href="/employer/addJob" class="btn btn-primary mb-3">Add Job</a>
+    </div>
     {% for job in jobs %}
     <div class="col-md-4">
       <div class="card mb-4">
         <div class="card-body">
           <h5 class="card-title">{{ job.position }}</h5>
-          <h6 class="card-subtitle mb-2 text-muted">CSP</h6>
-          <p class="card-text">{{ job.description }}</p> <!-- Limit description to 100 characters -->
+          <h6 class="card-subtitle mb-2 text-muted">{{ job.employer.companyName }}</h6>
+          <p class="card-text">{{ job.description|slice:":300 }}</p> <!-- Limit description to 100 characters -->
           <a href="/employer/viewJob/{{job.id}}" class="btn btn-primary">View Details</a>
         </div>
       </div>
@@ -18,4 +21,3 @@
   </div>
 </div>
 {% endblock %}
-
