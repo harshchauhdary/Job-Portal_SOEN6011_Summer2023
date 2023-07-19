@@ -19,6 +19,11 @@ class ResumeForm(forms.ModelForm):
             "file": forms.FileInput(attrs={'class': 'form-control'}),
         }
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Set the 'required' attribute of the 'file' field to False
+        self.fields["file"].required = False
+
 
 class CandidateForm(forms.ModelForm):
     class Meta:

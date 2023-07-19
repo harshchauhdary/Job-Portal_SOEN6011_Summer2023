@@ -15,9 +15,9 @@
             <h4>Summary</h4>
             <p>{{ candidate.resume.summary }}</p>
             <h4>Education</h4>
-            <p><strong>{{ candidate.resume.education }}</strong></p>
+            <p>{{ candidate.resume.education }}</p>
             <h4>Experience</h4>
-            <p><strong>{{ candidate.resume.experience }}</strong></p>
+            <p>{{ candidate.resume.experience }}</p>
             <h4>Skills</h4>
             <p>{{ candidate.resume.skills }}</p>
           {% else %}
@@ -34,8 +34,6 @@
   {% else %}
     <button class="btn btn-primary" disabled>Download Resume</button>
   {% endif %}
+  <a href="updateResume" class="btn btn-primary mx-3">Edit Resume</a>
 </div>
 {% endblock %}
-
-
-
