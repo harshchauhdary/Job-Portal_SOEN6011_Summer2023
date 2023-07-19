@@ -11,18 +11,44 @@ from .models import Job, Employer
 
 
 class JobForm(forms.ModelForm):
-    class Meta:
-        model = Job
-        fields = ('position', 'description', 'applicationDeadline', 'status')
     STATUS_CHOICES = (
         ('OPEN', 'Open'),
         ('CLOSE', 'Close'),
     )
 
-    description = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    position: forms.TextInput(attrs={'class': 'form-control'})
-    applicationDeadline = forms.DateField(widget=forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}))
-    status = forms.ChoiceField(choices=STATUS_CHOICES, widget=forms.Select(attrs={'class': 'form-control'}))
+    class Meta:
+        model = Job
+        fields = ('position', 'description', 'applicationDeadline', 'status')
+        widgets = {
+            'position': forms.TextInput(attrs={'class': 'form-control'}),
+            'description': forms.TextInput(attrs={'class': 'form-control'}),
+            'applicationDeadline': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+            'status': forms.Select(attrs={'class': 'form-control'}),
+        }
+
+    status = forms.ChoiceField(
+        choices=STATUS_CHOICES,
+        widget=forms.Select(attrs={'class': 'form-control'}),
+        label='Job Status'  # Customize the label here
+    )
+
+    position = forms.CharField(
+        max_length=255,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
+        label='Position'  # Customize the label here
+    )
+
+    description = forms.CharField(
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
+        label='Description'  # Customize the label here
+    )
+
+    applicationDeadline = forms.DateField(
+        widget=forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+        label='Application Deadline'  # Customize the label here
+    )
+
+
 
 
 class EmployerForm(forms.ModelForm):

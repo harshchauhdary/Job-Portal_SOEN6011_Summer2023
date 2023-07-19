@@ -147,7 +147,7 @@ def browse_candidates(request, job_id):
     try:
         job = Job.objects.get(pk=job_id)
     except Job.DoesNotExist:
-        return HttpResponseRedirect('/users')
+        return HttpResponseRedirect('/employer/viewJobs')
 
     applications = Application.objects.filter(job=job)
     candidates = [application.candidate for application in applications]
@@ -180,7 +180,7 @@ def add_job(request):
     employer = check_login(request)
 
     if employer is None:
-        return HttpResponseRedirect('/users/login')
+        return HttpResponseRedirect('/')
 
     if request.method == 'POST':
         form = JobForm(request.POST)
@@ -201,11 +201,11 @@ def add_job(request):
 def view_job(request, job_id):
     employer = check_login(request)
     if employer is None:
-        return HttpResponseRedirect('/users/login')
+        return HttpResponseRedirect('/')
     try:
         job = Job.objects.get(pk=job_id, employer=employer)
     except Job.DoesNotExist:
-        return HttpResponseRedirect('/users')
+        return HttpResponseRedirect('/employer/viewJobs')
 
     context = {
         'job': job,
@@ -215,11 +215,11 @@ def view_job(request, job_id):
 def update_job(request, job_id):
     employer = check_login(request)
     if employer is None:
-        return HttpResponseRedirect('/users/login')
+        return HttpResponseRedirect('/')
     try:
         job = Job.objects.get(pk=job_id, employer=employer)
     except Job.DoesNotExist:
-        return HttpResponseRedirect('/users')
+        return HttpResponseRedirect('/employer/viewJobs')
 
     if request.method == 'POST':
         form = JobForm(request.POST, instance=job)
@@ -245,9 +245,9 @@ def create_employer_profile(request):
         try:
             user = User.objects.get(id=user_id)
         except User.DoesNotExist:
-            return HttpResponseRedirect('/users/register')
+            return HttpResponseRedirect('/register')
     else:
-        return HttpResponseRedirect('/users/login')
+        return HttpResponseRedirect('/')
 
     if request.method == 'POST':
         form = EmployerForm(request.POST)
@@ -278,7 +278,7 @@ def create_employer_profile(request):
 def update_employer_profile(request):
     employer = check_login(request)
     if employer is None:
-        return HttpResponseRedirect('/users/login')
+        return HttpResponseRedirect('/')
 
     if request.method == 'POST':
         form = EmployerForm(request.POST, instance=employer)
@@ -300,7 +300,7 @@ def update_employer_profile(request):
 def view_employer_profile(request):
     employer = check_login(request)
     if employer is None:
-        return HttpResponseRedirect('/users/login')
+        return HttpResponseRedirect('/')
 
     return render(request, 'employer/profileTemplate.html', context={'employer': employer})
 
@@ -308,7 +308,7 @@ def view_employer_profile(request):
 def view_jobs(request):
     employer = check_login(request)
     if employer is None:
-        return HttpResponseRedirect('/users/login')
+        return HttpResponseRedirect('/')
     jobs = Job.objects.filter(employer=employer)
 
     context = {
