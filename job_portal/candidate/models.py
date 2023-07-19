@@ -5,6 +5,7 @@ from user.models import User
 
 class Job(models.Model):
     pos = models.CharField(max_length=255)
+    status = models.CharField(max_length=255)
 
 
 class Resume(models.Model):
@@ -24,3 +25,10 @@ class Candidate(models.Model):
     resume = models.ForeignKey(
         Resume, on_delete=models.SET_NULL, null=True, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+
+class Application(models.Model):
+    candidate = models.ForeignKey(
+        Candidate, on_delete=models.SET_NULL, null=True, blank=True)
+    job = models.ForeignKey(Job, on_delete=models.CASCADE)
+    status = models.CharField(max_length=255)

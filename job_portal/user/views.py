@@ -47,6 +47,9 @@ def registration(request):
         form = UserProfileForm(request.POST)
 
         if form.is_valid():
+
+            if User.objects.exists(email=form.cleaned_data["email"]):
+                return render(request, 'users/login.html')
             # save profile data
             u = form.save()
             request.session["user_id"] = u.id

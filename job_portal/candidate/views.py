@@ -1,48 +1,56 @@
-from django.http import FileResponse, HttpResponseForbidden, HttpResponseRedirect
+from django.http import FileResponse, HttpResponseRedirect
 from django.shortcuts import render
-from .models import User, Job, Candidate
+from .models import User, Job, Candidate, Application
 from django.views import generic
 from django.shortcuts import get_object_or_404
 from .forms import ResumeForm, CandidateForm
 
+# view jobs
 
-# View Job Offers
-class Job_List_View(generic.ListView):
-    model = Job
-    context_object_name = 'job_Instances'
 
-    def get_queryset(self):
-        # Can add filter for status open
-        return Job.objects.all
-
-    def get_context_data(self, **kwargs):
-        context = super(Job_List_View, self).get_context_data(**kwargs)
-        return context
-
-    template_name = 'candidates/ViewJobTemplate.html'
+def view_Jobs(request):
+   # get candidate from session
+    c = checkLogin(request)
+    context = {
+        'jobs': Job.objects.filter(status="OPEN"),
+        'candidate': c
+    }
+    return render(request, 'candidates/ViewJobsTemplate.html', context)
 
 
 # Apply Job Offers
 def apply_Job(request, jpK):
-    cpk = checkLogin(request)
+    # get candidate from session
+    c = checkLogin(request)
+    try:
+        job = Job.objects.filter(id=jpK)
+    except Exception:
+        return HttpResponseRedirect('/candidates/viewJobTemplate.html')
 
-    user = get_object_or_404(User, pk=cpk)
-    job = get_object_or_404(Job, pk=jpK)
-
-    # add candidate to job's applied candidates list
-
-    job.save()
-
-    # add job to candidate's applies job
-
-    user.save()
-
+    a = Application({"candidate": c, "job": job, "status": "Review"})
+    a.save()
     context = {
-        'user': user,
+        'candidate': c,
         'job': job
     }
 
     return render(request, "candidates/appliedSuccessTemplate.html", context)
+
+# View Job Offer
+
+
+def view_Job(request, jpk):
+    # get candidate from session
+    c = checkLogin(request)
+    try:
+        job = Job.objects.filter(id=jpk)
+    except Exception:
+        return HttpResponseRedirect('/candidates/viewJobsTemplate.html')
+    context = {
+        'candidate': c,
+        'job': job
+    }
+    return render(request, "candidates/viewJobTemplate.html", context)
 
 
 # view Resume  DONE!
