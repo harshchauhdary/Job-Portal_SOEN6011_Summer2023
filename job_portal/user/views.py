@@ -68,3 +68,16 @@ def registration(request):
     }
 
     return render(request, 'users/register.html', context)
+
+# logout
+
+
+def logout(request):
+    if "user_id" in request.session:
+        del request.session["user_id"]
+    if "e_id" in request.session:
+        del request.session["e_id"]
+    if "c_id" in request.session:
+        del request.session["c_id"]
+
+    return HttpResponseRedirect('')
