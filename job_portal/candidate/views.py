@@ -66,7 +66,7 @@ def view_Resume(request):
     # get candidate from session
     c = checkLogin(request)
     if c.resume is not None:
-        return render(request, 'candidates/resumeDetailTemplate.html', context={'resume': c.resume})
+        return render(request, 'candidates/resumeDetailTemplate.html', context={'candidate': c})
     else:
         return HttpResponseRedirect('/candidates/createResume')
 
@@ -77,7 +77,7 @@ def download(request):
 
     # get candidate  from session
     c = checkLogin(request)
-    obj = c[0].resume
+    obj = c.resume
     filename = obj.file.path
     response = FileResponse(open(filename, 'rb'))
     return response
