@@ -36,16 +36,7 @@ class CandidateForm(forms.ModelForm):
         }
     def clean_phone(self):
         phone = self.cleaned_data.get('phone')
-        min_length = 10  # Minimum phone number length
-        max_length = 15  # Maximum phone number length
-
-        # Use MinLengthValidator and MaxLengthValidator to validate the phone number length
-        validators = [MinLengthValidator(min_length), MaxLengthValidator(max_length)]
-
-        for validator in validators:
-            try:
-                validator(phone)
-            except forms.ValidationError as e:
-                raise forms.ValidationError("Phone number must be between 10 and 15 digits.")
-
+        if not phone.isdigit() or not (10 <= len(phone) <= 15):
+            raise forms.ValidationError("Phone number must be a 10-15 digit number.")
         return phone
+    
