@@ -15,4 +15,4 @@ class Job(models.Model):
     description = models.TextField()
     applicationDeadline = models.DateField()
     status=models.CharField(max_length=255)
-    employer = models.ForeignKey(Employer, on_delete=models.SET_NULL, null=True, blank=True)
+    employer = models.ForeignKey(Employer, on_delete=models.CASCADE)
