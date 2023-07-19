@@ -33,10 +33,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Jobs</a>
+          <a class="nav-link" href="/candidates">Home</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">About</a>
@@ -44,24 +41,29 @@
         <li class="nav-item">
           <a class="nav-link" href="#">Contact</a>
         </li>
-
-        <!-- Show user name and link to profile if user is authenticated -->
-        {% if request.session.is_authenticated %}
-          <li class="nav-item">
-            <a class="nav-link" href="">Hello, {{ request.session.user_id }}</a>
-          </li>
-        {% else %}
-          <!-- Show login/signup buttons if user is not authenticated -->
-          <li class="nav-item">
-            <a class="nav-link" href="">Login</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="">Signup</a>
-          </li>
-        {% endif %}
-        <!-- End of user name and login/signup buttons -->
-
       </ul>
+
+      <!-- Show user name and login/signup buttons if user is not authenticated -->
+      {% if request.session.is_authenticated %}
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/candidates/profile">Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/logout">Logout</a>
+          </li>
+        </ul>
+      {% else %}
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/register">Signup</a>
+          </li>
+        </ul>
+      {% endif %}
+      <!-- End of user name and login/signup buttons -->
     </div>
   </nav>
 

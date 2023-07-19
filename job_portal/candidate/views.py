@@ -25,15 +25,15 @@ def view_Jobs(request):
 
 
 # Apply Job Offers
-def apply_Job(request, jpK):
+def apply_Job(request, pk):
     # get candidate from session
     c = checkLogin(request)
     try:
-        job = Job.objects.filter(id=jpK)
+        job = Job.objects.filter(id=pk)[0]
     except Exception:
         return HttpResponseRedirect('/candidates/viewJobTemplate.html')
-    if Application.objects.filter(candidate=c).filter(job=job).count == 0:
-        a = Application({"candidate": c, "job": job, "status": "Review"})
+    if Application.objects.filter(candidate=c).filter(job=job).count() == 0:
+        a = Application(candidate = c, job = job, status = "Review")
         a.save()
     else:
         return HttpResponseRedirect('/candidates/viewJobTemplate.html')
@@ -47,11 +47,11 @@ def apply_Job(request, jpK):
 # View Job Offer
 
 
-def view_Job(request, jpk):
+def view_Job(request, pk):
     # get candidate from session
     c = checkLogin(request)
     try:
-        job = Job.objects.filter(id=jpk)
+        job = Job.objects.filter(id=pk)[0]
     except Exception:
         return HttpResponseRedirect('/candidates/viewJobsTemplate.html')
     context = {
