@@ -79,5 +79,6 @@ def logout(request):
         del request.session["e_id"]
     if "c_id" in request.session:
         del request.session["c_id"]
+    del request.session["is_authenticated"]
 
-    return HttpResponseRedirect('')
+    return HttpResponseRedirect('/')
