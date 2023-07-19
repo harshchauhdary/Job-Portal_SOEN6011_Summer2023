@@ -37,15 +37,13 @@ For the development of the system, we have adopted a comprehensive project appro
 
 | Tools | Name | 
 | ------- | ------- |
-| Product Management| Azure Devops |
 | Programming Language| Python |
-| Framework| Flask|
+| Framework| Django|
 | Web Technology| HTML5, CSS3, jQuery, AJAX |
-| Database| PostgreSQL |
+| Database| SQLite |
 | Version Control| Git |
 | IDE| PyCharm |
 | Operating System| Windows |
-| Application Server| Gunicorn |
 | Testing| PyTest |
 
 
