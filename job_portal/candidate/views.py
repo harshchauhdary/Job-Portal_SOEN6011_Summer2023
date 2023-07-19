@@ -11,8 +11,14 @@ from .forms import ResumeForm, CandidateForm
 def view_Jobs(request):
    # get candidate from session
     c = checkLogin(request)
+    j = []
+    jobs = Job.objects.filter(status="OPEN")
+    for job in jobs:
+        if Application.objects.filter(candidate=c).filter(job=job).count() == 0:
+            j.append(job)
+
     context = {
-        'jobs': Job.objects.filter(status="OPEN"),
+        'jobs': j,
         'candidate': c
     }
     return render(request, 'candidates/ViewJobsTemplate.html', context)
@@ -26,9 +32,11 @@ def apply_Job(request, jpK):
         job = Job.objects.filter(id=jpK)
     except Exception:
         return HttpResponseRedirect('/candidates/viewJobTemplate.html')
-
-    a = Application({"candidate": c, "job": job, "status": "Review"})
-    a.save()
+    if Application.objects.filter(candidate=c).filter(job=job).count == 0:
+        a = Application({"candidate": c, "job": job, "status": "Review"})
+        a.save()
+    else:
+        return HttpResponseRedirect('/candidates/viewJobTemplate.html')
     context = {
         'candidate': c,
         'job': job

@@ -48,7 +48,7 @@ def registration(request):
 
         if form.is_valid():
 
-            if User.objects.exists(email=form.cleaned_data["email"]):
+            if User.objects.filter(email=form.cleaned_data["email"]).count() != 0:
                 return render(request, 'users/login.html')
             # save profile data
             u = form.save()
