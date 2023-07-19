@@ -136,7 +136,7 @@ def check_login(request):
         # except Exception:
         #     return HttpResponseRedirect('/users/login')
         except Employer.DoesNotExist:
-            pass
+            return None
 
     # else:
     #     return HttpResponseRedirect('/users/login')

@@ -6,6 +6,7 @@ from .forms import UserProfileForm
 
 def login(request):
     from candidate.models import Candidate
+    from employer.models import Employer
     if request.method == 'POST':
 
         login_data = request.POST.dict()
@@ -31,7 +32,8 @@ def login(request):
             else:
                 try:
                     # employer Detail page
-                    request.session["e_id"] = u.id
+                    e = Employer.objects.filter(userID=u.id)[0]
+                    request.session["e_id"] = e.id
                     del request.session["user_id"]
                     return HttpResponseRedirect("/employer/profile/")
                 except Exception:
