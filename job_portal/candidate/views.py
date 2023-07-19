@@ -135,7 +135,7 @@ def update_Resume(request):
             c.resume.file = form.cleaned_data['file']
             c.resume.education = form.cleaned_data['education']
             c.resume.experience = form.cleaned_data['experience']
-            c.resume.fileName = form.cleaned_data['fileName']
+
             c.resume.skills = form.cleaned_data['skills']
             c.resume.save()
 
@@ -146,7 +146,7 @@ def update_Resume(request):
 
         form = ResumeForm(
             initial={'summary': c.resume.summary, 'education': c.resume.education, 'experience': c.resume.experience,
-                     'fileName': c.resume.fileName, 'skills': c.resume.skills, 'file': c.resume.file})
+                     'skills': c.resume.skills, 'file': c.resume.file})
 
     context = {
         'form': form,
@@ -171,7 +171,7 @@ def create_Candidate_Profile(request):
             return HttpResponseRedirect('/users/register')
 
     else:
-        return HttpResponseRedirect('/users/login')
+        return HttpResponseRedirect('')
 
     if request.method == 'POST':
 
@@ -248,7 +248,7 @@ def checkLogin(request):
             c = Candidate.objects.filter(id=id)[0]
             return c
         except Exception:
-            return HttpResponseRedirect('/users/login')
+            return HttpResponseRedirect('')
 
     else:
-        return HttpResponseRedirect('/users/login')
+        return HttpResponseRedirect('')

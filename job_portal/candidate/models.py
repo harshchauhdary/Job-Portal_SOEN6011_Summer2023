@@ -9,8 +9,6 @@ class Job(models.Model):
 
 
 class Resume(models.Model):
-    # add more fields
-    fileName = models.CharField(max_length=255)
     summary = models.CharField(max_length=255)
     education = models.CharField(max_length=255)
     experience = models.CharField(max_length=255)

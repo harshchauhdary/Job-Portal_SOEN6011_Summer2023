@@ -7,7 +7,7 @@ class ResumeForm(forms.ModelForm):
     class Meta:
         model = Resume
         fields = ["summary", "education",
-                  "experience", "skills", "fileName", "file"]
+                  "experience", "skills", "file"]
 
         widgets = {
 
