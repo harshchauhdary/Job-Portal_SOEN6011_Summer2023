@@ -23,8 +23,8 @@ The objective of this project is to develop a career services platform that serv
 | ------- | ------- | ------- | ------- | ------- |
 | Project Manager | A K M Saifun Nabi | 40222168 | shabuj@gmail.com | 5145180474 |
 |Software Architecture & Dbms | Neha Sudhir Himane |40219032 | neha.himane4413@gmail.com | 4386805857 |
-| Software Developers | Harsh Chaudhary <br/> Bhargav Virendra Bhutwala <br/> Sahil Kalathiya | 40201627 <br/> 40196468 <br/> 40192697 | harsh.chaudhary@mail.concordia.ca <br/> bhargavbhutwala@gmail.com <br/> sahilkalathiya11@gmail.com | 4389285607 <br/> 5148157821 <br/> 4384581086 |
-| Software Testers | A K M Saifun Nabi <br/>  Adwait Sambare | 40222168 <br/> 40162664 | shabuj@gmail.com <br/> adwait395@gmail.com | 5145180474 <br/> 4384596746 |
+| Software Developers | Harsh Chaudhary <br/> Bhargav Virendra Bhutwala <br/> Sahil Kalathiya <br/> Adwait Sambare | 40201627 <br/> 40196468 <br/> 40192697 <br/> 40162664 | harsh.chaudhary@mail.concordia.ca <br/> bhargavbhutwala@gmail.com <br/> sahilkalathiya11@gmail.com <br/> adwait395@gmail.com | 4389285607 <br/> 5148157821 <br/> 4384581086 <br/> 4384596746 |
+| Software Testers | A K M Saifun Nabi <br/>  Neha Sudhir Himane | 40222168 <br/> 40219032 | shabuj@gmail.com <br/> neha.himane4413@gmail.com | 5145180474 <br/> 4386805857 |
 
 
 
