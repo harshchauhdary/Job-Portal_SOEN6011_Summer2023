@@ -132,7 +132,8 @@ def update_Resume(request):
         form = ResumeForm(request.POST, request.FILES)
         if form.is_valid():
             c.resume.summary = form.cleaned_data['summary']
-            c.resume.file = form.cleaned_data['file']
+            if form.cleaned_data["file"] is not None:
+                c.resume.file = form.cleaned_data['file']
             c.resume.education = form.cleaned_data['education']
             c.resume.experience = form.cleaned_data['experience']
 
