@@ -336,6 +336,27 @@ def view_employer_profile(request):
 
     return render(request, 'employer/profileTemplate.html', context={'employer': employer})
 
+def download_employee_resume(request):
+    employer = check_login(request)
+
+    if employer is None:
+        return HttpResponseRedirect('/')
+
+    if request.method == 'POST':
+        candidate_id = request.POST.get('resume_id')
+
+        try:
+            entry = Candidate.objects.get(id=candidate_id)
+            obj = entry.resume
+            filename = obj.file.path
+            response = FileResponse(open(filename, 'rb'))
+        except Candidate.DoesNotExist:
+            entry = None
+            response = None
+    
+    return response
+
+
 # View all jobs
 def view_jobs(request):
     employer = check_login(request)
