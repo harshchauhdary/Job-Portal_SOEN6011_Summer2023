@@ -8,15 +8,19 @@
         <div class="card-body">
           <h5 class="card-title mb-4">List of Candidates</h5>
           <ul class="list-group">
-            {% for candidate in candidates %}
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              <div>
-                <h6 class="mb-0">{{ candidate.firstName }} {{ candidate.lastName }}</h6>
-                <p class="text-muted">{{ candidate.user.email }}</p>
-              </div>
-              <a href="" class="btn btn-primary">View Profile</a>
-            </li>
-            {% endfor %}
+            <form method="post" action="{% url 'employer:view_employee_profile' %}">
+              {% for candidate in candidates %}
+              {%csrf_token%}
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                  <h6 class="mb-0">{{ candidate.firstName }} {{ candidate.lastName }}</h6>
+                  <p class="text-muted">{{ candidate.user.email }}</p>
+                </div>
+                {% comment %} <a href="" class="btn btn-primary">View Profile</a> {% endcomment %}
+                <button type="submit" class="btn btn-primary" name="button_id" value="{{ candidate.id }}">View Profile</button>
+              </li>
+              {% endfor %}
+          </form>
           </ul>
         </div>
       </div>

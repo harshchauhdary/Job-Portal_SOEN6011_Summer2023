@@ -8,7 +8,7 @@
         <div class="card-body">
           <h5 class="card-title mb-4">List of Candidates</h5>
           <ul class="list-group">
-            <form method="post" action="view_employee_profile/">
+            <form method="post" action="{% url 'employer:view_employee_profile' %}">
                 {% for candidate in candidates %}
                 {% csrf_token %}
                 <li class="list-group-item d-flex justify-content-between align-items-center">
