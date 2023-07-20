@@ -125,6 +125,7 @@ from django.http import FileResponse, HttpResponseRedirect
 from .models import User, Job, Employer
 from candidate.models import Application
 from .forms import JobForm, EmployerForm
+from candidate.models import Candidate
 
 # Check login for every request
 def check_login(request):
@@ -157,6 +158,19 @@ def browse_candidates(request, job_id):
         'candidates': candidates
         }
     return render(request, 'employer/browse_candidates.html', context)
+
+def browse_candidates_all(request):
+    employer = check_login(request)
+
+    # if employer is None:
+        # return HttpResponseRedirect('/')
+    
+    candidates = Candidate.objects.all()
+
+    context = {
+        'candidates': candidates
+        }
+    return render(request, 'employer/browse_candidates_all.html', context)
 
 
 # Add a job
@@ -295,6 +309,24 @@ def update_employer_profile(request):
 
     return render(request, 'employer/updateProfileTemplate.html', context)
 
+# View profile
+def view_employee_profile(request):
+    employer = check_login(request)
+
+    if employer is None:
+        return HttpResponseRedirect('/')
+
+    if request.method == 'POST':
+        button_id = request.POST.get('button_id')
+
+        try:
+            entry = Candidate.objects.get(id=button_id)
+        except Candidate.DoesNotExist:
+            entry = None
+        
+        print(entry.firstName)
+
+    return render(request, 'employer/view_profile.html', context={'candidate': entry})
 
 # View profile
 def view_employer_profile(request):
