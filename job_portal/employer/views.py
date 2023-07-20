@@ -309,6 +309,24 @@ def update_employer_profile(request):
 
     return render(request, 'employer/updateProfileTemplate.html', context)
 
+# View profile
+def view_employee_profile(request):
+    employer = check_login(request)
+
+    if employer is None:
+        return HttpResponseRedirect('/')
+
+    if request.method == 'POST':
+        button_id = request.POST.get('button_id')
+
+        try:
+            entry = Candidate.objects.get(id=button_id)
+        except Candidate.DoesNotExist:
+            entry = None
+        
+        print(entry.firstName)
+
+    return render(request, 'employer/view_profile.html', context={'candidate': entry})
 
 # View profile
 def view_employer_profile(request):

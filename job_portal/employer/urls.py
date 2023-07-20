@@ -16,6 +16,7 @@ app_name = 'employer'
 urlpatterns = [
     path('browseCandidates/<int:job_id>/', views.browse_candidates, name='browse_candidates'),
     path('browseCandidatesAll/', views.browse_candidates_all, name='browse_candidates_all'),
+    path('browseCandidatesAll/view_employee_profile/', views.view_employee_profile, name='view_employee_profile'),
     path('addJob/', views.add_job, name='add_job'),
     path('viewJob/<int:job_id>/', views.view_job, name='view_job'),
     path('updateJob/<int:job_id>/', views.update_job, name='update_job'),
