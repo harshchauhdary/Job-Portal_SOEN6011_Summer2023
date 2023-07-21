@@ -121,11 +121,40 @@
 #     return render(request, 'employer/update_job.html', context)
 
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import FileResponse, HttpResponseRedirect
+from django.http import FileResponse, HttpResponseRedirect, HttpResponseForbidden
 from .models import User, Job, Employer
 from candidate.models import Application
 from .forms import JobForm, EmployerForm
 from candidate.models import Candidate
+from django.shortcuts import redirect, get_object_or_404
+
+def accept_application(request, application_id):
+    employer = check_login(request)
+    if not employer:
+        return HttpResponseRedirect('/')
+    
+    application = get_object_or_404(Application, pk=application_id)
+    if application.job.employer != employer:
+        return HttpResponseForbidden("You do not have permission to perform this action.")
+    
+    application.status = "Accepted"
+    application.save()
+    return HttpResponseRedirect(f'/employer/browseCandidates/{application.job.pk}')
+
+def reject_application(request, application_id):
+    employer = check_login(request)
+    if not employer:
+        return HttpResponseRedirect('/users/login')
+    
+    application = get_object_or_404(Application, pk=application_id)
+    if application.job.employer != employer:
+        return HttpResponseForbidden("You do not have permission to perform this action.")
+    
+    application.status = "Rejected"
+    application.save()
+    return HttpResponseRedirect(f'/employer/browseCandidates/{application.job.pk}')
+
+
 
 # Check login for every request
 def check_login(request):
@@ -155,7 +184,7 @@ def browse_candidates(request, job_id):
 
     context = {
         'job': job,
-        'candidates': candidates
+        'applications': applications
         }
     return render(request, 'employer/browse_candidates.html', context)
 

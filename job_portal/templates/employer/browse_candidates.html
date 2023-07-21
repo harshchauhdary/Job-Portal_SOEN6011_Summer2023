@@ -9,18 +9,41 @@
           <h5 class="card-title mb-4">List of Candidates</h5>
           <ul class="list-group">
             <form method="post" action="{% url 'employer:view_employee_profile' %}">
-              {% for candidate in candidates %}
-              {%csrf_token%}
-              <li class="list-group-item d-flex justify-content-between align-items-center">
-                <div>
-                  <h6 class="mb-0">{{ candidate.firstName }} {{ candidate.lastName }}</h6>
-                  <p class="text-muted">{{ candidate.user.email }}</p>
-                </div>
-                {% comment %} <a href="" class="btn btn-primary">View Profile</a> {% endcomment %}
-                <button type="submit" class="btn btn-primary" name="button_id" value="{{ candidate.id }}">View Profile</button>
-              </li>
+              {% for application in applications %}
+                {% csrf_token %}
+                <li class="list-group-item">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                      <h6 class="mb-0">{{ application.candidate.firstName }} {{ application.candidate.lastName }}</h6>
+                      <p class="text-muted">{{ application.candidate.user.email }}</p>
+                    </div>
+                    <div>
+                      {% if application.status == "Review" %}
+                        <span class="badge bg-info text-dark">{{ application.status }}</span>
+                      {% elif application.status == "Accepted" %}
+                        <span class="badge bg-success">{{ application.status }}</span>
+                      {% elif application.status == "Rejected" %}
+                        <span class="badge bg-danger">{{ application.status }}</span>
+                      {% endif %}
+                      <span style="margin-left: 10px;"></span> <!-- Adding space here -->
+                      <div class="dropdown d-inline-block">
+                        <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton{{ candidate.id }}" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Actions
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton{{ candidate.id }}">
+                          <button type="submit" class="dropdown-item" name="button_id" value="{{ application.candidate.id }}">View Profile</button>
+                          <a href="/employer/accept_application/{{ application.pk }}" class="dropdown-item text-success">Accept</a>
+                          <a href="/employer/reject_application/{{ application.pk }}" class="dropdown-item text-danger">Reject</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                {% if not forloop.last %}
+                  <hr>
+                {% endif %}
               {% endfor %}
-          </form>
+            </form>
           </ul>
         </div>
       </div>
