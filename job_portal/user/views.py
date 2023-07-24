@@ -29,6 +29,12 @@ def login(request):
                     return HttpResponseRedirect('/candidates/profile')
                 except Exception:
                     return HttpResponseRedirect('/candidates/createProfile')
+                
+            elif u.role == 'A':
+                request.session["a_id"] = request.session["user_id"]
+                del request.session["user_id"]
+                return HttpResponseRedirect('/csaadmin/home')
+                
             else:
                 try:
                     # employer Detail page
@@ -56,7 +62,9 @@ def registration(request):
         if form.is_valid():
 
             if User.objects.filter(email=form.cleaned_data["email"]).count() != 0:
-                return render(request, 'users/login.html')
+                return render(request, '/')
+            if form.cleaned_data["role"] == 'A':
+                return render(request, '/register.html')
             # save profile data
             u = form.save()
             request.session["user_id"] = u.id
@@ -87,6 +95,8 @@ def logout(request):
         del request.session["e_id"]
     if "c_id" in request.session:
         del request.session["c_id"]
+    if "a_id" in request.session:
+        del request.session["a_id"]
     del request.session["is_authenticated"]
 
     return HttpResponseRedirect('/')

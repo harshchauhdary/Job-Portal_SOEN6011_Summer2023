@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'candidate',
     'employer',
-    'user'
+    'user',
+    'csaadmin'
 ]
 
 MIDDLEWARE = [

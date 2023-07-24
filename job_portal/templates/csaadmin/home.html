@@ -1,0 +1,50 @@
+{% extends "shared/base.html" %}
+
+{% block content %}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card mt-4">
+        <div class="card-body">
+          <h5 class="card-title text-center mb-4">Admin Dashboard</h5>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="card mb-4">
+                <div class="card-body text-center">
+                  <h6 class="card-subtitle mb-2 text-muted">Candidates</h6>
+                  <p class="card-text fs-4 font-weight-bold">{{ num_candidates }}</p>
+                  <div class="d-grid">
+                    <a href="/csaadmin/list_candidates/" class="btn btn-primary">View List</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card mb-4">
+                <div class="card-body text-center">
+                  <h6 class="card-subtitle mb-2 text-muted">Employers</h6>
+                  <p class="card-text fs-4 font-weight-bold">{{ num_employers }}</p>
+                  <div class="d-grid">
+                    <a href="/csaadmin/list_employers/" class="btn btn-primary">View List</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card mb-4">
+                <div class="card-body text-center">
+                  <h6 class="card-subtitle mb-2 text-muted">Jobs</h6>
+                  <p class="card-text fs-4 font-weight-bold">{{ num_jobs }}</p>
+                  <div class="d-grid">
+                    <a href="/csaadmin/list_jobs/" class="btn btn-primary">View List</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
