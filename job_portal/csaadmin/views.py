@@ -68,3 +68,15 @@ def delete_candidate(request, candidate_id):
     candidate.delete()
     return redirect('/csaadmin/list_candidates')
 
+def candidate_profile(request, pk):
+    if not is_admin(request):
+        return HttpResponseRedirect('/')
+    candidate = get_object_or_404(Candidate, pk=pk)
+    return render(request, 'csaadmin/candidate_profile.html', {'candidate': candidate})
+
+def employer_profile(request, pk):
+    if not is_admin(request):
+        return HttpResponseRedirect('/')
+    employer = get_object_or_404(Employer, pk=pk)
+    return render(request, 'csaadmin/employer_profile.html', {'employer': employer})
+

@@ -1,0 +1,64 @@
+<!-- templates/employer/view_profile.html -->
+
+{% extends "shared/base.html" %}
+
+{% block content %}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card mt-4">
+        <div class="card-body">
+          <div class="d-flex align-items-center mb-3">
+            <h5 class="card-title m-0">View Profile</h5>
+            <small class="text-muted ms-2 align-self-end">| Employer</small>
+          </div>
+          <div class="mb-3">
+            <label class="form-label"><strong>Company Name</strong></label>
+            <p class="form-control-static">{{ employer.companyName }}</p>
+          </div>
+          <div class="mb-3">
+            <label class="form-label"><strong>Company Email</strong></label>
+            <p class="form-control-static">{{ employer.companyEmail }}</p>
+          </div>
+          <div class="mb-3">
+            <label class="form-label"><strong>First Name</strong></label>
+            <p class="form-control-static">{{ employer.firstName }}</p>
+          </div>
+          <div class="mb-3">
+            <label class="form-label"><strong>Last Name</strong></label>
+            <p class="form-control-static">{{ employer.lastName }}</p>
+          </div>
+          <div class="mb-3">
+            <label class="form-label"><strong>Phone</strong></label>
+            <p class="form-control-static">{{ employer.phone }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Center the dropdown menu for actions -->
+  <div class="row justify-content-center mt-3">
+    <div class="col-md-6 text-center">
+      <div class="btn-group" role="group">
+        <!-- Add an icon for the actions button -->
+        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="bi bi-gear me-2"></i> Actions
+        </button>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="#">
+            <i class="bi bi-key me-2"></i> Change Email/Password
+          </a>
+          <a class="dropdown-item" href="#">
+            <i class="bi bi-briefcase me-2"></i> View Jobs
+          </a>
+          <!-- Add a custom class to make "Delete" red-colored -->
+          <a class="dropdown-item text-danger" href="#">
+            <i class="bi bi-trash me-2"></i> Delete
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End of centered dropdown menu section -->
+</div>
+{% endblock %}
