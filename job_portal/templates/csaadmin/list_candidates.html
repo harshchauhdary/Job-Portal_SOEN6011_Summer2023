@@ -1,0 +1,43 @@
+{% extends "shared/base.html" %}
+
+{% block content %}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card mt-4">
+        <div class="card-body">
+          <h5 class="card-title">List of Candidates</h5>
+          <ul class="list-group">
+            {% for candidate in candidates %}
+            <li class="list-group-item candidate-item">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <h6 class="mb-0">{{ candidate.firstName }} {{ candidate.lastName }}</h6>
+                  <p class="text-muted">{{ candidate.user.email }}</p>
+                </div>
+                <div class="d-flex">
+                  <a href="/csaadmin/candidate_profile/{{ candidate.pk }}" class="btn btn-primary btn-sm me-2">View</a>
+                  <a href="/csaadmin/delete_candidate/{{ candidate.pk }}" class="btn btn-danger btn-sm">Delete</a>
+                </div>
+              </div>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  .candidate-item {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    margin-bottom: 10px;
+  }
+
+  .candidate-item:hover {
+    background-color: #f0f0f0;
+  }
+</style>
+{% endblock %}

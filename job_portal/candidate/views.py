@@ -21,7 +21,7 @@ def view_Jobs(request):
         'jobs': j,
         'candidate': c
     }
-    return render(request, 'candidates/ViewJobsTemplate.html', context)
+    return render(request, 'candidates/viewJobsTemplate.html', context)
 
 
 # Apply Job Offers

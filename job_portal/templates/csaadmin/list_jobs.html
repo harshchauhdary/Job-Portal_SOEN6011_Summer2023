@@ -1,0 +1,43 @@
+{% extends "shared/base.html" %}
+
+{% block content %}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card mt-4">
+        <div class="card-body">
+          <h5 class="card-title">List of Jobs</h5>
+          <ul class="list-group">
+            {% for job in jobs %}
+            <li class="list-group-item job-item">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <h6 class="mb-0">{{ job.position }}</h6>
+                  <p class="text-muted">{{ job.employer.companyName }}</p>
+                </div>
+                <div class="d-flex">
+                  <a href="/csaadmin/view_job/{{ job.pk }}" class="btn btn-primary btn-sm me-2">View</a>
+                  <a href="/csaadmin/delete_job/{{ job.pk }}" class="btn btn-danger btn-sm">Delete</a>
+                </div>
+              </div>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  .job-item {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    margin-bottom: 10px;
+  }
+
+  .job-item:hover {
+    background-color: #f0f0f0;
+  }
+</style>
+{% endblock %}
