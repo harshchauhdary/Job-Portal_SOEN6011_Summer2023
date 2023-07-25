@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import User, Employer, Candidate, Job
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, FileResponse
+from django.contrib import messages
 
 def is_admin(request):
     # Assuming you have a custom User model with a 'role' field
@@ -58,14 +59,14 @@ def delete_employer(request, employer_id):
     if not is_admin(request):
         return HttpResponseRedirect('/') 
     employer = get_object_or_404(Employer, pk=employer_id)
-    employer.delete()
+    employer.userID.delete()
     return redirect('/csaadmin/list_employers')
 
 def delete_candidate(request, candidate_id):
     if not is_admin(request):
         return HttpResponseRedirect('/') 
     candidate = get_object_or_404(Candidate, pk=candidate_id)
-    candidate.delete()
+    candidate.user.delete()
     return redirect('/csaadmin/list_candidates')
 
 def candidate_profile(request, pk):
@@ -80,3 +81,79 @@ def employer_profile(request, pk):
     employer = get_object_or_404(Employer, pk=pk)
     return render(request, 'csaadmin/employer_profile.html', {'employer': employer})
 
+def download(request, pk):
+    # get candidate  from session
+    if not is_admin(request):
+        return HttpResponseRedirect('/')
+    c = get_object_or_404(Candidate, pk=pk)
+    obj = c.resume
+    filename = obj.file.path
+    response = FileResponse(open(filename, 'rb'))
+    return response
+
+def view_resume(request, pk):
+    # get candidate  from session
+    if not is_admin(request):
+        return HttpResponseRedirect('/')
+    candidate = get_object_or_404(Candidate, pk=pk)
+    return render(request, 'csaadmin/view_resume.html', {'candidate': candidate})
+
+def view_employer_jobs(request, pk):
+    if not is_admin(request):
+        return HttpResponseRedirect('/') 
+    employer = get_object_or_404(Employer, pk=pk)
+    jobs = Job.objects.filter(employer=employer)
+    return render(request, 'csaadmin/list_jobs.html', {'jobs': jobs})
+
+def view_job(request, pk):
+    if not is_admin(request):
+        return HttpResponseRedirect('/') 
+    job = get_object_or_404(Job, pk=pk)
+    return render(request, 'csaadmin/view_job.html', {'job': job})
+
+def reset_password(request, role, pk):
+    # Assuming you have a method to check if the logged-in user is an admin
+    if not is_admin(request):
+        return redirect('/')
+
+    if role=='c':
+        user = get_object_or_404(Candidate, id=pk).user
+    else:
+        user = get_object_or_404(Employer, id=pk).userID
+
+    if request.method == 'POST':
+        if not is_admin(request):
+            return redirect('/')
+        new_password = request.POST.get('password')
+        user.password = new_password
+        user.save()
+        messages.success(request, 'Password reset successfully.')
+        if role=='c':
+            return redirect(f'/csaadmin/candidate_profile/{pk}')  # Replace '/admin/users/' with the appropriate URL to list all users
+        else:
+            return redirect(f'/csaadmin/employer_profile/{pk}') 
+    return render(request, 'csaadmin/reset_password.html', {'user': user})
+
+def change_email(request, role, pk):
+    # Assuming you have a method to check if the logged-in user is an admin
+    if not is_admin(request):
+        return redirect('/')
+
+    if role=='c':
+        user = get_object_or_404(Candidate, id=pk).user
+    else:
+        user = get_object_or_404(Employer, id=pk).userID
+
+    if request.method == 'POST':
+        if not is_admin(request):
+            return redirect('/')
+        new_email = request.POST.get('email')
+        user.email = new_email
+        user.save()
+        messages.success(request, 'Email changed successfully.')
+        if role=='c':
+            return redirect(f'/csaadmin/candidate_profile/{pk}')  # Replace '/admin/users/' with the appropriate URL to list all users
+        else:
+            return redirect(f'/csaadmin/employer_profile/{pk}') 
+        
+    return render(request, 'csaadmin/change_email.html', {'user': user})

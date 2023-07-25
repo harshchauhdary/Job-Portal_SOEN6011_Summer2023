@@ -13,5 +13,11 @@ urlpatterns = [
     path('delete_candidate/<int:candidate_id>/', views.delete_candidate, name='delete_candidate'),
     path('candidate_profile/<int:pk>/', views.candidate_profile, name='candidate_profile'),
     path('employer_profile/<int:pk>/', views.employer_profile, name='employer_profile'),
+    path('view_resume/<int:pk>/', views.view_resume, name='view_resume'),
+    path('download/<int:pk>/', views.download, name='download'),
+    path('view_employer_jobs/<int:pk>/', views.view_employer_jobs, name='view_employer_jobs'),
+    path('view_job/<int:pk>/', views.view_job, name='view_job'),
+    path('change_email/<str:role>/<int:pk>/', views.change_email, name='change_email'),
+    path('reset_password/<str:role>/<int:pk>/', views.reset_password, name='reset_password'),
 ]
 
