@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import User, Employer, Candidate, Job
 from django.http import HttpResponseRedirect, FileResponse
 from django.contrib import messages
+from django.contrib.auth.hashers import make_password
 
 def is_admin(request):
     # Assuming you have a custom User model with a 'role' field
@@ -125,7 +126,7 @@ def reset_password(request, role, pk):
         if not is_admin(request):
             return redirect('/')
         new_password = request.POST.get('password')
-        user.password = new_password
+        user.password = make_password(new_password)
         user.save()
         messages.success(request, 'Password reset successfully.')
         if role=='c':
