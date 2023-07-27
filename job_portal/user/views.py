@@ -1,4 +1,5 @@
 from django.http import HttpResponseRedirect
+from django.contrib.auth.hashers import make_password, check_password
 from django.shortcuts import get_object_or_404, render
 from .models import User
 from .forms import UserProfileForm
@@ -17,7 +18,7 @@ def login(request):
         except Exception:
             return render(request, 'users/login.html')
 
-        if u.password == password:
+        if check_password(password, u.password):
             request.session["user_id"] = u.id
             request.session["is_authenticated"] = True
             request.session["email"] = u.email
@@ -65,6 +66,12 @@ def registration(request):
                 return render(request, '/')
             if form.cleaned_data["role"] == 'A':
                 return render(request, '/register.html')
+            
+            # hash password
+            # Django's make_password function uses the PBKDF2 algorithm with a SHA256 hash by default
+            password = form.cleaned_data["password"]
+            form.cleaned_data["password"] = make_password(password)
+            
             # save profile data
             u = form.save()
             request.session["user_id"] = u.id
