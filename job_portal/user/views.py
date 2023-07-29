@@ -69,8 +69,8 @@ def registration(request):
             
             # hash password
             # Django's make_password function uses the PBKDF2 algorithm with a SHA256 hash by default
-            password = form.cleaned_data["password"]
-            form.cleaned_data["password"] = make_password(password)
+            # password = form.cleaned_data["password"]
+            # form.cleaned_data["password"] = make_password(password)
             
             # save profile data
             u = form.save()
