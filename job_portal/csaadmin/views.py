@@ -125,8 +125,7 @@ def reset_password(request, role, pk):
     if request.method == 'POST':
         if not is_admin(request):
             return redirect('/')
-        new_password = request.POST.get('password')
-        user.password = make_password(new_password)
+        user.password = request.POST.get('password')
         user.save()
         messages.success(request, 'Password reset successfully.')
         if role=='c':
