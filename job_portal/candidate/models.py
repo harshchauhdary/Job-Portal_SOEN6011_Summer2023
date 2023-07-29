@@ -26,7 +26,3 @@ class Application(models.Model):
         Candidate, on_delete=models.SET_NULL, null=True, blank=True)
     job = models.ForeignKey(Job, on_delete=models.CASCADE)
     status = models.CharField(max_length=255)
-
-
-class Tracking(models.Model):
-    date = models.DateField()
