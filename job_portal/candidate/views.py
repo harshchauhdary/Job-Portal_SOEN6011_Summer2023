@@ -145,54 +145,25 @@ def update_Resume(request):
     if c.resume is None:
         return HttpResponseRedirect('/candidates/createResume')
     
-    r = c.resume
-
     if request.method == 'POST':
-
-        # form = ResumeForm(request.POST, request.FILES)
-        form = ResumeForm(request.POST, request.FILES, instance=r)
-        education_formset = EducationFormSet(request.POST, instance=r, prefix='education')
-        experience_formset = ExperienceFormSet(request.POST, instance=r, prefix='experience')
-        skill_formset = SkillFormSet(request.POST, instance=r, prefix='skill')
-
-        # if form.is_valid():
-        #     c.resume.summary = form.cleaned_data['summary']
-        #     if form.cleaned_data["file"] is not None:
-        #         c.resume.file = form.cleaned_data['file']
-        #     c.resume.education = form.cleaned_data['education']
-        #     c.resume.experience = form.cleaned_data['experience']
-
-        #     c.resume.skills = form.cleaned_data['skills']
-        #     c.resume.save()
-
-        #     # redirect to a new URL:
-        #     return HttpResponseRedirect('/candidates/resume')
+        form = ResumeForm(request.POST, request.FILES, instance=c.resume)
+        education_formset = EducationFormSet(request.POST, instance=c.resume, prefix='education')
+        experience_formset = ExperienceFormSet(request.POST, instance=c.resume, prefix='experience')
+        skill_formset = SkillFormSet(request.POST, instance=c.resume, prefix='skill')
 
         if form.is_valid() and education_formset.is_valid() and experience_formset.is_valid() and skill_formset.is_valid():
             form.save()
             education_formset.save()
             experience_formset.save()
             skill_formset.save()
-            # redirect to a new URL:
+            # Redirect to a new URL:
             return HttpResponseRedirect('/candidates/resume')
 
-    # else:
-
-    #     form = ResumeForm(
-    #         initial={'summary': c.resume.summary, 'education': c.resume.education, 'experience': c.resume.experience,
-    #                  'skills': c.resume.skills, 'file': c.resume.file})
-
     else:
-        form = ResumeForm(instance=r)
-        education_formset = EducationFormSet(instance=r, prefix='education')
-        experience_formset = ExperienceFormSet(instance=r, prefix='experience')
-        skill_formset = SkillFormSet(instance=r, prefix='skill')
-
-    # context = {
-    #     'form': form,
-    #     'resume': c.resume,
-
-    # }
+        form = ResumeForm(instance=c.resume)
+        education_formset = EducationFormSet(instance=c.resume, prefix='education')
+        experience_formset = ExperienceFormSet(instance=c.resume, prefix='experience')
+        skill_formset = SkillFormSet(instance=c.resume, prefix='skill')
 
     context = {
         'form': form,
