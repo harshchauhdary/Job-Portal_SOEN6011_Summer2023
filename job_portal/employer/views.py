@@ -128,32 +128,52 @@ from .forms import JobForm, EmployerForm
 from candidate.models import Candidate
 from django.shortcuts import redirect, get_object_or_404
 
+
+def view_candidate_application(request, candidateId, applicationId):
+    employer = check_login(request)
+    if not employer:
+        return HttpResponseRedirect('/')
+
+    application = get_object_or_404(Application, pk=applicationId)
+    if application.job.employer != employer:
+        return HttpResponseForbidden("You do not have permission to perform this action.")
+
+    candidate = Candidate.objects.filter(id=candidateId)
+    application.status = "Viewed"
+    application.save()
+    context: {
+        candidate: candidate,
+        application: application
+    }
+    return render(request, '#Template for showing each view of candidate ', context)
+
+
 def accept_application(request, application_id):
     employer = check_login(request)
     if not employer:
         return HttpResponseRedirect('/')
-    
+
     application = get_object_or_404(Application, pk=application_id)
     if application.job.employer != employer:
         return HttpResponseForbidden("You do not have permission to perform this action.")
-    
+
     application.status = "Accepted"
     application.save()
     return HttpResponseRedirect(f'/employer/browseCandidates/{application.job.pk}')
+
 
 def reject_application(request, application_id):
     employer = check_login(request)
     if not employer:
         return HttpResponseRedirect('/users/login')
-    
+
     application = get_object_or_404(Application, pk=application_id)
     if application.job.employer != employer:
         return HttpResponseForbidden("You do not have permission to perform this action.")
-    
+
     application.status = "Rejected"
     application.save()
     return HttpResponseRedirect(f'/employer/browseCandidates/{application.job.pk}')
-
 
 
 # Check login for every request
@@ -171,7 +191,8 @@ def check_login(request):
     # else:
     #     return HttpResponseRedirect('/users/login')
     return None
-    
+
+
 def browse_candidates(request, job_id):
     employer = check_login(request)
     try:
@@ -185,20 +206,21 @@ def browse_candidates(request, job_id):
     context = {
         'job': job,
         'applications': applications
-        }
+    }
     return render(request, 'employer/browse_candidates.html', context)
+
 
 def browse_candidates_all(request):
     employer = check_login(request)
 
     # if employer is None:
-        # return HttpResponseRedirect('/')
-    
+    # return HttpResponseRedirect('/')
+
     candidates = Candidate.objects.all()
 
     context = {
         'candidates': candidates
-        }
+    }
     return render(request, 'employer/browse_candidates_all.html', context)
 
 
@@ -241,6 +263,8 @@ def add_job(request):
     return render(request, 'employer/add_job.html', context)
 
 # View job details
+
+
 def view_job(request, job_id):
     employer = check_login(request)
     if employer is None:
@@ -254,6 +278,7 @@ def view_job(request, job_id):
         'job': job,
     }
     return render(request, 'employer/view_job.html', context)
+
 
 def update_job(request, job_id):
     employer = check_login(request)
@@ -339,6 +364,8 @@ def update_employer_profile(request):
     return render(request, 'employer/updateProfileTemplate.html', context)
 
 # View profile
+
+
 def view_employee_profile(request):
     employer = check_login(request)
 
@@ -352,18 +379,21 @@ def view_employee_profile(request):
             entry = Candidate.objects.get(id=button_id)
         except Candidate.DoesNotExist:
             entry = None
-        
+
         print(entry.firstName)
 
     return render(request, 'employer/view_profile.html', context={'candidate': entry})
 
 # View profile
+
+
 def view_employer_profile(request):
     employer = check_login(request)
     if employer is None:
         return HttpResponseRedirect('/')
 
     return render(request, 'employer/profileTemplate.html', context={'employer': employer})
+
 
 def download_employee_resume(request):
     employer = check_login(request)
@@ -382,7 +412,7 @@ def download_employee_resume(request):
         except Candidate.DoesNotExist:
             entry = None
             response = None
-    
+
     return response
 
 
