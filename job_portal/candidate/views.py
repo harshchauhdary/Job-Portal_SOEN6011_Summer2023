@@ -3,7 +3,7 @@ from django.shortcuts import render
 from .models import User, Job, Candidate, Application
 from django.views import generic
 from django.shortcuts import get_object_or_404
-from .forms import ResumeForm, CandidateForm
+from .forms import ResumeForm, CandidateForm, EducationFormSet, ExperienceFormSet, SkillFormSet
 
 # view jobs
 
@@ -95,23 +95,52 @@ def create_Resume(request):
     if request.method == 'POST':
 
         form = ResumeForm(request.POST, request.FILES)
+        education_formset = EducationFormSet(request.POST, prefix='education')
+        experience_formset = ExperienceFormSet(request.POST, prefix='experience')
+        skill_formset = SkillFormSet(request.POST, prefix='skill')
 
-        if form.is_valid():
+        if form.is_valid() and education_formset.is_valid() and experience_formset.is_valid() and skill_formset.is_valid():
             # save profile data
             # Save the form data but don't commit yet
-            r = form.save(commit=False)
-            r.save()
-            c.resume = r
-            c.save()
+            # r = form.save(commit=False)
+            # r.save()
+            # c.resume = r
+            # c.save()
+            # education_formset.instance = r
+            # education_formset.save()
+            # experience_formset.instance = r
+            # experience_formset.save()
+            # skill_formset.instance = r
+            # skill_formset.save()
+            # Save resume data
+            resume = form.save(commit=False)
+            resume.candidate = c
+            resume.save()
+
+            # Save education, experience, and skill formsets
+            education_formset.instance = resume
+            education_formset.save()
+
+            experience_formset.instance = resume
+            experience_formset.save()
+
+            skill_formset.instance = resume
+            skill_formset.save()
             # redirect to a new URL:
             return HttpResponseRedirect('/candidates/resume')
 
     else:
 
         form = ResumeForm()
+        education_formset = EducationFormSet(prefix='education')
+        experience_formset = ExperienceFormSet(prefix='experience')
+        skill_formset = SkillFormSet(prefix='skill')
 
     context = {
         'form': form,
+        'education_formset': education_formset,
+        'experience_formset': experience_formset,
+        'skill_formset': skill_formset,
     }
 
     return render(request, 'candidates/resumeFormTemplate.html', context)
@@ -126,33 +155,61 @@ def update_Resume(request):
     c = checkLogin(request)
     if c.resume is None:
         return HttpResponseRedirect('/candidates/createResume')
+    
+    r = c.resume
 
     if request.method == 'POST':
 
-        form = ResumeForm(request.POST, request.FILES)
-        if form.is_valid():
-            c.resume.summary = form.cleaned_data['summary']
-            if form.cleaned_data["file"] is not None:
-                c.resume.file = form.cleaned_data['file']
-            c.resume.education = form.cleaned_data['education']
-            c.resume.experience = form.cleaned_data['experience']
+        # form = ResumeForm(request.POST, request.FILES)
+        form = ResumeForm(request.POST, request.FILES, instance=r)
+        education_formset = EducationFormSet(request.POST, instance=r, prefix='education')
+        experience_formset = ExperienceFormSet(request.POST, instance=r, prefix='experience')
+        skill_formset = SkillFormSet(request.POST, instance=r, prefix='skill')
 
-            c.resume.skills = form.cleaned_data['skills']
-            c.resume.save()
+        # if form.is_valid():
+        #     c.resume.summary = form.cleaned_data['summary']
+        #     if form.cleaned_data["file"] is not None:
+        #         c.resume.file = form.cleaned_data['file']
+        #     c.resume.education = form.cleaned_data['education']
+        #     c.resume.experience = form.cleaned_data['experience']
 
+        #     c.resume.skills = form.cleaned_data['skills']
+        #     c.resume.save()
+
+        #     # redirect to a new URL:
+        #     return HttpResponseRedirect('/candidates/resume')
+
+        if form.is_valid() and education_formset.is_valid() and experience_formset.is_valid() and skill_formset.is_valid():
+            form.save()
+            education_formset.save()
+            experience_formset.save()
+            skill_formset.save()
             # redirect to a new URL:
             return HttpResponseRedirect('/candidates/resume')
 
-    else:
+    # else:
 
-        form = ResumeForm(
-            initial={'summary': c.resume.summary, 'education': c.resume.education, 'experience': c.resume.experience,
-                     'skills': c.resume.skills, 'file': c.resume.file})
+    #     form = ResumeForm(
+    #         initial={'summary': c.resume.summary, 'education': c.resume.education, 'experience': c.resume.experience,
+    #                  'skills': c.resume.skills, 'file': c.resume.file})
+
+    else:
+        form = ResumeForm(instance=r)
+        education_formset = EducationFormSet(instance=r, prefix='education')
+        experience_formset = ExperienceFormSet(instance=r, prefix='experience')
+        skill_formset = SkillFormSet(instance=r, prefix='skill')
+
+    # context = {
+    #     'form': form,
+    #     'resume': c.resume,
+
+    # }
 
     context = {
         'form': form,
-        'resume': c.resume,
-
+        'education_formset': education_formset,
+        'experience_formset': experience_formset,
+        'skill_formset': skill_formset,
     }
 
     return render(request, 'candidates/updateResumeTemplate.html', context)

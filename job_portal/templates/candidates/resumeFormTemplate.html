@@ -1,4 +1,3 @@
-
 {% extends "shared/base.html" %}
 
 {% block content %}
@@ -19,6 +18,30 @@
               {% endif %}
             </div>
             {% endfor %}
+
+            <!-- Add the formsets rendering code -->
+            <div id="education-formset">
+              {% for education_form in education_formset %}
+                {{ education_form.as_table }}
+              {% endfor %}
+            </div>
+            <button type="button" class="btn btn-primary" id="add-education">Add Education</button>
+
+            <div id="experience-formset">
+              {% for experience_form in experience_formset %}
+                {{ experience_form.as_table }}
+              {% endfor %}
+            </div>
+            <button type="button" class="btn btn-primary" id="add-experience">Add Experience</button>
+
+            <div id="skill-formset">
+              {% for skill_form in skill_formset %}
+                {{ skill_form.as_table }}
+              {% endfor %}
+            </div>
+            <button type="button" class="btn btn-primary" id="add-skill">Add Skill</button>
+
+            <!-- Rest of the template remains the same -->
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
         </div>
@@ -26,4 +49,37 @@
     </div>
   </div>
 </div>
+
+<!-- Add JavaScript to handle the dynamic addition of formsets -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  // Add Education Form
+  document.getElementById("add-education").addEventListener("click", function () {
+    var formIdx = document.querySelectorAll("#education-formset .formset").length;
+    var educationForm = document.getElementById("empty-education-form").cloneNode(true);
+    educationForm.id = "education-form-" + formIdx;
+    educationForm.classList.add("formset");
+    document.getElementById("education-formset").appendChild(educationForm);
+  });
+
+  // Add Experience Form
+  document.getElementById("add-experience").addEventListener("click", function () {
+    var formIdx = document.querySelectorAll("#experience-formset .formset").length;
+    var experienceForm = document.getElementById("empty-experience-form").cloneNode(true);
+    experienceForm.id = "experience-form-" + formIdx;
+    experienceForm.classList.add("formset");
+    document.getElementById("experience-formset").appendChild(experienceForm);
+  });
+
+  // Add Skill Form
+  document.getElementById("add-skill").addEventListener("click", function () {
+    var formIdx = document.querySelectorAll("#skill-formset .formset").length;
+    var skillForm = document.getElementById("empty-skill-form").cloneNode(true);
+    skillForm.id = "skill-form-" + formIdx;
+    skillForm.classList.add("formset");
+    document.getElementById("skill-formset").appendChild(skillForm);
+  });
+});
+</script>
+
 {% endblock %}

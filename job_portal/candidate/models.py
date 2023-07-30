@@ -3,13 +3,45 @@ from django.db import models
 from user.models import User
 from employer.models import Job
 
-
 class Resume(models.Model):
     summary = models.CharField(max_length=255)
     education = models.CharField(max_length=255)
     experience = models.CharField(max_length=255)
     skills = models.CharField(max_length=255)
     file = models.FileField(null=True, upload_to="files/")
+
+# class Education(models.Model):
+#     resume = models.ForeignKey(Resume, on_delete=models.CASCADE)
+#     school_name = models.CharField(max_length=100)
+#     degree = models.CharField(max_length=100)
+#     start_date = models.DateField()
+#     end_date = models.DateField()
+
+# class Experience(models.Model):
+#     resume = models.ForeignKey(Resume, on_delete=models.CASCADE)
+#     company_name = models.CharField(max_length=100)
+#     position = models.CharField(max_length=100)
+#     start_date = models.DateField()
+#     end_date = models.DateField()
+
+class Education(models.Model):
+    resume = models.ForeignKey(Resume, related_name='educations', on_delete=models.CASCADE)
+    school_name = models.CharField(max_length=100)
+    degree = models.CharField(max_length=100)
+    start_date = models.DateField()
+    end_date = models.DateField()
+
+
+class Experience(models.Model):
+    resume = models.ForeignKey(Resume, related_name='experiences', on_delete=models.CASCADE)
+    company_name = models.CharField(max_length=100)
+    position = models.CharField(max_length=100)
+    start_date = models.DateField()
+    end_date = models.DateField()
+
+class Skill(models.Model):
+    resume = models.ForeignKey(Resume, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
 
 
 class Candidate(models.Model):

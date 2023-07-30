@@ -1,21 +1,47 @@
 from django import forms
-from .models import Resume, Candidate
+from django.forms import inlineformset_factory
+from .models import Resume, Candidate, Education, Experience, Skill
 from django.core.validators import MinLengthValidator, MaxLengthValidator
 
+class EducationForm(forms.ModelForm):
+    class Meta:
+        model = Education
+        fields = ["school_name", "degree", "start_date", "end_date"]
+
+EducationFormSet = inlineformset_factory(Resume, Education, form=EducationForm, extra=1)
+
+class SkillForm(forms.ModelForm):
+    class Meta:
+        model = Skill
+        fields = ["name"]
+
+SkillFormSet = inlineformset_factory(Resume, Skill, form=SkillForm, extra=1)
+
+class ExperienceForm(forms.ModelForm):
+    class Meta:
+        model = Experience
+        fields = ["company_name", "position", "start_date", "end_date"]
+
+ExperienceFormSet = inlineformset_factory(Resume, Experience, form=ExperienceForm, extra=1)
 
 class ResumeForm(forms.ModelForm):
     # add more fields
     class Meta:
         model = Resume
-        fields = ["summary", "education",
-                  "experience", "skills", "file"]
+        # fields = ["summary", "education",
+        #           "experience", "skills", "file"]
+        fields = ["summary", "file"]
 
+        # widgets = {
+        #     "summary": forms.TextInput(attrs={'class': 'form-control'}),
+        #     "education": forms.TextInput(attrs={'class': 'form-control'}),
+        #     "experience": forms.TextInput(attrs={'class': 'form-control'}),
+        #     "skills": forms.TextInput(attrs={'class': 'form-control'}),
+        #     "fileName": forms.TextInput(attrs={'class': 'form-control'}),
+        #     "file": forms.FileInput(attrs={'class': 'form-control'}),
+        # }
         widgets = {
             "summary": forms.TextInput(attrs={'class': 'form-control'}),
-            "education": forms.TextInput(attrs={'class': 'form-control'}),
-            "experience": forms.TextInput(attrs={'class': 'form-control'}),
-            "skills": forms.TextInput(attrs={'class': 'form-control'}),
-            "fileName": forms.TextInput(attrs={'class': 'form-control'}),
             "file": forms.FileInput(attrs={'class': 'form-control'}),
         }
 
