@@ -86,36 +86,24 @@ def download(request):
 
 
 def create_Resume(request):
-
-    # get candidate  from session
+    # get candidate from session
     c = checkLogin(request)
     if c.resume is not None:
         return HttpResponseRedirect('/candidates/resume')
 
     if request.method == 'POST':
-
         form = ResumeForm(request.POST, request.FILES)
         education_formset = EducationFormSet(request.POST, prefix='education')
         experience_formset = ExperienceFormSet(request.POST, prefix='experience')
         skill_formset = SkillFormSet(request.POST, prefix='skill')
 
         if form.is_valid() and education_formset.is_valid() and experience_formset.is_valid() and skill_formset.is_valid():
-            # save profile data
-            # Save the form data but don't commit yet
-            # r = form.save(commit=False)
-            # r.save()
-            # c.resume = r
-            # c.save()
-            # education_formset.instance = r
-            # education_formset.save()
-            # experience_formset.instance = r
-            # experience_formset.save()
-            # skill_formset.instance = r
-            # skill_formset.save()
             # Save resume data
-            resume = form.save(commit=False)
-            resume.candidate = c
-            resume.save()
+            resume = form.save()
+
+            # Update candidate's resume
+            c.resume = resume
+            c.save()
 
             # Save education, experience, and skill formsets
             education_formset.instance = resume
@@ -126,11 +114,11 @@ def create_Resume(request):
 
             skill_formset.instance = resume
             skill_formset.save()
+
             # redirect to a new URL:
             return HttpResponseRedirect('/candidates/resume')
 
     else:
-
         form = ResumeForm()
         education_formset = EducationFormSet(prefix='education')
         experience_formset = ExperienceFormSet(prefix='experience')
@@ -144,6 +132,7 @@ def create_Resume(request):
     }
 
     return render(request, 'candidates/resumeFormTemplate.html', context)
+
 
 
 # Update Resume form

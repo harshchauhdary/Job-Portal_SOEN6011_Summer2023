@@ -7,6 +7,12 @@ class EducationForm(forms.ModelForm):
     class Meta:
         model = Education
         fields = ["school_name", "degree", "start_date", "end_date"]
+        widgets = {
+            "school_name": forms.TextInput(attrs={'class': 'form-control'}),
+            "degree": forms.TextInput(attrs={'class': 'form-control'}),
+            "start_date": forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+            "end_date": forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+        }
 
 EducationFormSet = inlineformset_factory(Resume, Education, form=EducationForm, extra=1)
 
@@ -14,6 +20,9 @@ class SkillForm(forms.ModelForm):
     class Meta:
         model = Skill
         fields = ["name"]
+        widgets = {
+            "name": forms.TextInput(attrs={'class': 'form-control'}),
+        }
 
 SkillFormSet = inlineformset_factory(Resume, Skill, form=SkillForm, extra=1)
 
@@ -21,6 +30,12 @@ class ExperienceForm(forms.ModelForm):
     class Meta:
         model = Experience
         fields = ["company_name", "position", "start_date", "end_date"]
+        widgets = {
+            "company_name": forms.TextInput(attrs={'class': 'form-control'}),
+            "position": forms.TextInput(attrs={'class': 'form-control'}),
+            "start_date": forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+            "end_date": forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+        }
 
 ExperienceFormSet = inlineformset_factory(Resume, Experience, form=ExperienceForm, extra=1)
 
