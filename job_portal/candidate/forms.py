@@ -14,7 +14,7 @@ class EducationForm(forms.ModelForm):
             "end_date": forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
         }
 
-EducationFormSet = inlineformset_factory(Resume, Education, form=EducationForm, extra=1)
+EducationFormSet = inlineformset_factory(Resume, Education, form=EducationForm, extra=0)
 
 class SkillForm(forms.ModelForm):
     class Meta:
@@ -24,7 +24,7 @@ class SkillForm(forms.ModelForm):
             "name": forms.TextInput(attrs={'class': 'form-control'}),
         }
 
-SkillFormSet = inlineformset_factory(Resume, Skill, form=SkillForm, extra=1)
+SkillFormSet = inlineformset_factory(Resume, Skill, form=SkillForm, extra=0)
 
 class ExperienceForm(forms.ModelForm):
     class Meta:
@@ -37,7 +37,7 @@ class ExperienceForm(forms.ModelForm):
             "end_date": forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
         }
 
-ExperienceFormSet = inlineformset_factory(Resume, Experience, form=ExperienceForm, extra=1)
+ExperienceFormSet = inlineformset_factory(Resume, Experience, form=ExperienceForm, extra=0)
 
 class ResumeForm(forms.ModelForm):
     # add more fields

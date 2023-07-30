@@ -29,7 +29,8 @@
                 {{ education_formset.empty_form.as_table }}
               </div>
             </div>
-            <button type="button" class="btn btn-primary" id="add-education">Add Education</button>
+            <button type="button" class="btn btn-secondary" id="add-education" style="margin-bottom: 20px;"><i class="bi bi-plus"></i> Add Education</button>
+
 
             <div id="experience-formset">
               {{ experience_formset.management_form }}
@@ -40,7 +41,7 @@
                 {{ experience_formset.empty_form.as_table }}
               </div>
             </div>
-            <button type="button" class="btn btn-primary" id="add-experience">Add Experience</button>
+            <button type="button" class="btn btn-secondary" id="add-experience" style="margin-bottom: 20px;"><i class="bi bi-plus"></i> Add Experience</button>
 
             <div id="skill-formset">
               {{ skill_formset.management_form }}
@@ -51,10 +52,12 @@
                 {{ skill_formset.empty_form.as_table }}
               </div>
             </div>
-            <button type="button" class="btn btn-primary" id="add-skill">Add Skill</button>
+            <button type="button" class="btn btn-secondary" id="add-skill" style="margin-bottom: 20px;"><i class="bi bi-plus"></i> Add Skill</button>
 
             <!-- Rest of the template remains the same -->
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
           </form>
         </div>
       </div>
@@ -72,6 +75,7 @@ document.addEventListener("DOMContentLoaded", function () {
       form.id = prefix + "-form-" + formIdx;
       form.style.display = "block";
       form.classList.add("formset");
+      form.innerHTML = form.innerHTML.replace(/__prefix__/g, formIdx);
       document.getElementById(prefix + "-formset").appendChild(form);
 
       // Update the TOTAL_FORMS count
@@ -80,6 +84,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
+
 </script>
 
 {% endblock %}
