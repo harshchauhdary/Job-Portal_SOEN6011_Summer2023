@@ -26,7 +26,7 @@
                     <em>{{ education.degree }}</em>
                   </div>
                   <div class="col-md-3 text-md-end">
-                    <span class="text-muted">
+                    <span class="text-muted small">
                       {{ education.start_date|date:"F Y" }} - {{ education.end_date|date:"F Y" }}
                     </span>
                   </div>
@@ -36,32 +36,6 @@
 
             {% else %}
               <p>No education details available</p>
-            {% endif %}
-            
-            {% if candidate.resume.experiences.all %}
-              <hr>
-              <h4>Experience</h4>
-              {% for experience in candidate.resume.experiences.all %}
-              <div class="row mb-3">
-                <div class="col-md-9">
-                  <strong>{{ experience.position }}</strong><br>
-                  <em>{{ experience.company_name }}</em>
-                </div>
-                <div class="col-md-3 text-md-end">
-                  <span class="text-muted">
-                    {{ experience.start_date|date:"F Y" }} - {{ experience.end_date|date:"F Y" }}
-                  </span>
-                </div>
-              </div>
-              <ul class="mt-0">
-                {% for line in experience.description.splitlines %}
-                  <li>{{ line }}</li>
-                {% endfor %}
-              </ul>
-            {% endfor %}
-
-            {% else %}
-              <p>No experience details available</p>
             {% endif %}
             
             {% if candidate.resume.skill_set.all %}
@@ -76,25 +50,56 @@
               <p>No skills available</p>
             {% endif %}
 
+            {% if candidate.resume.experiences.all %}
+              <hr>
+              <h4>Experience</h4>
+              {% for experience in candidate.resume.experiences.all %}
+              <div class="row mb-3">
+                <div class="col-md-9">
+                  <strong>{{ experience.position }}</strong><br>
+                  <em>{{ experience.company_name }}</em>
+                </div>
+                <div class="col-md-3 text-md-end">
+                  <span class="text-muted small">
+                    {{ experience.start_date|date:"F Y" }} - {{ experience.end_date|date:"F Y" }}
+                  </span>
+                </div>
+              </div>
+              <ul class="mt-0">
+                {% for line in experience.description.splitlines %}
+                  <li>{{ line }}</li>
+                {% endfor %}
+              </ul>
+            {% endfor %}
+
+            {% else %}
+              <p>No experience details available</p>
+            {% endif %}
+
             {% if candidate.resume.projects.all %}
               <hr>
               <h4>Projects</h4>
               {% for project in candidate.resume.projects.all %}
                 <div class="row mb-3">
-                <div class="col-md-9">
-                <strong>{{ project.name }}</strong>
-              </div>
-              <div class="col-md-3 text-md-end">
-                <span class="text-muted">
-                  {{ project.start_date|date:"F Y" }} - {{ project.end_date|date:"F Y" }}
-                </span>
-              </div>
-            </div>
-            <p>{{ project.description }}</p>
-          {% endfor %}
-        {% else %}
-          <p>No project details available</p>
-        {% endif %}
+                  <div class="col-md-9">
+                    <strong>{{ project.name }}</strong>
+                  </div>
+                  <div class="col-md-3 text-md-end">
+                    <span class="text-muted small">
+                      {{ project.start_date|date:"F Y" }} - {{ project.end_date|date:"F Y" }}
+                    </span>
+                  </div>
+                </div>
+                <ul class="mt-0">
+                  {% for line in project.description.splitlines %}
+                    <li>{{ line }}</li>
+                  {% endfor %}
+                </ul>
+              {% endfor %}
+            {% else %}
+              <p>No project details available</p>
+            {% endif %}
+          
             
           {% else %}
             <p>No resume available</p>

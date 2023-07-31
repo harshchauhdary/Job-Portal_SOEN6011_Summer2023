@@ -48,7 +48,7 @@ class ProjectForm(forms.ModelForm):
             "name": forms.TextInput(attrs={'class': 'form-control'}),
             "start_date": forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
             "end_date": forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
-            "description": forms.Textarea(attrs={'class': 'form-control', 'rows': 3, 'placeholder': 'Project description'}),
+            "description": forms.Textarea(attrs={'class': 'form-control', 'rows': 3, 'placeholder': 'Bullet point 1\nBullet point 2\nBullet point 3'}),
         }
 
 ProjectFormSet = inlineformset_factory(Resume, Project, form=ProjectForm, extra=0)
