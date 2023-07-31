@@ -20,39 +20,152 @@
             {% endfor %}
 
             <!-- Add the formsets rendering code -->
-            <div id="education-formset">
-              {{ education_formset.management_form }}
-              {% for education_form in education_formset %}
-                {{ education_form.as_table }}
-              {% endfor %}
-              <div id="empty-education-form" style="display: none;">
-                {{ education_formset.empty_form.as_table }}
-              </div>
-            </div>
-            <button type="button" class="btn btn-secondary add-formset-row" data-formset="education" style="margin-bottom: 20px;"><i class="bi bi-plus"></i> Add Education</button>
+            
+            <!-- Education Formset -->
+<div id="education-formset">
+  <h3>Education</h3>
+  {{ education_formset.management_form }}
+  {% for education_form in education_formset %}
+    <div class="formset-row" id="education-form-{{ forloop.counter0 }}">
+      <!-- Include the id field as a hidden input -->
+      {{ education_form.id }}
 
+      <div class="mb-3">
+        <label for="{{ education_form.school_name.id_for_label }}" class="form-label">Enter School/University</label>
+        {{ education_form.school_name }}
+      </div>
+      <div class="mb-3">
+        <label for="{{ education_form.degree.id_for_label }}" class="form-label">Enter Course</label>
+        {{ education_form.degree }}
+      </div>
+      <div class="mb-3">
+        <label for="{{ education_form.start_date.id_for_label }}" class="form-label">Start Date</label>
+        {{ education_form.start_date }}
+      </div>
+      <div class="mb-3">
+        <label for="{{ education_form.end_date.id_for_label }}" class="form-label">End Date</label>
+        {{ education_form.end_date }}
+      </div>
+      {{ education_form.resume }}
 
-            <div id="experience-formset">
-              {{ experience_formset.management_form }}
-              {% for experience_form in experience_formset %}
-                {{ experience_form.as_table }}
-              {% endfor %}
-              <div id="empty-experience-form" style="display: none;">
-                {{ experience_formset.empty_form.as_table }}
-              </div>
-            </div>
-            <button type="button" class="btn btn-secondary add-formset-row" data-formset="experience" style="margin-bottom: 20px;"><i class="bi bi-plus"></i> Add Experience</button>
+      {% if not education_form.instance.id %}
+        <!-- For new formset rows, clear the id field -->
+        <script>document.getElementById("id_education-{{ forloop.counter0 }}").value = "";</script>
+      {% endif %}
+    </div>
+  {% endfor %}
+  <div id="empty-education-form" style="display: none;">
+    {{ education_formset.empty_form.id }}
+    <div class="mb-3">
+      <label for="{{ education_formset.empty_form.school_name.id_for_label }}" class="form-label">Enter School/University</label>
+      {{ education_formset.empty_form.school_name }}
+    </div>
+    <div class="mb-3">
+      <label for="{{ education_formset.empty_form.degree.id_for_label }}" class="form-label">Enter Course</label>
+      {{ education_formset.empty_form.degree }}
+    </div>
+    <div class="mb-3">
+      <label for="{{ education_formset.empty_form.start_date.id_for_label }}" class="form-label">Start Date</label>
+      {{ education_formset.empty_form.start_date }}
+    </div>
+    <div class="mb-3">
+      <label for="{{ education_formset.empty_form.end_date.id_for_label }}" class="form-label">End Date</label>
+      {{ education_formset.empty_form.end_date }}
+    </div>
+    {{ education_formset.empty_form.resume }}
+  </div>
+</div>
+<button type="button" class="btn btn-secondary add-formset-row" data-formset="education" style="margin-bottom: 20px;"><i class="bi bi-plus"></i> Add Education</button>
+<!-- Rest of the template remains the same -->
 
-            <div id="skill-formset">
-              {{ skill_formset.management_form }}
-              {% for skill_form in skill_formset %}
-                {{ skill_form.as_table }}
-              {% endfor %}
-              <div id="empty-skill-form" style="display: none;">
-                {{ skill_formset.empty_form.as_table }}
-              </div>
-            </div>
-            <button type="button" class="btn btn-secondary add-formset-row" data-formset="skill" style="margin-bottom: 20px;"><i class="bi bi-plus"></i> Add Skill</button>
+<!-- Experience Formset -->
+<div id="experience-formset">
+  <h3>Experience</h3>
+  {{ experience_formset.management_form }}
+  {% for experience_form in experience_formset %}
+    <div class="formset-row" id="experience-form-{{ forloop.counter0 }}">
+      <!-- Include the id field as a hidden input -->
+      {{ experience_form.id }}
+
+      <div class="mb-3">
+        <label for="{{ experience_form.company_name.id_for_label }}" class="form-label">Company Name</label>
+        {{ experience_form.company_name }}
+      </div>
+      <div class="mb-3">
+        <label for="{{ experience_form.position.id_for_label }}" class="form-label">Position</label>
+        {{ experience_form.position }}
+      </div>
+      <div class="mb-3">
+        <label for="{{ experience_form.start_date.id_for_label }}" class="form-label">Start Date</label>
+        {{ experience_form.start_date }}
+      </div>
+      <div class="mb-3">
+        <label for="{{ experience_form.end_date.id_for_label }}" class="form-label">End Date</label>
+        {{ experience_form.end_date }}
+      </div>
+      {{ experience_form.resume }}
+
+      {% if not experience_form.instance.id %}
+        <!-- For new formset rows, clear the id field -->
+        <script>document.getElementById("id_experience-{{ forloop.counter0 }}").value = "";</script>
+      {% endif %}
+    </div>
+  {% endfor %}
+  <div id="empty-experience-form" style="display: none;">
+    {{ experience_formset.empty_form.id }}
+    <div class="mb-3">
+      <label for="{{ experience_formset.empty_form.company_name.id_for_label }}" class="form-label">Company Name</label>
+      {{ experience_formset.empty_form.company_name }}
+    </div>
+    <div class="mb-3">
+      <label for="{{ experience_formset.empty_form.position.id_for_label }}" class="form-label">Position</label>
+      {{ experience_formset.empty_form.position }}
+    </div>
+    <div class="mb-3">
+      <label for="{{ experience_formset.empty_form.start_date.id_for_label }}" class="form-label">Start Date</label>
+      {{ experience_formset.empty_form.start_date }}
+    </div>
+    <div class="mb-3">
+      <label for="{{ experience_formset.empty_form.end_date.id_for_label }}" class="form-label">End Date</label>
+      {{ experience_formset.empty_form.end_date }}
+    </div>
+    {{ experience_formset.empty_form.resume }}
+  </div>
+</div>
+<button type="button" class="btn btn-secondary add-formset-row" data-formset="experience" style="margin-bottom: 20px;"><i class="bi bi-plus"></i> Add Experience</button>
+<!-- Rest of the template remains the same -->
+
+<!-- Skill Formset -->
+<div id="skill-formset">
+  <h3>Skills</h3>
+  {{ skill_formset.management_form }}
+  {% for skill_form in skill_formset %}
+    <div class="formset-row" id="skill-form-{{ forloop.counter0 }}">
+      <!-- Include the id field as a hidden input -->
+      {{ skill_form.id }}
+
+      <div class="mb-3">
+        <label for="{{ skill_form.name.id_for_label }}" class="form-label">Skill Name</label>
+        {{ skill_form.name }}
+      </div>
+      {{ skill_form.resume }}
+
+      {% if not skill_form.instance.id %}
+        <!-- For new formset rows, clear the id field -->
+        <script>document.getElementById("id_skill-{{ forloop.counter0 }}").value = "";</script>
+      {% endif %}
+    </div>
+  {% endfor %}
+  <div id="empty-skill-form" style="display: none;">
+    {{ skill_formset.empty_form.id }}
+    <div class="mb-3">
+      <label for="{{ skill_formset.empty_form.name.id_for_label }}" class="form-label">Skill Name</label>
+      {{ skill_formset.empty_form.name }}
+    </div>
+    {{ skill_formset.empty_form.resume }}
+  </div>
+</div>
+<button type="button" class="btn btn-secondary add-formset-row" data-formset="skill" style="margin-bottom: 20px;"><i class="bi bi-plus"></i> Add Skill</button>
 
             <!-- Rest of the template remains the same -->
             <div>
