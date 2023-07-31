@@ -13,10 +13,11 @@ def view_Jobs(request):
     c = checkLogin(request)
     j = []
     a = []
-    jobs = Job.objects.filter(status="OPEN")
+    jobs = Job.objects.all()
     for job in jobs:
         if Application.objects.filter(candidate=c).filter(job=job).count() == 0:
-            j.append(job)
+            if job.status == "OPEN":
+                j.append(job)
         else:
             a.append(Application.objects.filter(candidate=c).filter(job=job)[0])
 

@@ -9,18 +9,19 @@
     <div class="col-md-12">
       <a href="/employer/browseCandidatesAll" class="btn btn-primary mb-3">Browse All Candidates</a>
     </div>
-    {% for job in jobs %}
-    <div class="col-md-4">
-      <div class="card mb-4">
-        <div class="card-body">
-          <h5 class="card-title">{{ job.position }}</h5>
-          <h6 class="card-subtitle mb-2 text-muted">{{ job.employer.companyName }}</h6>
-          <p class="card-text">{{ job.description|slice:300 }}</p> <!-- Limit description to 100 characters -->
-          <a href="/employer/viewJob/{{job.id}}" class="btn btn-primary">View Details</a>
+    <div class="row mt-4">
+      {% for job in jobs %}
+      <div class="col-md-4 d-flex align-items-stretch"> <!-- Add flex utilities -->
+        <div class="card mb-4" style="width: 100%;"> <!-- Specify card width -->
+          <div class="card-body d-flex flex-column"> <!-- Make this a flex container -->
+            <h5 class="card-title">{{ job.position }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{job.employer.companyName}}</h6>
+            <p class="card-text flex-grow-1">{{ job.description|slice:300 }}</p> <!-- Allow this item to grow -->
+            <a href="/employer/viewJob/{{job.id}}" class="btn btn-primary mt-2 align-self-start">View Details</a> <!-- Add auto margins -->
+          </div>
         </div>
       </div>
-    </div>
-    {% endfor %}
+      {% endfor %}
   </div>
 </div>
 {% endblock %}
