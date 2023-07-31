@@ -33,7 +33,7 @@ def apply_Job(request, pk):
     except Exception:
         return HttpResponseRedirect('/candidates/viewJobTemplate.html')
     if Application.objects.filter(candidate=c).filter(job=job).count() == 0:
-        a = Application(candidate = c, job = job, status = "Review")
+        a = Application(candidate=c, job=job, status="Applied")
         a.save()
     else:
         return HttpResponseRedirect('/candidates/viewJobTemplate.html')
