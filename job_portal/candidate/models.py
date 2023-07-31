@@ -52,3 +52,9 @@ class Application(models.Model):
     job = models.ForeignKey(Job, on_delete=models.CASCADE)
     status = models.CharField(max_length=255)
 
+class Notification(models.Model):
+        candidate = models.ForeignKey(
+        Candidate, on_delete=models.SET_NULL, null=True, blank=True)
+        message = models.TextField()
+        read = models.BooleanField(default=False)
+

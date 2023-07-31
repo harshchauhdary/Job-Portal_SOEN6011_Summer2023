@@ -123,7 +123,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import FileResponse, HttpResponseRedirect, HttpResponseForbidden
 from .models import User, Job, Employer
-from candidate.models import Application
+from candidate.models import Application, Notification
 from .forms import JobForm, EmployerForm
 from candidate.models import Candidate
 from django.shortcuts import redirect, get_object_or_404
@@ -160,6 +160,11 @@ def accept_application(request, application_id):
 
     application.status = "Accepted"
     application.save()
+
+    message = "Congratulations you are accepted for the job: "+application.job.get_job_message()
+    notification = Notification(candidate=application.candidate, message=message, read=False)
+    notification.save()
+
     return HttpResponseRedirect(f'/employer/browseCandidates/{application.job.pk}')
 
 
@@ -174,6 +179,11 @@ def reject_application(request, application_id):
 
     application.status = "Rejected"
     application.save()
+
+    message = "Try next time for the job: "+application.job.get_job_message()
+    notification = Notification(candidate=application.candidate, message=message, read=False)
+    notification.save()
+
     return HttpResponseRedirect(f'/employer/browseCandidates/{application.job.pk}')
 
 

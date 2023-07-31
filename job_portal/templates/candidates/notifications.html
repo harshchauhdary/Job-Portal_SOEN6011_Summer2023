@@ -1,0 +1,18 @@
+{% extends "shared/base.html" %}
+
+{% block content %}
+<div class="container">
+  <div class="row mt-4"> <!-- Add top margin to create space -->
+    {% for notification in notifications %}
+    <div class="col-md-8">
+      <div class="card mb-8">
+        <div class="card-body">
+          <h5 class="card-title"> {{ notification.message }} </h5> 
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
+

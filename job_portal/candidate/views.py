@@ -1,13 +1,22 @@
 from django.http import FileResponse, HttpResponseRedirect
 from django.shortcuts import render
-from .models import User, Job, Candidate, Application
+from .models import User, Job, Candidate, Application, Notification
 from django.views import generic
 from django.shortcuts import get_object_or_404
 from .forms import ResumeForm, CandidateForm, EducationFormSet, ExperienceFormSet, SkillFormSet, ProjectFormSet
 
+
+#view notifications
+def view_notifications(request):
+    c = checkLogin(request)
+
+    notifications = Notification.objects.filter(candidate=c)
+
+    context = {'notifications': notifications}
+
+    return render(request, 'candidates/notifications.html', context)
+
 # view jobs
-
-
 def view_Jobs(request):
    # get candidate from session
     c = checkLogin(request)
