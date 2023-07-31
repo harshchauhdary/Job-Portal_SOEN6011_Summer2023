@@ -1,0 +1,135 @@
+{% extends "shared/base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <div class="card">
+        <div class="card-body">
+          <h2 class="card-title">{{ candidate.firstName }} {{ candidate.lastName }}</h2>
+          <p class="card-text mb-1"><strong>Phone:</strong> {{ candidate.phone }}</p>
+          <p class="card-text mb-3"><strong>Email:</strong> {{ candidate.user.email }}</p>
+          
+          {% if candidate.resume %}
+            <hr>
+            <h4>Summary</h4>
+            <p>{{ candidate.resume.summary }}</p>
+
+            {% if candidate.resume.educations.all %}
+              <hr>
+              <h4>Education</h4>
+              {% for education in candidate.resume.educations.all %}
+                <div class="row mb-3">
+                  <div class="col-md-9">
+                    <strong>{{ education.school_name }}</strong><br>
+                    <em>{{ education.degree }}</em>
+                  </div>
+                  <div class="col-md-3 text-md-end">
+                    <span class="text-muted small">
+                      {{ education.start_date|date:"F Y" }} - {{ education.end_date|date:"F Y" }}
+                    </span>
+                  </div>
+                </div>
+              
+              {% endfor %}
+
+            {% else %}
+              <p>No education details available</p>
+            {% endif %}
+            
+            {% if candidate.resume.skill_set.all %}
+              <hr>
+              <h4>Skills</h4>
+              <ul>
+                {% for skill in candidate.resume.skill_set.all %}
+                  <li>{{ skill.name }}</li>
+                {% endfor %}
+              </ul>
+            {% else %}
+              <p>No skills available</p>
+            {% endif %}
+
+            {% if candidate.resume.experiences.all %}
+              <hr>
+              <h4>Experience</h4>
+              {% for experience in candidate.resume.experiences.all %}
+              <div class="row mb-3">
+                <div class="col-md-9">
+                  <strong>{{ experience.position }}</strong><br>
+                  <em>{{ experience.company_name }}</em>
+                </div>
+                <div class="col-md-3 text-md-end">
+                  <span class="text-muted small">
+                    {{ experience.start_date|date:"F Y" }} - {{ experience.end_date|date:"F Y" }}
+                  </span>
+                </div>
+              </div>
+              <ul class="mt-0">
+                {% for line in experience.description.splitlines %}
+                  <li>{{ line }}</li>
+                {% endfor %}
+              </ul>
+            {% endfor %}
+
+            {% else %}
+              <p>No experience details available</p>
+            {% endif %}
+
+            {% if candidate.resume.projects.all %}
+              <hr>
+              <h4>Projects</h4>
+              {% for project in candidate.resume.projects.all %}
+                <div class="row mb-3">
+                  <div class="col-md-9">
+                    <strong>{{ project.name }}</strong>
+                  </div>
+                  <div class="col-md-3 text-md-end">
+                    <span class="text-muted small">
+                      {{ project.start_date|date:"F Y" }} - {{ project.end_date|date:"F Y" }}
+                    </span>
+                  </div>
+                </div>
+                <ul class="mt-0">
+                  {% for line in project.description.splitlines %}
+                    <li>{{ line }}</li>
+                  {% endfor %}
+                </ul>
+              {% endfor %}
+            {% else %}
+              <p>No project details available</p>
+            {% endif %}
+          
+            
+          {% else %}
+            <p>No resume available</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row mt-3">
+    <div class="col-md-4 mx-auto text-center">
+      <div class="dropdown d-inline-block ms-md-3">
+        <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton{{ candidate.id }}" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Actions
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton{{ candidate.id }}">
+          <form method="post" action="{% url 'employer:download_employee_resume' %}">
+            {% csrf_token %}
+            {% if candidate.resume.file %}
+              <button type="submit" class="dropdown-item text-primary" name="resume_id" value="{{ candidate.id }}">Download Resume</button>
+            {% else %}
+              <button class="btn btn-primary" disabled>No Resume</button>
+            {% endif %}
+          </form>
+          <a href="/employer/accept_application/{{ application.pk }}" class="dropdown-item text-success">Accept</a>
+          <a href="/employer/reject_application/{{ application.pk }}" class="dropdown-item text-danger">Reject</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+
+{% endblock %}

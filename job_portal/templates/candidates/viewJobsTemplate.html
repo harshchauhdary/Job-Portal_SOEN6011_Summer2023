@@ -2,20 +2,73 @@
 
 {% block content %}
 <div class="container">
-  <div class="row mt-4"> <!-- Add top margin to create space -->
-    {% for job in jobs %}
-    <div class="col-md-4">
-      <div class="card mb-4">
-        <div class="card-body">
-          <h5 class="card-title">{{ job.position }}</h5>
-          <h6 class="card-subtitle mb-2 text-muted">{{job.employer.companyName}}</h6>
-          <p class="card-text">{{ job.description|slice:300 }}</p> 
-          <a href="job/{{job.id}}" class="btn btn-primary">View Details</a>
+  <ul class="nav nav-tabs mt-4">
+    <li class="nav-item">
+      <a class="nav-link active" id="available-tab" data-bs-toggle="tab" href="#available">Available Jobs <span class="badge bg-secondary">{{ jobs|length }}</span></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="applied-tab" data-bs-toggle="tab" href="#applied">Applied Jobs <span class="badge bg-secondary">{{ applied|length }}</span></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="saved-tab" data-bs-toggle="tab" href="#saved">Saved Jobs <span class="badge bg-secondary">0</span></a>
+    </li>
+  </ul>
+  
+  <div class="tab-content">
+    <div class="tab-pane fade show active" id="available">
+      <div class="row mt-4">
+        {% for job in jobs %}
+        <div class="col-md-4 d-flex align-items-stretch"> <!-- Add flex utilities -->
+          <div class="card mb-4" style="width: 100%;"> <!-- Specify card width -->
+            <div class="card-body d-flex flex-column"> <!-- Make this a flex container -->
+              <h5 class="card-title">{{ job.position }}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">{{job.employer.companyName}}</h6>
+              <p class="card-text flex-grow-1">{{ job.description|slice:300 }}</p> <!-- Allow this item to grow -->
+              <a href="job/{{job.id}}" class="btn btn-primary mt-2 align-self-start">View Details</a> <!-- Add auto margins -->
+            </div>
+          </div>
         </div>
+        {% endfor %}
       </div>
     </div>
-    {% endfor %}
+    
+    <div class="tab-pane fade" id="applied">
+      <div class="row mt-4">
+        {% for application in applied %}
+        <div class="col-md-4 d-flex align-items-stretch"> <!-- Add flex utilities -->
+          <div class="card mb-4" style="width: 100%;"> <!-- Specify card width -->
+            <div class="card-body d-flex flex-column"> <!-- Make this a flex container -->
+              <h5 class="card-title">{{ application.job.position }}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">{{application.job.employer.companyName}}</h6>
+              <!-- Added Application Status here -->
+              <div>
+                {% if application.status == "Applied" %}
+                  <span class="badge bg-warning">{{ application.status }}</span>
+                {% elif application.status == "Viewed" %}
+                  <span class="badge bg-info">{{ application.status }}</span>
+                {% elif application.status == "Accepted" %}
+                  <span class="badge bg-success">{{ application.status }}</span>
+                {% elif application.status == "Rejected" %}
+                  <span class="badge bg-danger">{{ application.status }}</span>
+                {% endif %}
+                </div>
+              <!-- End of Application Status -->
+              <p class="card-text mt-2 flex-grow-1">{{ application.job.description|slice:300 }}</p> <!-- Allow this item to grow -->
+              <a href="job/{{application.job.id}}" class="btn btn-primary mt-2 align-self-start">View Details</a> <!-- Add auto margins -->
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    
+    
+    
+    <div class="tab-pane fade" id="saved">
+      <!-- Add your HTML for Saved Jobs here -->
+    </div>
   </div>
 </div>
 {% endblock %}
+
 

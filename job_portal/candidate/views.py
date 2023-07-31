@@ -12,13 +12,18 @@ def view_Jobs(request):
    # get candidate from session
     c = checkLogin(request)
     j = []
+    a = []
     jobs = Job.objects.filter(status="OPEN")
     for job in jobs:
         if Application.objects.filter(candidate=c).filter(job=job).count() == 0:
             j.append(job)
+        else:
+            a.append(Application.objects.filter(candidate=c).filter(job=job)[0])
+
 
     context = {
         'jobs': j,
+        'applied' : a,
         'candidate': c
     }
     return render(request, 'candidates/viewJobsTemplate.html', context)

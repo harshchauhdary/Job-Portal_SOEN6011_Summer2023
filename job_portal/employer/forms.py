@@ -21,7 +21,7 @@ class JobForm(forms.ModelForm):
         fields = ('position', 'description', 'applicationDeadline', 'status')
         widgets = {
             'position': forms.TextInput(attrs={'class': 'form-control'}),
-            'description': forms.TextInput(attrs={'class': 'form-control'}),
+            "description": forms.Textarea(attrs={'class': 'form-control', 'rows': 3, 'placeholder': 'Job Description'}),
             'applicationDeadline': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
             'status': forms.Select(attrs={'class': 'form-control'}),
         }
@@ -39,7 +39,7 @@ class JobForm(forms.ModelForm):
     )
 
     description = forms.CharField(
-        widget=forms.TextInput(attrs={'class': 'form-control'}),
+        widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 3, 'placeholder': 'Job Description'}),
         label='Description'  # Customize the label here
     )
 

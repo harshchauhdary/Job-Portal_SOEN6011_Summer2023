@@ -27,6 +27,6 @@ urlpatterns = [
     path('viewJobs/', views.view_jobs, name='view_jobs'),
     path('accept_application/<int:application_id>/', views.accept_application, name='accept_application'),
     path('reject_application/<int:application_id>/', views.reject_application, name='reject_application'),
-
+    path('view_candidate_application/<int:applicationId>/', views.view_candidate_application, name='view_candidate_application'),
 ]
 

@@ -129,7 +129,7 @@ from candidate.models import Candidate
 from django.shortcuts import redirect, get_object_or_404
 
 
-def view_candidate_application(request, candidateId, applicationId):
+def view_candidate_application(request, applicationId):
     employer = check_login(request)
     if not employer:
         return HttpResponseRedirect('/')
@@ -138,14 +138,15 @@ def view_candidate_application(request, candidateId, applicationId):
     if application.job.employer != employer:
         return HttpResponseForbidden("You do not have permission to perform this action.")
 
-    candidate = Candidate.objects.filter(id=candidateId)
+    candidate = Candidate.objects.filter(id=application.candidate.id)[0]
+    print(candidate)
     application.status = "Viewed"
     application.save()
-    context: {
-        candidate: candidate,
-        application: application
+    context = {
+        'candidate': candidate,
+        'application': application,
     }
-    return render(request, '#Template for showing each view of candidate ', context)
+    return render(request, 'employer/view_candidate_application.html', context)
 
 
 def accept_application(request, application_id):

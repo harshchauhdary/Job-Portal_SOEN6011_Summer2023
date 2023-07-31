@@ -8,7 +8,10 @@
         <div class="card-body">
           <h5 class="card-title">{{ job.position }}</h5>
           <h6 class="card-subtitle mb-2 text-muted">{{ job.employer.companyName }}</h6>
-          <p class="card-text">{{ job.description }}</p>
+          
+          {% for line in job.description.splitlines %}
+            <p class="card-text" style="margin-bottom: 0;">{{ line }}</p>
+          {% endfor %}
           <p class="card-text">Application Deadline: {{ job.applicationDeadline }}</p>
           <p class="card-text">Status: {{ job.status }}</p>
           <!-- Add any other job details you want to display -->
