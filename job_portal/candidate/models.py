@@ -29,6 +29,14 @@ class Skill(models.Model):
     name = models.CharField(max_length=100)
 
 
+class Project(models.Model):
+    resume = models.ForeignKey(Resume, related_name='projects', on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    start_date = models.DateField()
+    end_date = models.DateField()
+    description = models.TextField()
+
+
 class Candidate(models.Model):
     firstName = models.CharField(max_length=255)
     lastName = models.CharField(max_length=255)

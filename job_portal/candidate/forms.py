@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import inlineformset_factory
-from .models import Resume, Candidate, Education, Experience, Skill
+from .models import Resume, Candidate, Education, Experience, Skill, Project
 from django.core.validators import MinLengthValidator, MaxLengthValidator
 
 class EducationForm(forms.ModelForm):
@@ -39,6 +39,19 @@ class ExperienceForm(forms.ModelForm):
         }
 
 ExperienceFormSet = inlineformset_factory(Resume, Experience, form=ExperienceForm, extra=0)
+
+class ProjectForm(forms.ModelForm):
+    class Meta:
+        model = Project
+        fields = ["name", "start_date", "end_date", "description"]
+        widgets = {
+            "name": forms.TextInput(attrs={'class': 'form-control'}),
+            "start_date": forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+            "end_date": forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+            "description": forms.Textarea(attrs={'class': 'form-control', 'rows': 3, 'placeholder': 'Project description'}),
+        }
+
+ProjectFormSet = inlineformset_factory(Resume, Project, form=ProjectForm, extra=0)
 
 class ResumeForm(forms.ModelForm):
     # add more fields

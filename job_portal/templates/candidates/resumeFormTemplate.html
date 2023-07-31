@@ -54,6 +54,17 @@
             </div>
             <button type="button" class="btn btn-secondary" id="add-skill" style="margin-bottom: 20px;"><i class="bi bi-plus"></i> Add Skill</button>
 
+            <div id="project-formset">
+              {{ project_formset.management_form }}
+              {% for project_form in project_formset %}
+                {{ project_form.as_table }}
+              {% endfor %}
+              <div id="empty-project-form" style="display: none;">
+                {{ project_formset.empty_form.as_table }}
+              </div>
+            </div>
+            <button type="button" class="btn btn-secondary" id="add-project" style="margin-bottom: 20px;"><i class="bi bi-plus"></i> Add Project</button>
+
             <!-- Rest of the template remains the same -->
             <div>
               <button type="submit" class="btn btn-primary">Submit</button>
@@ -66,7 +77,7 @@
 </div>
 
 <!-- Add JavaScript to handle the dynamic addition of formsets -->
-<script>
+<!-- <script>
 document.addEventListener("DOMContentLoaded", function () {
   ["education", "experience", "skill"].forEach(function (prefix) {
     document.getElementById("add-" + prefix).addEventListener("click", function () {
@@ -85,6 +96,56 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-</script>
+</script> -->
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    function updateFormsetPrefix(formsetPrefix) {
+      var formsetRows = document.querySelectorAll("#" + formsetPrefix + "-formset .formset-row");
+      formsetRows.forEach(function (row, idx) {
+        row.id = formsetPrefix + "-form-" + idx;
+        var formInputs = row.querySelectorAll("input, select, textarea");
+        formInputs.forEach(function (input) {
+          input.name = input.name.replace(/__prefix__/g, idx);
+          input.id = input.id.replace(/__prefix__/g, idx);
+          input.setAttribute("for", input.getAttribute("for").replace(/__prefix__/g, idx));
+        });
+        var deleteButton = row.querySelector(".delete-formset-row");
+        deleteButton.addEventListener("click", function () {
+          row.remove();
+          updateFormsetPrefix(formsetPrefix);
+        });
+      });
+    }
+  
+    function addFormsetRow(formsetPrefix) {
+      var formset = document.getElementById(formsetPrefix + "-formset");
+      var formIdx = formset.querySelectorAll(".formset-row").length;
+      var form = document.getElementById("empty-" + formsetPrefix + "-form").cloneNode(true);
+      form.style.display = "block";
+      form.classList.add("formset-row");
+      form.id = formsetPrefix + "-form-" + formIdx;
+      form.innerHTML = form.innerHTML.replace(/__prefix__/g, formIdx);
+      formset.appendChild(form);
+  
+      // Update the TOTAL_FORMS count
+      var totalFormsInput = document.querySelector("#" + formsetPrefix + "-formset input[name='" + formsetPrefix + "-TOTAL_FORMS']");
+      totalFormsInput.value = parseInt(totalFormsInput.value) + 1;
+  
+      updateFormsetPrefix(formsetPrefix);
+    }
+  
+    ["education", "experience", "skill", "project"].forEach(function (prefix) {
+      document.getElementById("add-" + prefix).addEventListener("click", function () {
+        addFormsetRow(prefix);
+      });
+    });
+  
+    // Call the updateFormsetPrefix initially to handle any pre-existing formsets
+    ["education", "experience", "skill", "project"].forEach(function (prefix) {
+      updateFormsetPrefix(prefix);
+    });
+  });
+  </script>
 
 {% endblock %}

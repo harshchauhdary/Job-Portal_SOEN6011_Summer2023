@@ -177,6 +177,59 @@
 </div>
 <button type="button" class="btn btn-secondary add-formset-row" data-formset="skill" style="margin-bottom: 20px;"><i class="bi bi-plus"></i> Add Skill</button>
 
+<div id="project-formset">
+  <h3>Projects</h3>
+  {{ project_formset.management_form }}
+  {% for project_form in project_formset %}
+    <div class="formset-row" id="project-form-{{ forloop.counter0 }}">
+      <!-- Include the id field as a hidden input -->
+      {{ project_form.id }}
+
+      <div class="mb-3">
+        <label for="{{ project_form.name.id_for_label }}" class="form-label">Project Name</label>
+        {{ project_form.name }}
+      </div>
+      <div class="mb-3">
+        <label for="{{ project_form.start_date.id_for_label }}" class="form-label">Start Date</label>
+        {{ project_form.start_date }}
+      </div>
+      <div class="mb-3">
+        <label for="{{ project_form.end_date.id_for_label }}" class="form-label">End Date</label>
+        {{ project_form.end_date }}
+      </div>
+      <div class="mb-3">
+        <label for="{{ project_form.description.id_for_label }}" class="form-label">Description</label>
+        {{ project_form.description }}
+      </div>
+
+      {% if not project_form.instance.id %}
+        <!-- For new formset rows, clear the id field -->
+        <script>document.getElementById("id_project-{{ forloop.counter0 }}").value = "";</script>
+      {% endif %}
+    </div>
+  {% endfor %}
+  <div id="empty-project-form" style="display: none;">
+    {{ project_formset.empty_form.id }}
+    <div class="mb-3">
+      <label for="{{ project_formset.empty_form.name.id_for_label }}" class="form-label">Project Name</label>
+      {{ project_formset.empty_form.name }}
+    </div>
+    <div class="mb-3">
+      <label for="{{ project_formset.empty_form.start_date.id_for_label }}" class="form-label">Start Date</label>
+      {{ project_formset.empty_form.start_date }}
+    </div>
+    <div class="mb-3">
+      <label for="{{ project_formset.empty_form.end_date.id_for_label }}" class="form-label">End Date</label>
+      {{ project_formset.empty_form.end_date }}
+    </div>
+    <div class="mb-3">
+      <label for="{{ project_formset.empty_form.description.id_for_label }}" class="form-label">Description</label>
+      {{ project_formset.empty_form.description }}
+    </div>
+  </div>
+</div>
+<button type="button" class="btn btn-secondary add-formset-row" data-formset="project" style="margin-bottom: 20px;"><i class="bi bi-plus"></i> Add Project</button>
+
             <!-- Rest of the template remains the same -->
             <div>
               <button type="submit" class="btn btn-primary">Update Resume</button>

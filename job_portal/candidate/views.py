@@ -3,7 +3,7 @@ from django.shortcuts import render
 from .models import User, Job, Candidate, Application
 from django.views import generic
 from django.shortcuts import get_object_or_404
-from .forms import ResumeForm, CandidateForm, EducationFormSet, ExperienceFormSet, SkillFormSet
+from .forms import ResumeForm, CandidateForm, EducationFormSet, ExperienceFormSet, SkillFormSet, ProjectFormSet
 
 # view jobs
 
@@ -96,8 +96,9 @@ def create_Resume(request):
         education_formset = EducationFormSet(request.POST, prefix='education')
         experience_formset = ExperienceFormSet(request.POST, prefix='experience')
         skill_formset = SkillFormSet(request.POST, prefix='skill')
+        project_formset = ProjectFormSet(request.POST, prefix='project')
 
-        if form.is_valid() and education_formset.is_valid() and experience_formset.is_valid() and skill_formset.is_valid():
+        if form.is_valid() and education_formset.is_valid() and experience_formset.is_valid() and skill_formset.is_valid() and project_formset.is_valid():
             # Save resume data
             resume = form.save()
 
@@ -115,6 +116,9 @@ def create_Resume(request):
             skill_formset.instance = resume
             skill_formset.save()
 
+            project_formset.instance = resume
+            project_formset.save()
+
             # redirect to a new URL:
             return HttpResponseRedirect('/candidates/resume')
 
@@ -123,12 +127,14 @@ def create_Resume(request):
         education_formset = EducationFormSet(prefix='education')
         experience_formset = ExperienceFormSet(prefix='experience')
         skill_formset = SkillFormSet(prefix='skill')
+        project_formset = ProjectFormSet(prefix='project')
 
     context = {
         'form': form,
         'education_formset': education_formset,
         'experience_formset': experience_formset,
         'skill_formset': skill_formset,
+        'project_formset': project_formset,
     }
 
     return render(request, 'candidates/resumeFormTemplate.html', context)
@@ -150,12 +156,14 @@ def update_Resume(request):
         education_formset = EducationFormSet(request.POST, instance=c.resume, prefix='education')
         experience_formset = ExperienceFormSet(request.POST, instance=c.resume, prefix='experience')
         skill_formset = SkillFormSet(request.POST, instance=c.resume, prefix='skill')
+        project_formset = ProjectFormSet(request.POST, instance=c.resume, prefix='project')
 
-        if form.is_valid() and education_formset.is_valid() and experience_formset.is_valid() and skill_formset.is_valid():
+        if form.is_valid() and education_formset.is_valid() and experience_formset.is_valid() and skill_formset.is_valid() and project_formset.is_valid():
             form.save()
             education_formset.save()
             experience_formset.save()
             skill_formset.save()
+            project_formset.save()
             # Redirect to a new URL:
             return HttpResponseRedirect('/candidates/resume')
 
@@ -164,12 +172,14 @@ def update_Resume(request):
         education_formset = EducationFormSet(instance=c.resume, prefix='education')
         experience_formset = ExperienceFormSet(instance=c.resume, prefix='experience')
         skill_formset = SkillFormSet(instance=c.resume, prefix='skill')
+        project_formset=ProjectFormSet(instance=c.resume,prefix='project')
 
     context = {
         'form': form,
         'education_formset': education_formset,
         'experience_formset': experience_formset,
         'skill_formset': skill_formset,
+        'project_formset': project_formset,
     }
 
     return render(request, 'candidates/updateResumeTemplate.html', context)
