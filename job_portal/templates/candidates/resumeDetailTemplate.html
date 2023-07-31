@@ -1,25 +1,106 @@
 {% extends "shared/base.html" %}
 
 {% block content %}
+
 <div class="container mt-4">
   <div class="row">
     <div class="col-md-8 offset-md-2">
       <div class="card">
         <div class="card-body">
           <h2 class="card-title">{{ candidate.firstName }} {{ candidate.lastName }}</h2>
-          <p class="card-text"><strong>{{ candidate.role }}</strong></p>
-          <p class="card-text"><strong>Phone:</strong> {{ candidate.phone }}</p>
-          <p class="card-text"><strong>Email:</strong> {{ candidate.user.email }}</p>
+          <p class="card-text mb-1"><strong>Phone:</strong> {{ candidate.phone }}</p>
+          <p class="card-text mb-3"><strong>Email:</strong> {{ candidate.user.email }}</p>
+          
           {% if candidate.resume %}
             <hr>
             <h4>Summary</h4>
             <p>{{ candidate.resume.summary }}</p>
-            <h4>Education</h4>
-            <p>{{ candidate.resume.education }}</p>
-            <h4>Experience</h4>
-            <p>{{ candidate.resume.experience }}</p>
-            <h4>Skills</h4>
-            <p>{{ candidate.resume.skills }}</p>
+
+            {% if candidate.resume.educations.all %}
+              <hr>
+              <h4>Education</h4>
+              {% for education in candidate.resume.educations.all %}
+                <div class="row mb-3">
+                  <div class="col-md-9">
+                    <strong>{{ education.school_name }}</strong><br>
+                    <em>{{ education.degree }}</em>
+                  </div>
+                  <div class="col-md-3 text-md-end">
+                    <span class="text-muted small">
+                      {{ education.start_date|date:"F Y" }} - {{ education.end_date|date:"F Y" }}
+                    </span>
+                  </div>
+                </div>
+              
+              {% endfor %}
+
+            {% else %}
+              <p>No education details available</p>
+            {% endif %}
+            
+            {% if candidate.resume.skill_set.all %}
+              <hr>
+              <h4>Skills</h4>
+              <ul>
+                {% for skill in candidate.resume.skill_set.all %}
+                  <li>{{ skill.name }}</li>
+                {% endfor %}
+              </ul>
+            {% else %}
+              <p>No skills available</p>
+            {% endif %}
+
+            {% if candidate.resume.experiences.all %}
+              <hr>
+              <h4>Experience</h4>
+              {% for experience in candidate.resume.experiences.all %}
+              <div class="row mb-3">
+                <div class="col-md-9">
+                  <strong>{{ experience.position }}</strong><br>
+                  <em>{{ experience.company_name }}</em>
+                </div>
+                <div class="col-md-3 text-md-end">
+                  <span class="text-muted small">
+                    {{ experience.start_date|date:"F Y" }} - {{ experience.end_date|date:"F Y" }}
+                  </span>
+                </div>
+              </div>
+              <ul class="mt-0">
+                {% for line in experience.description.splitlines %}
+                  <li>{{ line }}</li>
+                {% endfor %}
+              </ul>
+            {% endfor %}
+
+            {% else %}
+              <p>No experience details available</p>
+            {% endif %}
+
+            {% if candidate.resume.projects.all %}
+              <hr>
+              <h4>Projects</h4>
+              {% for project in candidate.resume.projects.all %}
+                <div class="row mb-3">
+                  <div class="col-md-9">
+                    <strong>{{ project.name }}</strong>
+                  </div>
+                  <div class="col-md-3 text-md-end">
+                    <span class="text-muted small">
+                      {{ project.start_date|date:"F Y" }} - {{ project.end_date|date:"F Y" }}
+                    </span>
+                  </div>
+                </div>
+                <ul class="mt-0">
+                  {% for line in project.description.splitlines %}
+                    <li>{{ line }}</li>
+                  {% endfor %}
+                </ul>
+              {% endfor %}
+            {% else %}
+              <p>No project details available</p>
+            {% endif %}
+          
+            
           {% else %}
             <p>No resume available</p>
           {% endif %}
@@ -30,10 +111,11 @@
 </div>
 <div class="mt-3 text-center">
   {% if candidate.resume.file %}
-    <a href="downloadResume" target="_blank" class="btn btn-primary">Download Resume</a>
+  <a href="downloadResume" target="_blank" class="btn btn-primary">Download Resume</a>
   {% else %}
     <button class="btn btn-primary" disabled>Download Resume</button>
   {% endif %}
   <a href="updateResume" class="btn btn-primary mx-3">Edit Resume</a>
 </div>
+
 {% endblock %}
