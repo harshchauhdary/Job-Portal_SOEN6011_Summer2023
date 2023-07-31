@@ -29,12 +29,13 @@ SkillFormSet = inlineformset_factory(Resume, Skill, form=SkillForm, extra=0)
 class ExperienceForm(forms.ModelForm):
     class Meta:
         model = Experience
-        fields = ["company_name", "position", "start_date", "end_date"]
+        fields = ["company_name", "position", "start_date", "end_date", 'description']
         widgets = {
             "company_name": forms.TextInput(attrs={'class': 'form-control'}),
             "position": forms.TextInput(attrs={'class': 'form-control'}),
             "start_date": forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
             "end_date": forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+            'description': forms.Textarea(attrs={'class': 'form-control','rows': 3, 'placeholder': 'Bullet point 1\nBullet point 2\nBullet point 3'}),
         }
 
 ExperienceFormSet = inlineformset_factory(Resume, Experience, form=ExperienceForm, extra=0)

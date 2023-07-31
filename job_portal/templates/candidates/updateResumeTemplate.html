@@ -103,7 +103,13 @@
         <label for="{{ experience_form.end_date.id_for_label }}" class="form-label">End Date</label>
         {{ experience_form.end_date }}
       </div>
+      
       {{ experience_form.resume }}
+
+      <div class="mb-3">
+        <label for="{{ experience_form.description.id_for_label }}" class="form-label">Description</label>
+        {{ experience_form.description }}
+      </div>
 
       {% if not experience_form.instance.id %}
         <!-- For new formset rows, clear the id field -->
@@ -128,6 +134,10 @@
     <div class="mb-3">
       <label for="{{ experience_formset.empty_form.end_date.id_for_label }}" class="form-label">End Date</label>
       {{ experience_formset.empty_form.end_date }}
+    </div>
+    <div class="mb-3">
+      <label for="{{ experience_formset.empty_form.description.id_for_label }}" class="form-label">Description</label>
+      {{ experience_formset.empty_form.description }}
     </div>
     {{ experience_formset.empty_form.resume }}
   </div>
