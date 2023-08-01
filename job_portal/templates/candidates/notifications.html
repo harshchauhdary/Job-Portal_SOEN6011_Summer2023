@@ -2,13 +2,17 @@
 
 {% block content %}
 <div class="container">
-  <div class="row mt-4"> <!-- Add top margin to create space -->
+  <div class="row mt-4">
     {% for notification in notifications %}
-    <div class="col-md-8">
-      <div class="card mb-8">
+    <div class="col-md-8 mb-3">
+      <div class="card">
         <div class="card-body">
-          <h5 class="card-title"> {{ notification.message }} </h5>
-          <a href="close_notification/{{notification.id}}" class="btn btn-primary">Close</a>
+          <div class="d-flex justify-content-between align-items-center"> <!-- Added a flex container to align elements horizontally -->
+            <p class="mb-0"> {{ notification.message }} </p> <!-- Changed to paragraph and removed bottom margin -->
+            <a href="close_notification/{{notification.id}}" class="btn btn-outline-danger btn-sm"> <!-- Added btn-sm for a smaller button -->
+              <i class="bi bi-x"></i> <!-- Changed to X icon -->
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -16,4 +20,3 @@
   </div>
 </div>
 {% endblock %}
-
