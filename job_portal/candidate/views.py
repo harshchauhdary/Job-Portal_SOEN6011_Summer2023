@@ -10,7 +10,7 @@ from .forms import ResumeForm, CandidateForm, EducationFormSet, ExperienceFormSe
 def view_notifications(request):
     c = checkLogin(request)
 
-    notifications = Notification.objects.filter(candidate=c, read=False)
+    notifications = Notification.objects.filter(candidate=c, read=False).order_by('-id')
 
     context = {'notifications': notifications}
 

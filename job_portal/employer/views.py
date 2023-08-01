@@ -1,125 +1,3 @@
-# from django.shortcuts import render, redirect
-# from django.http import FileResponse, HttpResponseForbidden, HttpResponseRedirect
-# from django.shortcuts import get_object_or_404
-# from .models import User, Job, Resume
-# from .forms import JobForm
-
-# # def browse_candidates(request):
-# #     students = User.objects.filter(role='student')
-# #     context = {
-# #         'candidates': students
-# #     }
-# #     return render(request, 'employer/browse_candidates.html', context)
-
-# def browse_candidates(request):
-#     if 'user_id' in request.session:
-#         cpk = request.session['user_id']
-#         user = get_object_or_404(User, pk=cpk)
-#         if user.role != 'employer':
-#             return redirect('/users')
-#     else:
-#         return redirect('/users')
-
-#     students = User.objects.filter(role='student')
-#     context = {
-#         'candidates': students
-#     }
-#     return render(request, 'employer/browse_candidates.html', context)
-
-
-# # def add_job(request):
-# #     if request.method == 'POST':
-# #         form = JobForm(request.POST)
-# #         if form.is_valid():
-# #             job = form.save()
-# #             return HttpResponseRedirect(f'/employer/viewJob/{job.id}/')
-# #     else:
-# #         form = JobForm()
-# #     context = {
-# #         'form': form,
-# #     }
-# #     return render(request, 'employer/add_job.html', context)
-
-# def add_job(request):
-#     if 'user_id' in request.session:
-#         cpk = request.session['user_id']
-#         user = get_object_or_404(User, pk=cpk)
-#         if user.role != 'employer':
-#             return redirect('/users')
-#     else:
-#         return redirect('/users')
-
-#     if request.method == 'POST':
-#         form = JobForm(request.POST)
-#         if form.is_valid():
-#             job = form.save()
-#             return HttpResponseRedirect(f'/employer/viewJob/{job.id}/')
-#     else:
-#         form = JobForm()
-#     context = {
-#         'form': form,
-#     }
-#     return render(request, 'employer/add_job.html', context)
-
-# # def view_job(request, job_id):
-# #     job = get_object_or_404(Job, pk=job_id)
-# #     return render(request, 'employer/view_job.html', context={'job': job})
-
-# def view_job(request, job_id):
-#     if 'user_id' in request.session:
-#         cpk = request.session['user_id']
-#         user = get_object_or_404(User, pk=cpk)
-#         if user.role != 'employer':
-#             return redirect('/users')
-#     else:
-#         return redirect('/users')
-
-#     job = get_object_or_404(Job, pk=job_id)
-#     return render(request, 'employer/view_job.html', context={'job': job})
-
-
-# # def update_job(request, job_id):
-# #     job = get_object_or_404(Job, pk=job_id)
-
-# #     if request.method == 'POST':
-# #         form = JobForm(request.POST, instance=job)
-# #         if form.is_valid():
-# #             form.save()
-# #             return HttpResponseRedirect(f'/employer/viewJob/{job.id}/')
-# #     else:
-# #         form = JobForm(instance=job)
-
-# #     context = {
-# #         'form': form,
-# #         'job': job,
-# #     }
-# #     return render(request, 'employer/update_job.html', context)
-
-# def update_job(request, job_id):
-#     if 'user_id' in request.session:
-#         cpk = request.session['user_id']
-#         user = get_object_or_404(User, pk=cpk)
-#         if user.role != 'employer':
-#             return redirect('/users')
-#     else:
-#         return redirect('/users')
-
-#     job = get_object_or_404(Job, pk=job_id)
-
-#     if request.method == 'POST':
-#         form = JobForm(request.POST, instance=job)
-#         if form.is_valid():
-#             form.save()
-#             return HttpResponseRedirect(f'/employer/viewJob/{job.id}/')
-#     else:
-#         form = JobForm(instance=job)
-
-#     context = {
-#         'form': form,
-#         'job': job,
-#     }
-#     return render(request, 'employer/update_job.html', context)
-
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import FileResponse, HttpResponseRedirect, HttpResponseForbidden
 from .models import User, Job, Employer
@@ -146,6 +24,11 @@ def view_candidate_application(request, applicationId):
         'candidate': candidate,
         'application': application,
     }
+
+    message = "Someone viewed your profile for the job: "+application.job.get_job_position()+" at "+application.job.get_company_name()
+    notification = Notification(candidate=application.candidate, message=message, read=False)
+    notification.save()
+    
     return render(request, 'employer/view_candidate_application.html', context)
 
 
