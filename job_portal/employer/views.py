@@ -146,6 +146,11 @@ def view_candidate_application(request, applicationId):
         'candidate': candidate,
         'application': application,
     }
+
+    message = "Someone from "+application.job.get_company_name()+" viewed your profile"
+    notification = Notification(candidate=application.candidate, message=message, read=False)
+    notification.save()
+    
     return render(request, 'employer/view_candidate_application.html', context)
 
 
