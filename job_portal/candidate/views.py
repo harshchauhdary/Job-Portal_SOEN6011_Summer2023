@@ -10,11 +10,20 @@ from .forms import ResumeForm, CandidateForm, EducationFormSet, ExperienceFormSe
 def view_notifications(request):
     c = checkLogin(request)
 
-    notifications = Notification.objects.filter(candidate=c)
+    notifications = Notification.objects.filter(candidate=c, read=False)
 
     context = {'notifications': notifications}
 
     return render(request, 'candidates/notifications.html', context)
+
+def closeNotification(request, nId):
+    c = checkLogin(request)
+
+    notification = Notification(id=nId)
+    notification.read = True
+    notification.save()
+
+    return HttpResponseRedirect('/candidates/notifications')
 
 # view jobs
 def view_Jobs(request):

@@ -17,5 +17,8 @@ class Job(models.Model):
     status=models.CharField(max_length=255)
     employer = models.ForeignKey(Employer, on_delete=models.CASCADE)
 
-    def get_job_message(self):
-        return f"Position: {self.position}, Description: {self.description}"
+    def get_job_position(self):
+        return f"{self.position}"
+    
+    def get_company_name(self):
+        return f"{self.employer.companyName}"

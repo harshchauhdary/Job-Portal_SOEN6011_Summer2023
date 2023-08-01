@@ -161,7 +161,7 @@ def accept_application(request, application_id):
     application.status = "Accepted"
     application.save()
 
-    message = "Congratulations you are accepted for the job: "+application.job.get_job_message()
+    message = "Congratulations you are accepted for the job: "+application.job.get_job_position()+" at "+application.job.get_company_name()
     notification = Notification(candidate=application.candidate, message=message, read=False)
     notification.save()
 
@@ -180,7 +180,7 @@ def reject_application(request, application_id):
     application.status = "Rejected"
     application.save()
 
-    message = "Try next time for the job: "+application.job.get_job_message()
+    message = "Try next time for the job: "+application.job.get_job_position()+" at "+application.job.get_company_name()
     notification = Notification(candidate=application.candidate, message=message, read=False)
     notification.save()
 
