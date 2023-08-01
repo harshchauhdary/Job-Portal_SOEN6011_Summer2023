@@ -16,3 +16,9 @@ class Job(models.Model):
     applicationDeadline = models.DateField()
     status=models.CharField(max_length=255)
     employer = models.ForeignKey(Employer, on_delete=models.CASCADE)
+
+    def get_job_position(self):
+        return f"{self.position}"
+    
+    def get_company_name(self):
+        return f"{self.employer.companyName}"
