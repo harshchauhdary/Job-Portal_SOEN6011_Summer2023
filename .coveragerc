@@ -1,0 +1,12 @@
+[run]
+source = .
+branch = False
+[report]
+show_missing = True
+include = *.py
+omit =
+    tests.py
+    *_test.py
+    *_tests.py
+    */site-packages/*
+    */migrations/*
