@@ -44,7 +44,7 @@ For the development of the system, we have adopted a comprehensive project appro
 | Version Control| Git |
 | IDE| PyCharm |
 | Operating System| Windows |
-| Testing| PyTest |
+| Testing| Django Test/PyTest |
 
 
 
