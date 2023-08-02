@@ -36,7 +36,6 @@ jobs:
 
     - name: Coverage report
       run: |
-        pip install coverage
         coverage run ./job_portal/manage.py test job_portal
         coverage report
 
