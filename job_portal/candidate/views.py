@@ -66,6 +66,9 @@ def apply_Job(request, pk):
         return HttpResponseRedirect('/candidates/viewJobTemplate.html')
     if Application.objects.filter(candidate=c).filter(job=job).count() == 0:
         a = Application(candidate=c, job=job, status="Applied")
+        if c.savedJobs.contains(job):
+            c.savedJobs.remove(job)
+            c.save()
         a.save()
     else:
         return HttpResponseRedirect('/candidates/viewJobTemplate.html')
