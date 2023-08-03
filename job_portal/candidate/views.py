@@ -6,15 +6,17 @@ from django.shortcuts import get_object_or_404
 from .forms import ResumeForm, CandidateForm, EducationFormSet, ExperienceFormSet, SkillFormSet, ProjectFormSet
 
 
-#view notifications
+# view notifications
 def view_notifications(request):
     c = checkLogin(request)
 
-    notifications = Notification.objects.filter(candidate=c, read=False).order_by('-id')
+    notifications = Notification.objects.filter(
+        candidate=c, read=False).order_by('-id')
 
     context = {'notifications': notifications}
 
     return render(request, 'candidates/notifications.html', context)
+
 
 def closeNotification(request, nId):
     c = checkLogin(request)
@@ -26,6 +28,8 @@ def closeNotification(request, nId):
     return HttpResponseRedirect('/candidates/notifications')
 
 # view jobs
+
+
 def view_Jobs(request):
    # get candidate from session
     c = checkLogin(request)
@@ -37,12 +41,12 @@ def view_Jobs(request):
             if job.status == "OPEN":
                 j.append(job)
         else:
-            a.append(Application.objects.filter(candidate=c).filter(job=job)[0])
-
+            a.append(Application.objects.filter(
+                candidate=c).filter(job=job)[0])
 
     context = {
         'jobs': j,
-        'applied' : a,
+        'applied': a,
         'candidate': c
     }
     return render(request, 'candidates/viewJobsTemplate.html', context)
@@ -118,7 +122,8 @@ def create_Resume(request):
     if request.method == 'POST':
         form = ResumeForm(request.POST, request.FILES)
         education_formset = EducationFormSet(request.POST, prefix='education')
-        experience_formset = ExperienceFormSet(request.POST, prefix='experience')
+        experience_formset = ExperienceFormSet(
+            request.POST, prefix='experience')
         skill_formset = SkillFormSet(request.POST, prefix='skill')
         project_formset = ProjectFormSet(request.POST, prefix='project')
 
@@ -164,7 +169,6 @@ def create_Resume(request):
     return render(request, 'candidates/resumeFormTemplate.html', context)
 
 
-
 # Update Resume form
 
 
@@ -174,13 +178,17 @@ def update_Resume(request):
     c = checkLogin(request)
     if c.resume is None:
         return HttpResponseRedirect('/candidates/createResume')
-    
+
     if request.method == 'POST':
         form = ResumeForm(request.POST, request.FILES, instance=c.resume)
-        education_formset = EducationFormSet(request.POST, instance=c.resume, prefix='education')
-        experience_formset = ExperienceFormSet(request.POST, instance=c.resume, prefix='experience')
-        skill_formset = SkillFormSet(request.POST, instance=c.resume, prefix='skill')
-        project_formset = ProjectFormSet(request.POST, instance=c.resume, prefix='project')
+        education_formset = EducationFormSet(
+            request.POST, instance=c.resume, prefix='education')
+        experience_formset = ExperienceFormSet(
+            request.POST, instance=c.resume, prefix='experience')
+        skill_formset = SkillFormSet(
+            request.POST, instance=c.resume, prefix='skill')
+        project_formset = ProjectFormSet(
+            request.POST, instance=c.resume, prefix='project')
 
         if form.is_valid() and education_formset.is_valid() and experience_formset.is_valid() and skill_formset.is_valid() and project_formset.is_valid():
             form.save()
@@ -193,10 +201,12 @@ def update_Resume(request):
 
     else:
         form = ResumeForm(instance=c.resume)
-        education_formset = EducationFormSet(instance=c.resume, prefix='education')
-        experience_formset = ExperienceFormSet(instance=c.resume, prefix='experience')
+        education_formset = EducationFormSet(
+            instance=c.resume, prefix='education')
+        experience_formset = ExperienceFormSet(
+            instance=c.resume, prefix='experience')
         skill_formset = SkillFormSet(instance=c.resume, prefix='skill')
-        project_formset=ProjectFormSet(instance=c.resume,prefix='project')
+        project_formset = ProjectFormSet(instance=c.resume, prefix='project')
 
     context = {
         'form': form,
@@ -304,3 +314,27 @@ def checkLogin(request):
 
     else:
         return HttpResponseRedirect('')
+
+# Add jobs to saved list
+
+
+def addToFavoriteJobs(request, jobId):
+    # get candidate  from session
+    c = checkLogin(request)
+
+    c.savedJobs.add(Job.objects.filter(id=jobId)[0])
+    c.save()
+
+    return HttpResponseRedirect("candidates/viewJobsTemplate.html")
+
+
+# remove jobs from list
+
+def removeFromFavoriteJobs(request, jobId):
+    # get candidate  from session
+    c = checkLogin(request)
+
+    c.savedJobs.remove(Job.objects.filter(id=jobId)[0])
+    c.save()
+
+    return HttpResponseRedirect("candidates/viewJobsTemplate.html")

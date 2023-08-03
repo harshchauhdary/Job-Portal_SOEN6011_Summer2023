@@ -3,13 +3,15 @@ from django.db import models
 from user.models import User
 from employer.models import Job
 
+
 class Resume(models.Model):
     summary = models.CharField(max_length=255)
     file = models.FileField(null=True, upload_to="files/")
 
 
 class Education(models.Model):
-    resume = models.ForeignKey(Resume, related_name='educations', on_delete=models.CASCADE)
+    resume = models.ForeignKey(
+        Resume, related_name='educations', on_delete=models.CASCADE)
     school_name = models.CharField(max_length=100)
     degree = models.CharField(max_length=100)
     start_date = models.DateField()
@@ -17,12 +19,14 @@ class Education(models.Model):
 
 
 class Experience(models.Model):
-    resume = models.ForeignKey(Resume, related_name='experiences', on_delete=models.CASCADE)
+    resume = models.ForeignKey(
+        Resume, related_name='experiences', on_delete=models.CASCADE)
     company_name = models.CharField(max_length=100)
     position = models.CharField(max_length=100)
     start_date = models.DateField()
     end_date = models.DateField()
     description = models.TextField()
+
 
 class Skill(models.Model):
     resume = models.ForeignKey(Resume, on_delete=models.CASCADE)
@@ -30,7 +34,8 @@ class Skill(models.Model):
 
 
 class Project(models.Model):
-    resume = models.ForeignKey(Resume, related_name='projects', on_delete=models.CASCADE)
+    resume = models.ForeignKey(
+        Resume, related_name='projects', on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     start_date = models.DateField()
     end_date = models.DateField()
@@ -44,6 +49,7 @@ class Candidate(models.Model):
     resume = models.ForeignKey(
         Resume, on_delete=models.SET_NULL, null=True, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    savedJobs = models.ManyToManyField(Job)
 
 
 class Application(models.Model):
@@ -52,9 +58,9 @@ class Application(models.Model):
     job = models.ForeignKey(Job, on_delete=models.CASCADE)
     status = models.CharField(max_length=255)
 
-class Notification(models.Model):
-        candidate = models.ForeignKey(
-        Candidate, on_delete=models.SET_NULL, null=True, blank=True)
-        message = models.TextField()
-        read = models.BooleanField(default=False)
 
+class Notification(models.Model):
+    candidate = models.ForeignKey(
+        Candidate, on_delete=models.SET_NULL, null=True, blank=True)
+    message = models.TextField()
+    read = models.BooleanField(default=False)
