@@ -66,6 +66,9 @@ def apply_Job(request, pk):
         return HttpResponseRedirect('/candidates/viewJobTemplate.html')
     if Application.objects.filter(candidate=c).filter(job=job).count() == 0:
         a = Application(candidate=c, job=job, status="Applied")
+        if c.savedJobs.contains(job):
+            c.savedJobs.remove(job)
+            c.save()
         a.save()
     else:
         return HttpResponseRedirect('/candidates/viewJobTemplate.html')
@@ -325,10 +328,10 @@ def checkLogin(request):
 def addToFavoriteJobs(request, jobId):
     # get candidate  from session
     c = checkLogin(request)
-
-    c.savedJobs.add(Job.objects.filter(id=jobId)[0])
-    print(c.savedJobs)
-    c.save()
+    job = Job.objects.filter(id=jobId)[0]
+    if Application.objects.filter(candidate=c).filter(job=job).count() == 0:
+        c.savedJobs.add(Job.objects.filter(id=jobId)[0])
+        c.save()
 
     return HttpResponseRedirect("/candidates")
 
