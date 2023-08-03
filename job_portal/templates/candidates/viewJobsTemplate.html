@@ -10,7 +10,7 @@
       <a class="nav-link" id="applied-tab" data-bs-toggle="tab" href="#applied">Applied Jobs <span class="badge rounded-pill bg-secondary">{{ applied|length }}</span></a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" id="saved-tab" data-bs-toggle="tab" href="#saved">Saved Jobs <span class="badge rounded-pill bg-secondary">0</span></a>
+      <a class="nav-link" id="saved-tab" data-bs-toggle="tab" href="#saved">Saved Jobs <span class="badge rounded-pill bg-secondary">{{candidate.savedJobs.count}}</span></a>
     </li>
   </ul>
   
@@ -25,6 +25,9 @@
               <h6 class="card-subtitle mb-2 text-muted">{{job.employer.companyName}}</h6>
               <p class="card-text flex-grow-1">{{ job.description|slice:300 }}</p> <!-- Allow this item to grow -->
               <a href="job/{{job.id}}" class="btn btn-primary mt-2 align-self-start">View Details</a> <!-- Add auto margins -->
+              <a href="addSaved/{{job.id}}" class="btn mt-2 align-self-start save-job border">
+                <span class="bi-heart"></span>
+              </a>
             </div>
           </div>
         </div>
@@ -65,7 +68,23 @@
     
     
     <div class="tab-pane fade" id="saved">
-      <!-- Add your HTML for Saved Jobs here -->
+      <div class="row mt-4">
+        {% for job in candidate.savedJobs.all %}
+        <div class="col-md-4 d-flex align-items-stretch"> <!-- Add flex utilities -->
+          <div class="card mb-4" style="width: 100%;"> <!-- Specify card width -->
+            <div class="card-body d-flex flex-column"> <!-- Make this a flex container -->
+              <h5 class="card-title">{{ job.position }}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">{{job.employer.companyName}}</h6>
+              <p class="card-text flex-grow-1">{{ job.description|slice:300 }}</p> <!-- Allow this item to grow -->
+              <a href="job/{{job.id}}" class="btn btn-primary mt-2 align-self-start">View Details</a> <!-- Add auto margins -->
+              <a href="removeSaved/{{job.id}}" class="btn mt-2 align-self-start save-job border">
+                <span class=" bi-heart"></span>
+              </a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
     </div>
   </div>
 </div>
