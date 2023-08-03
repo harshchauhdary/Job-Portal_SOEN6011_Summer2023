@@ -33,13 +33,17 @@ def closeNotification(request, nId):
 def view_Jobs(request):
    # get candidate from session
     c = checkLogin(request)
+    print(c.savedJobs.all)
     j = []
     a = []
     jobs = Job.objects.all()
     for job in jobs:
         if Application.objects.filter(candidate=c).filter(job=job).count() == 0:
             if job.status == "OPEN":
-                j.append(job)
+                if c.savedJobs.contains(job):
+                    continue
+                else:
+                    j.append(job)
         else:
             a.append(Application.objects.filter(
                 candidate=c).filter(job=job)[0])
@@ -81,7 +85,7 @@ def view_Job(request, pk):
     try:
         job = Job.objects.filter(id=pk)[0]
     except Exception:
-        return HttpResponseRedirect('/candidates/viewJobsTemplate.html')
+        return HttpResponseRedirect('/candidates/')
     context = {
         'candidate': c,
         'job': job
@@ -323,9 +327,10 @@ def addToFavoriteJobs(request, jobId):
     c = checkLogin(request)
 
     c.savedJobs.add(Job.objects.filter(id=jobId)[0])
+    print(c.savedJobs)
     c.save()
 
-    return HttpResponseRedirect("candidates/viewJobsTemplate.html")
+    return HttpResponseRedirect("/candidates")
 
 
 # remove jobs from list
@@ -337,4 +342,4 @@ def removeFromFavoriteJobs(request, jobId):
     c.savedJobs.remove(Job.objects.filter(id=jobId)[0])
     c.save()
 
-    return HttpResponseRedirect("candidates/viewJobsTemplate.html")
+    return HttpResponseRedirect("/candidates")
