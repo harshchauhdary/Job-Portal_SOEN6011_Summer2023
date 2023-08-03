@@ -24,10 +24,13 @@
               <h5 class="card-title">{{ job.position }}</h5>
               <h6 class="card-subtitle mb-2 text-muted">{{job.employer.companyName}}</h6>
               <p class="card-text flex-grow-1">{{ job.description|slice:300 }}</p> <!-- Allow this item to grow -->
-              <a href="job/{{job.id}}" class="btn btn-primary mt-2 align-self-start">View Details</a> <!-- Add auto margins -->
-              <a href="addSaved/{{job.id}}" class="btn mt-2 align-self-start save-job border">
-                <span class="bi-heart"></span>
-              </a>
+              <div class="d-flex">
+                <a href="job/{{job.id}}" class="btn btn-primary mt-2">View Details</a>
+                <a href="addSaved/{{job.id}}" class="btn mt-2 save-job border save" style="margin-left: 10px;">
+                    <span class="bi bi-bookmark-fill"></span>
+                    <span class="bi bi-bookmark"></span>
+                </a>
+            </div>
             </div>
           </div>
         </div>
@@ -76,10 +79,13 @@
               <h5 class="card-title">{{ job.position }}</h5>
               <h6 class="card-subtitle mb-2 text-muted">{{job.employer.companyName}}</h6>
               <p class="card-text flex-grow-1">{{ job.description|slice:300 }}</p> <!-- Allow this item to grow -->
-              <a href="job/{{job.id}}" class="btn btn-primary mt-2 align-self-start">View Details</a> <!-- Add auto margins -->
-              <a href="removeSaved/{{job.id}}" class="btn mt-2 align-self-start save-job border">
-                <span class=" bi-heart"></span>
-              </a>
+              <div class="d-flex">
+                <a href="job/{{job.id}}" class="btn btn-primary mt-2">View Details</a> 
+                <a href="removeSaved/{{job.id}}" class="btn mt-2 save-job border saved" style="margin-left: 10px;">
+                    <span class="bi bi-bookmark-fill"></span>
+                    <span class="bi bi-bookmark"></span>
+                </a>
+            </div>
             </div>
           </div>
         </div>
@@ -88,6 +94,57 @@
     </div>
   </div>
 </div>
+
+<style>
+.save, .saved {
+    transition: transform 0.3s ease; /* transition effect */
+}
+
+.save:hover, .saved:hover {
+    transform: scale(1.2); /* enlarge the icon when hovered */
+}
+
+.save .bi-bookmark-fill, .saved .bi-bookmark {
+    display: none;  /* hide filled heart in save button and outlined heart in saved button */
+}
+
+.save .bi-bookmark {
+    color: grey; 
+}
+.saved .bi-bookmark-fill {
+    color: black; 
+}
+
+.save:hover .bi-bookmark, .saved:hover .bi-bookmark-fill {
+    display: none; /* hide outlined heart on hover in save button and filled heart on hover in saved button */
+}
+
+.save:hover .bi-bookmark-fill, .saved:hover .bi-bookmark {
+    display: inline; /* show filled heart on hover in save button and outlined heart on hover in saved button */
+}
+
+.save:hover .bi-bookmark-fill{
+    color: black; 
+}
+.saved:hover .bi-bookmark {
+    color: grey; 
+}
+
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+      const url = window.location.toString();
+      if (url.match('#')) {
+          const tabID = url.split('#')[1];
+          const tab = document.getElementById(tabID + "-tab");
+          if (tab) {
+              tab.click();
+          }
+      }
+  });
+</script>
+
 {% endblock %}
 
 

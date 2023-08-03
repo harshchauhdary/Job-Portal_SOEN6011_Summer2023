@@ -8,6 +8,9 @@ from .forms import UserProfileForm
 def login(request):
     from candidate.models import Candidate
     from employer.models import Employer
+    if "is_authenticated" in request.session:
+        return HttpResponseRedirect('logout')
+
     if request.method == 'POST':
 
         login_data = request.POST.dict()
@@ -27,7 +30,7 @@ def login(request):
                     c = Candidate.objects.filter(user=u.id)[0]
                     request.session["c_id"] = c.id
                     del request.session["user_id"]
-                    return HttpResponseRedirect('/candidates/profile')
+                    return HttpResponseRedirect('/candidates/')
                 except Exception:
                     return HttpResponseRedirect('/candidates/createProfile')
                 
@@ -55,6 +58,9 @@ def login(request):
 
 # register
 def registration(request):
+
+    if "is_authenticated" in request.session:
+        return HttpResponseRedirect('logout')
 
     if request.method == 'POST':
 

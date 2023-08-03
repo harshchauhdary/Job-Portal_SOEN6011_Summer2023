@@ -89,9 +89,14 @@ def view_Job(request, pk):
         job = Job.objects.filter(id=pk)[0]
     except Exception:
         return HttpResponseRedirect('/candidates/')
+    
+    # check if the candidate has already applied for the job
+    has_applied = Application.objects.filter(candidate=c, job=job).exists()
+
     context = {
         'candidate': c,
-        'job': job
+        'job': job,
+        'has_applied': has_applied,
     }
     return render(request, "candidates/viewJobTemplate.html", context)
 
@@ -345,4 +350,4 @@ def removeFromFavoriteJobs(request, jobId):
     c.savedJobs.remove(Job.objects.filter(id=jobId)[0])
     c.save()
 
-    return HttpResponseRedirect("/candidates")
+    return HttpResponseRedirect("/candidates#saved")
