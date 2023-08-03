@@ -328,10 +328,10 @@ def checkLogin(request):
 def addToFavoriteJobs(request, jobId):
     # get candidate  from session
     c = checkLogin(request)
-
-    c.savedJobs.add(Job.objects.filter(id=jobId)[0])
-    print(c.savedJobs)
-    c.save()
+    job = Job.objects.filter(id=jobId)[0]
+    if Application.objects.filter(candidate=c).filter(job=job).count() == 0:
+        c.savedJobs.add(Job.objects.filter(id=jobId)[0])
+        c.save()
 
     return HttpResponseRedirect("/candidates")
 
