@@ -13,5 +13,9 @@ urlpatterns = [
     path('notifications', views.view_notifications, name="view notifications"),
     path('', views.view_Jobs, name="view jobs"),
     path('job/<int:pk>', views.view_Job, name="view job"),
-    path('close_notification/<int:nId>', views.closeNotification, name="close_notification"),
+    path('close_notification/<int:nId>',
+         views.closeNotification, name="close_notification"),
+    path('removeSaved/<int:jobId>',
+         views.removeFromFavoriteJobs, name="remove_savedJobs"),
+    path('addSaved/<int:jobId>', views.addToFavoriteJobs, name="add_savedJobs"),
 ]

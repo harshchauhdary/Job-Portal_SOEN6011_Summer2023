@@ -1,5 +1,4 @@
 # Career Services Application
-## [Sprint 2 Demo](https://drive.google.com/file/d/1LQEkFKUonj-hCZwq2X_sdmihzRKN3QUn/view?usp=sharing)
 ### Project Description: 
 
 The objective of this project is to develop a career services platform that serves as a hub for job-seeking students and employers. The platform enables students to create and update their portfolios, while employers can post job openings. This online system facilitates efficient job hunting and benefits both candidates and employers by allowing them to identify potential matches easily. The platform also enables employers to search for candidates who meet their specific requirements, while job seekers can tailor their profiles to align with market demands. Accessible through a PC or mobile device with an internet connection, the platform provides a user-friendly interface for seamless navigation and interaction.
@@ -44,7 +43,7 @@ For the development of the system, we have adopted a comprehensive project appro
 | Version Control| Git |
 | IDE| PyCharm |
 | Operating System| Windows |
-| Testing| PyTest |
+| Testing| unittest |
 
 
 

@@ -66,9 +66,6 @@
               <li class="nav-item">
                 <a class="nav-link" href="/candidates/profile">Profile</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/candidates/notifications">Notifications</a>
-              </li>
             {% elif request.session.a_id %}
               <!-- Show admin-specific links when a_id is true -->
               <li class="nav-item">
@@ -91,6 +88,11 @@
         <!-- Show user name and login/signup buttons if user is not authenticated -->
         {% if request.session.is_authenticated %}
           <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/candidates/notifications">
+                <i class="bi bi-bell"></i>
+              </a>
+            </li>
             <li class="nav-item">
               <a class="nav-link" href="/logout">Logout</a>
             </li>
