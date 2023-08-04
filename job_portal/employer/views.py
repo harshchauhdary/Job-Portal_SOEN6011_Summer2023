@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import FileResponse, HttpResponseRedirect, HttpResponseForbidden
+from django.http import FileResponse, HttpResponseRedirect, HttpResponseForbidden, HttpResponse
 from .models import User, Job, Employer
 from candidate.models import Application, Notification
 from .forms import JobForm, EmployerForm
 from candidate.models import Candidate
 from django.shortcuts import redirect, get_object_or_404
+from django.template.loader import get_template
+from xhtml2pdf import pisa
 
 
 def view_candidate_application(request, applicationId):
@@ -31,6 +33,25 @@ def view_candidate_application(request, applicationId):
     
     return render(request, 'employer/view_candidate_application.html', context)
 
+def export_resume_pdf_view(request, candidate_id):
+    employer = check_login(request)
+    if not employer:
+        return HttpResponseRedirect('/')
+    print("---------------------------")
+    candidate = Candidate.objects.filter(pk=candidate_id)[0]
+    template_path = 'candidates/exportResume.html'  # change to your new template path
+    context = {'candidate': candidate}
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'inline; filename="resume.pdf"'
+    template = get_template(template_path)
+    html = template.render(context)
+
+    pisa_status = pisa.CreatePDF(
+       html, dest=response, encoding='UTF-8')
+
+    if pisa_status.err:
+       return HttpResponse('We had some errors with generating your PDF <pre>' + html + '</pre>')
+    return response
 
 def accept_application(request, application_id):
     employer = check_login(request)
@@ -120,22 +141,6 @@ def browse_candidates_all(request):
 
 # Add a job
 def add_job(request):
-    # employer = check_login(request)
-
-    # if request.method == 'POST':
-    #     form = JobForm(request.POST)
-    #     if form.is_valid():
-    #         job = form.save(commit=False)
-    #         job.employer = employer
-    #         job.save()
-    #         return HttpResponseRedirect(f'/employer/viewJob/{job.id}/')
-    # else:
-    #     form = JobForm()
-
-    # context = {
-    #     'form': form,
-    # }
-    # return render(request, 'employer/add_job.html', context)
     employer = check_login(request)
 
     if employer is None:
