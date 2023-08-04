@@ -108,8 +108,8 @@
     </div>
   </div>
 </div>
-<div class="mt-3 text-center">
-  <form method="post" action="{% url 'employer:download_employee_resume' %}">
+<div class="mt-3 text-center d-flex justify-content-center">
+  <form method="post" action="{% url 'employer:download_employee_resume' %}" class="me-3">
     {% csrf_token %}
   {% if candidate.resume.file %}
     <button type="submit" class="btn btn-primary" name="resume_id" value="{{ candidate.id }}">Download Resume</button>
@@ -117,5 +117,6 @@
     <button class="btn btn-primary" disabled>No Resume</button>
   {% endif %}
   </form>
+  <a href="/employer/export_resume_pdf/{{ candidate.pk }}" target="_blank" class="btn btn-primary">Export CSA Resume</a>
 </div>
 {% endblock %}

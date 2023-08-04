@@ -28,5 +28,6 @@ urlpatterns = [
     path('accept_application/<int:application_id>/', views.accept_application, name='accept_application'),
     path('reject_application/<int:application_id>/', views.reject_application, name='reject_application'),
     path('view_candidate_application/<int:applicationId>/', views.view_candidate_application, name='view_candidate_application'),
+    path('export_resume_pdf/<int:candidate_id>/', views.export_resume_pdf_view, name="export_candidate_resume_pdf"),
 ]
 

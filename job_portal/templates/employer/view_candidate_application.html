@@ -123,6 +123,7 @@
               <button class="dropdown-item text-primary" disabled>No Resume</button>
             {% endif %}
           </form>
+          <a href="/employer/export_resume_pdf/{{ candidate.pk }}" target="_blank" class="dropdown-item text-primary">Export CSA Resume</a>
           <a href="/employer/accept_application/{{ application.pk }}" class="dropdown-item text-success">Accept</a>
           <a href="/employer/reject_application/{{ application.pk }}" class="dropdown-item text-danger">Reject</a>
         </div>

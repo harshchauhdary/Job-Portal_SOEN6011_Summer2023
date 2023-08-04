@@ -18,4 +18,5 @@ urlpatterns = [
     path('removeSaved/<int:jobId>',
          views.removeFromFavoriteJobs, name="remove_savedJobs"),
     path('addSaved/<int:jobId>', views.addToFavoriteJobs, name="add_savedJobs"),
+    path('export_resume_pdf/', views.export_resume_pdf_view, name="export_resume_pdf"),
 ]
