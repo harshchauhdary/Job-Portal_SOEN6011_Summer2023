@@ -1,11 +1,12 @@
-from django.http import FileResponse, HttpResponseRedirect
+from django.http import FileResponse, HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from .models import User, Job, Candidate, Application, Notification
 from django.views import generic
 from django.urls import reverse
 from django.shortcuts import get_object_or_404
 from .forms import ResumeForm, CandidateForm, EducationFormSet, ExperienceFormSet, SkillFormSet, ProjectFormSet
-
+from django.template.loader import get_template
+from xhtml2pdf import pisa
 
 # view notifications
 def view_notifications(request):
@@ -112,6 +113,22 @@ def view_Resume(request):
         return HttpResponseRedirect('/candidates/createResume')
 
 # download Resume DONE!
+
+def export_resume_pdf_view(request, *args, **kwargs):
+    template_path = 'candidates/exportResume.html'  # change to your new template path
+    context = {'candidate': checkLogin(request)}
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'inline; filename="resume.pdf"'
+    template = get_template(template_path)
+    html = template.render(context)
+
+    pisa_status = pisa.CreatePDF(
+       html, dest=response, encoding='UTF-8')
+
+    if pisa_status.err:
+       return HttpResponse('We had some errors with generating your PDF <pre>' + html + '</pre>')
+    return response
+
 
 
 def download(request):
@@ -352,3 +369,7 @@ def removeFromFavoriteJobs(request, jobId):
     c.save()
 
     return HttpResponseRedirect("/candidates#saved")
+
+
+
+

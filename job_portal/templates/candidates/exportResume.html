@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+   
+  <style>
+    @page {
+        size: letter portrait;
+        margin: 2cm;
+    }
+    body {
+      font-size: 14px;
+    }
+
+    h1, h2 {
+      font-size: 26px;
+    }
+
+    h4, h2, p {
+        margin-bottom: 0px !important;
+        margin-top: 0px !important;
+    }
+
+    h3, h4, h5, h6 {
+      font-size: 18px;
+    }
+
+    .hr_table {
+        width: 100%;
+        height: 3px;
+        background-color: black;
+        margin-top: 11px;
+        margin-bottom: 14px;
+    }
+
+  </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <div class="row">
+          <div class="col-md-8 offset-md-2">
+            <div class="card">
+              <div class="card-body">
+                <h2 class="card-title">{{ candidate.firstName }} {{ candidate.lastName }}</h2>
+                <p class="card-text"><strong>Phone:</strong> {{ candidate.phone }}</p>
+                <p class="card-text"><strong>Email:</strong> {{ candidate.user.email }}</p>
+
+                
+                {% if candidate.resume %}
+                    <table class="hr_table">
+                        <tr>
+                            <td></td>
+                        </tr>
+                    </table>
+                
+                  <h4>Summary</h4>
+                  <p>{{ candidate.resume.summary }}</p>
+      
+                  {% if candidate.resume.educations.all %}
+                    <hr>
+                    <h4>Education</h4>
+                    {% for education in candidate.resume.educations.all %}
+                      <div class="row mb-3">
+                        <div class="col-md-9">
+                          <strong>{{ education.school_name }}</strong><br>
+                          <em>{{ education.degree }}</em>
+                        </div>
+                        <div class="col-md-3 text-md-end">
+                          <span class="text-muted small">
+                            {{ education.start_date|date:"F Y" }} - {{ education.end_date|date:"F Y" }}
+                          </span>
+                        </div>
+                      </div>
+                    
+                    {% endfor %}
+      
+                  {% endif %}
+                  
+                  {% if candidate.resume.skill_set.all %}
+                    <hr>
+                    <h4>Skills</h4>
+                    <ul>
+                      {% for skill in candidate.resume.skill_set.all %}
+                        <li>{{ skill.name }}</li>
+                      {% endfor %}
+                    </ul>
+    
+                  {% endif %}
+      
+                  {% if candidate.resume.experiences.all %}
+                    <hr>
+                    <h4>Experience</h4>
+                    {% for experience in candidate.resume.experiences.all %}
+                    <div class="row mb-3">
+                      <div class="col-md-9">
+                        <strong>{{ experience.position }}</strong><br>
+                        <em>{{ experience.company_name }}</em>
+                      </div>
+                      <div class="col-md-3 text-md-end">
+                        <span class="text-muted small">
+                          {{ experience.start_date|date:"F Y" }} - {{ experience.end_date|date:"F Y" }}
+                        </span>
+                      </div>
+                    </div>
+                    <ul class="mt-0">
+                      {% for line in experience.description.splitlines %}
+                        <li>{{ line }}</li>
+                      {% endfor %}
+                    </ul>
+                  {% endfor %}
+      
+                  {% endif %}
+      
+                  {% if candidate.resume.projects.all %}
+                    <hr>
+                    <h4>Projects</h4>
+                    {% for project in candidate.resume.projects.all %}
+                      <div class="row mb-3">
+                        <div class="col-md-9">
+                          <strong>{{ project.name }}</strong>
+                        </div>
+                        <div class="col-md-3 text-md-end">
+                          <span class="text-muted small">
+                            {{ project.start_date|date:"F Y" }} - {{ project.end_date|date:"F Y" }}
+                          </span>
+                        </div>
+                      </div>
+                      <ul class="mt-0">
+                        {% for line in project.description.splitlines %}
+                          <li>{{ line }}</li>
+                        {% endfor %}
+                      </ul>
+                    {% endfor %}
+                
+                  {% endif %}
+                
+                  
+                {% else %}
+                  <p>No resume available</p>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+</body>
+</html>
