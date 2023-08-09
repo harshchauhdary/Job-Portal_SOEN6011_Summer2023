@@ -32,6 +32,14 @@
         margin-bottom: 14px;
     }
 
+    .hr {
+        width: 100%;
+        height: 1px;
+        background-color: #ccc;
+        margin-top: 11px;
+        margin-bottom: 14px;
+    }
+
   </style>
 </head>
 <body>
@@ -56,7 +64,11 @@
                   <p>{{ candidate.resume.summary }}</p>
       
                   {% if candidate.resume.educations.all %}
-                    <hr>
+                  <table class="hr">
+                    <tr>
+                        <td></td>
+                    </tr>
+                </table>
                     <h4>Education</h4>
                     {% for education in candidate.resume.educations.all %}
                       <div class="row mb-3">
@@ -76,7 +88,11 @@
                   {% endif %}
                   
                   {% if candidate.resume.skill_set.all %}
-                    <hr>
+                  <table class="hr">
+                    <tr>
+                        <td></td>
+                    </tr>
+                </table>
                     <h4>Skills</h4>
                     <ul>
                       {% for skill in candidate.resume.skill_set.all %}
@@ -87,7 +103,11 @@
                   {% endif %}
       
                   {% if candidate.resume.experiences.all %}
-                    <hr>
+                  <table class="hr">
+                    <tr>
+                        <td></td>
+                    </tr>
+                </table>
                     <h4>Experience</h4>
                     {% for experience in candidate.resume.experiences.all %}
                     <div class="row mb-3">
@@ -111,7 +131,11 @@
                   {% endif %}
       
                   {% if candidate.resume.projects.all %}
-                    <hr>
+                  <table class="hr">
+                    <tr>
+                        <td></td>
+                    </tr>
+                </table>
                     <h4>Projects</h4>
                     {% for project in candidate.resume.projects.all %}
                       <div class="row mb-3">
