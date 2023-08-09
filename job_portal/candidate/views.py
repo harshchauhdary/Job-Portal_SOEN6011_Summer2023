@@ -2,6 +2,7 @@ from django.http import FileResponse, HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from .models import User, Job, Candidate, Application, Notification
 from django.views import generic
+from django.urls import reverse
 from django.shortcuts import get_object_or_404
 from .forms import ResumeForm, CandidateForm, EducationFormSet, ExperienceFormSet, SkillFormSet, ProjectFormSet
 from django.template.loader import get_template
@@ -64,7 +65,7 @@ def apply_Job(request, pk):
     try:
         job = Job.objects.filter(id=pk)[0]
     except Exception:
-        return HttpResponseRedirect('/candidates/viewJobTemplate.html')
+        return HttpResponseRedirect(reverse('view job', args=[pk]))
     if Application.objects.filter(candidate=c).filter(job=job).count() == 0:
         a = Application(candidate=c, job=job, status="Applied")
         if c.savedJobs.contains(job):
@@ -72,7 +73,7 @@ def apply_Job(request, pk):
             c.save()
         a.save()
     else:
-        return HttpResponseRedirect('/candidates/viewJobTemplate.html')
+        return HttpResponseRedirect(reverse('view job', args=[pk]))
     context = {
         'candidate': c,
         'job': job
