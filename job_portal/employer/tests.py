@@ -1,8 +1,9 @@
-from django.test import TestCase
+from django.test import TestCase, Client
 from django.urls import reverse
 from employer.models import Employer, Job
 from user.models import User
-from candidate.models import Candidate, Application, Notification
+from candidate.models import Candidate, Application, Notification, Resume
+from django.core.files.uploadedfile import SimpleUploadedFile
 from urllib.parse import urljoin
 
 class EmployerViewsTestCase(TestCase):
@@ -45,6 +46,7 @@ class EmployerViewsTestCase(TestCase):
             job=self.job,
             status='Applied'
         )
+
 
     def test_view_candidate_application(self):
         # Simulate session login
@@ -222,3 +224,42 @@ class EmployerViewsTestCase(TestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
         
+    def test_view_employer_profile(self):
+        # Simulate session login
+        session = self.client.session
+        session['e_id'] = self.employer.id
+        session.save()
+        
+        # Assuming you've defined the URL name 'view_employer_profile'
+        url = reverse('employer:view_employer_profile')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)  # Assuming it should return 200
+        # Add more assertions as needed
+
+    def test_view_jobs(self):
+        # Simulate session login
+        session = self.client.session
+        session['e_id'] = self.employer.id
+        session.save()
+
+        # Create jobs associated with the employer
+        job1 = Job.objects.create(
+            position='Software Engineer',
+            description='Job description',
+            applicationDeadline='2023-12-31',
+            status='Open',
+            employer=self.employer
+        )
+        job2 = Job.objects.create(
+            position='Project Manager',
+            description='Job description',
+            applicationDeadline='2023-12-31',
+            status='Open',
+            employer=self.employer
+        )
+
+        # Assuming you've defined the URL name 'view_jobs'
+        url = reverse('employer:view_jobs')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)  # Assuming it should return 200
+        # Add more assertions as needed
