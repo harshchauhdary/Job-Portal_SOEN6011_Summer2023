@@ -119,3 +119,53 @@ class EmployerViewsTestCase(TestCase):
 
         # Check if the response is successful
         self.assertEqual(response.status_code, 200)
+
+    def test_add_job(self):
+        # Simulate session login
+        session = self.client.session
+        session['e_id'] = self.employer.id
+        session.save()
+        
+        url = reverse('employer:add_job')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        # ... Additional assertions
+        
+    def test_view_job(self):
+        # Create a job owned by the employer
+        job = Job.objects.create(
+            position='Software Engineer',
+            description='Job description',
+            applicationDeadline='2023-12-31',
+            status='Open',
+            employer=self.employer
+        )
+        
+        # Simulate session login
+        session = self.client.session
+        session['e_id'] = self.employer.id
+        session.save()
+        
+        url = reverse('employer:view_job', args=[job.id])
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        # ... Additional assertions
+        
+    def test_update_job(self):
+        # Create a job owned by the employer
+        job = Job.objects.create(
+            position='Software Engineer',
+            description='Job description',
+            applicationDeadline='2023-12-31',
+            status='Open',
+            employer=self.employer
+        )
+        
+        # Simulate session login
+        session = self.client.session
+        session['e_id'] = self.employer.id
+        session.save()
+        
+        url = reverse('employer:update_job', args=[job.id])
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
