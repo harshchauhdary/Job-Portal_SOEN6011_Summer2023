@@ -70,52 +70,52 @@ class EmployerViewsTestCase(TestCase):
         self.assertEqual(response.status_code, 200)  # Assuming it should return 200
         # Add more assertions as needed
 
-    # def test_accept_application(self):
-    #     # ... Simulate session login and other setup
-    #     session = self.client.session
-    #     session['e_id'] = self.employer.id
-    #     session.save()
-    #     # Assuming you've defined the URL name 'accept_application'
-    #     url = reverse('employer:accept_application', args=[self.application.pk])
-    #     response = self.client.post(url)
+    def test_accept_application(self):
+        # ... Simulate session login and other setup
+        session = self.client.session
+        session['e_id'] = self.employer.id
+        session.save()
+        # Assuming you've defined the URL name 'accept_application'
+        url = reverse('employer:accept_application', args=[self.application.pk])
+        response = self.client.post(url)
         
-    #     # Construct the expected full URL
-    #     expected_redirect_url = f'/employer/browseCandidates/{self.job.pk}'
+        # Construct the expected full URL
+        expected_redirect_url = f'/employer/browseCandidates/{self.job.pk}'
         
-    #     # Check if the response is a redirect and the location matches the expected URL
-    #     self.assertEqual(response.status_code, 302)  # 302 is the status code for a redirect
-    #     self.assertRedirects(response, expected_redirect_url, fetch_redirect_response=False)
+        # Check if the response is a redirect and the location matches the expected URL
+        self.assertEqual(response.status_code, 302)  # 302 is the status code for a redirect
+        self.assertRedirects(response, expected_redirect_url, fetch_redirect_response=False)
         
-    #     # Verify other assertions
+        # Verify other assertions
 
-    # def test_reject_application(self):
-    #     # ... Simulate session login and other setup
-    #     session = self.client.session
-    #     session['e_id'] = self.employer.id
-    #     session.save()
-    #     # Assuming you've defined the URL name 'reject_application'
-    #     url = reverse('employer:reject_application', args=[self.application.pk])
-    #     response = self.client.post(url)
+    def test_reject_application(self):
+        # ... Simulate session login and other setup
+        session = self.client.session
+        session['e_id'] = self.employer.id
+        session.save()
+        # Assuming you've defined the URL name 'reject_application'
+        url = reverse('employer:reject_application', args=[self.application.pk])
+        response = self.client.post(url)
         
-    #     # Construct the expected full URL
-    #     expected_redirect_url = f'/employer/browseCandidates/{self.job.pk}'
+        # Construct the expected full URL
+        expected_redirect_url = f'/employer/browseCandidates/{self.job.pk}'
         
-    #     # Check if the response is a redirect and the location matches the expected URL
-    #     self.assertEqual(response.status_code, 302)  # 302 is the status code for a redirect
-    #     self.assertRedirects(response, expected_redirect_url, fetch_redirect_response=False)
+        # Check if the response is a redirect and the location matches the expected URL
+        self.assertEqual(response.status_code, 302)  # 302 is the status code for a redirect
+        self.assertRedirects(response, expected_redirect_url, fetch_redirect_response=False)
         
-    #     # Verify other assertions
+        # Verify other assertions
         
 
-    # def test_browse_candidates(self):
-    #     # Simulate session login
-    #     session = self.client.session
-    #     session['e_id'] = self.employer.id
-    #     session.save()
+    def test_browse_candidates(self):
+        # Simulate session login
+        session = self.client.session
+        session['e_id'] = self.employer.id
+        session.save()
 
-    #     # Assuming you've defined the URL name 'browse_candidates'
-    #     url = reverse('employer:browse_candidates', args=[self.job.pk])
-    #     response = self.client.get(url)
+        # Assuming you've defined the URL name 'browse_candidates'
+        url = reverse('employer:browse_candidates', args=[self.job.pk])
+        response = self.client.get(url)
 
-    #     # Check if the response is successful
-    #     self.assertEqual(response.status_code, 200)
+        # Check if the response is successful
+        self.assertEqual(response.status_code, 200)
