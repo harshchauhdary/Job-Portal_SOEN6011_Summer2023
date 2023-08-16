@@ -270,6 +270,8 @@ def view_employee_profile(request):
 
     if employer is None:
         return HttpResponseRedirect('/')
+    
+    entry = None  # Initialize entry to None
 
     if request.method == 'POST':
         button_id = request.POST.get('button_id')
@@ -279,7 +281,7 @@ def view_employee_profile(request):
         except Candidate.DoesNotExist:
             entry = None
 
-        print(entry.firstName)
+        #print(entry.firstName)
 
     return render(request, 'employer/view_profile.html', context={'candidate': entry})
 

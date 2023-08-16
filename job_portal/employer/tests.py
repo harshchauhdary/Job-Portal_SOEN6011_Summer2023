@@ -169,3 +169,56 @@ class EmployerViewsTestCase(TestCase):
         url = reverse('employer:update_job', args=[job.id])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
+
+    def test_create_employer_profile(self):
+        # Simulate session login
+        session = self.client.session
+        session['user_id'] = self.user.id
+        session.save()
+        
+        url = reverse('employer:create_employer_profile')  # Replace with the actual URL name
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        # ... Additional assertions
+        
+    def test_update_employer_profile(self):
+        # Create an employer
+        employer = Employer.objects.create(
+            userID=self.user,
+            companyName='ABC Inc.',
+            companyEmail='company@example.com',
+            firstName='John',
+            lastName='Doe',
+            phone='1234567890'
+        )
+        
+        # Simulate session login
+        session = self.client.session
+        session['e_id'] = employer.id
+        session.save()
+        
+        url = reverse('employer:update_employer_profile')  # Replace with the actual URL name
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        # ... Additional assertions
+        
+    def test_view_employee_profile(self):
+        # Create an employer
+        employer = Employer.objects.create(
+            userID=self.user,
+            companyName='ABC Inc.',
+            companyEmail='company@example.com',
+            firstName='John',
+            lastName='Doe',
+            phone='1234567890'
+        )
+        
+        # Simulate session login
+        session = self.client.session
+        session['e_id'] = employer.id
+        session.save()
+        
+        url = reverse('employer:view_employee_profile')  # Replace with the actual URL name
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        
