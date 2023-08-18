@@ -69,7 +69,7 @@ def registration(request):
         if form.is_valid():
 
             if User.objects.filter(email=form.cleaned_data["email"]).count() != 0:
-                return render(request, '/')
+                return HttpResponseRedirect('/')
             if form.cleaned_data["role"] == 'A':
                 return render(request, '/register.html')
             
