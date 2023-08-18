@@ -4,6 +4,7 @@ from .models import User, Job, Candidate, Employer
 from candidate.models import Resume
 from datetime import date
 from django.core.files.uploadedfile import SimpleUploadedFile
+from django.contrib.auth.hashers import check_password
 
 # Create your tests here.
 class AnimalTestCase(TestCase):
@@ -164,7 +165,7 @@ class CSAAdminViewsTests(TestCase):
 
         response = self.client.get(reverse('csaadmin:delete_candidate', kwargs={'candidate_id': candidate.id}))
         self.assertRedirects(response, '/')
-        
+
     def test_candidate_profile_view(self):
         # Create a test candidate
         candidate_user = User.objects.create(email='candidate@example.com', role='C')
@@ -227,8 +228,76 @@ class CSAAdminViewsTests(TestCase):
         response = self.client.get(reverse('csaadmin:view_resume', kwargs={'pk': candidate.id}))
         self.assertEqual(response.status_code, 200)
 
+    def test_view_employer_jobs_view(self):
+        # Create a test employer
+        employer_user = User.objects.create(email='employer@example.com', role='E')
+        employer = Employer.objects.create(userID=employer_user, companyName='Test Company')
+
+        # Create test jobs for the employer
+        job_application_deadline = date.today()
+        Job.objects.create(position='Test Position 1', description='Test Description 1', status='Open', applicationDeadline=job_application_deadline, employer=employer)
+        Job.objects.create(position='Test Position 2', description='Test Description 2', status='Open', applicationDeadline=job_application_deadline, employer=employer)
+
+        # Log in as an admin user
+        session = self.client.session
+        session['a_id'] = self.admin_user.id
+        session.save()
+
+        response = self.client.get(reverse('csaadmin:view_employer_jobs', kwargs={'pk': employer.id}))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.context['jobs']), 2) # Assuming 'jobs' is in the context
+
+    def test_view_job_view(self):
+        # Create a test employer
+        employer_user = User.objects.create(email='employer@example.com', role='E')
+        employer = Employer.objects.create(userID=employer_user, companyName='Test Company')
+
+        # Create a test job for the employer
+        job_application_deadline = date.today()
+        job = Job.objects.create(position='Test Position', description='Test Description', status='Open', applicationDeadline=job_application_deadline, employer=employer)
+
+        # Log in as an admin user
+        session = self.client.session
+        session['a_id'] = self.admin_user.id
+        session.save()
+
+        response = self.client.get(reverse('csaadmin:view_job', kwargs={'pk': job.id}))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context['job'], job) # Assuming 'job' is in the context
+    def test_reset_password_view(self):
+        # Create a test candidate
+        candidate_user = User.objects.create(email='candidate@example.com', role='C', password='old_password')
+        candidate = Candidate.objects.create(user=candidate_user, firstName='Test', lastName='Candidate')
+
+        # Log in as an admin user
+        session = self.client.session
+        session['a_id'] = self.admin_user.id
+        session.save()
+
+        # Reset password
+        response = self.client.post(reverse('csaadmin:reset_password', kwargs={'role': 'c', 'pk': candidate.id}), {'password': 'new_password'})
+        self.assertRedirects(response, f'/csaadmin/candidate_profile/{candidate.id}/')
+
+        # Check the updated password
+        candidate_user.refresh_from_db()
+        self.assertTrue(check_password('new_password', candidate_user.password))
+
+    def test_change_email_view(self):
+        # Create a test employer
+        employer_user = User.objects.create(email='employer@example.com', role='E')
+        employer = Employer.objects.create(userID=employer_user, companyName='Test Company')
+
+        # Log in as an admin user
+        session = self.client.session
+        session['a_id'] = self.admin_user.id
+        session.save()
+
+        # Change email
+        response = self.client.post(reverse('csaadmin:change_email', kwargs={'role': 'e', 'pk': employer.id}), {'email': 'new_email@example.com'})
+        self.assertRedirects(response, f'/csaadmin/employer_profile/{employer.id}/')
+
+        # Check the updated email
+        employer_user.refresh_from_db()
+        self.assertEqual(employer_user.email, 'new_email@example.com')
 
 
-
-
-# Add more test methods to cover other views and scenarios

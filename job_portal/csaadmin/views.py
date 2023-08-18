@@ -129,9 +129,9 @@ def reset_password(request, role, pk):
         user.save()
         messages.success(request, 'Password reset successfully.')
         if role=='c':
-            return redirect(f'/csaadmin/candidate_profile/{pk}')  # Replace '/admin/users/' with the appropriate URL to list all users
+            return redirect(f'/csaadmin/candidate_profile/{pk}/')  # Replace '/admin/users/' with the appropriate URL to list all users
         else:
-            return redirect(f'/csaadmin/employer_profile/{pk}') 
+            return redirect(f'/csaadmin/employer_profile/{pk}/') 
     return render(request, 'csaadmin/reset_password.html', {'user': user})
 
 def change_email(request, role, pk):
@@ -152,8 +152,8 @@ def change_email(request, role, pk):
         user.save()
         messages.success(request, 'Email changed successfully.')
         if role=='c':
-            return redirect(f'/csaadmin/candidate_profile/{pk}')  # Replace '/admin/users/' with the appropriate URL to list all users
+            return redirect(f'/csaadmin/candidate_profile/{pk}/')  # Replace '/admin/users/' with the appropriate URL to list all users
         else:
-            return redirect(f'/csaadmin/employer_profile/{pk}') 
+            return redirect(f'/csaadmin/employer_profile/{pk}/') 
         
     return render(request, 'csaadmin/change_email.html', {'user': user})
