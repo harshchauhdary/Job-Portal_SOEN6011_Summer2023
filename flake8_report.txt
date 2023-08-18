@@ -1,0 +1,239 @@
+./job_portal/candidate/admin.py:2:80: E501 line too long (100 > 79 characters)
+./job_portal/candidate/admin.py:13:29: W292 no newline at end of file
+./job_portal/candidate/forms.py:4:1: F401 'django.core.validators.MinLengthValidator' imported but unused
+./job_portal/candidate/forms.py:4:1: F401 'django.core.validators.MaxLengthValidator' imported but unused
+./job_portal/candidate/forms.py:6:1: E302 expected 2 blank lines, found 1
+./job_portal/candidate/forms.py:13:80: E501 line too long (91 > 79 characters)
+./job_portal/candidate/forms.py:14:80: E501 line too long (89 > 79 characters)
+./job_portal/candidate/forms.py:17:1: E305 expected 2 blank lines after class or function definition, found 1
+./job_portal/candidate/forms.py:17:80: E501 line too long (88 > 79 characters)
+./job_portal/candidate/forms.py:19:1: E302 expected 2 blank lines, found 1
+./job_portal/candidate/forms.py:27:1: E305 expected 2 blank lines after class or function definition, found 1
+./job_portal/candidate/forms.py:29:1: E302 expected 2 blank lines, found 1
+./job_portal/candidate/forms.py:32:80: E501 line too long (86 > 79 characters)
+./job_portal/candidate/forms.py:36:80: E501 line too long (91 > 79 characters)
+./job_portal/candidate/forms.py:37:80: E501 line too long (89 > 79 characters)
+./job_portal/candidate/forms.py:38:73: E231 missing whitespace after ','
+./job_portal/candidate/forms.py:38:80: E501 line too long (150 > 79 characters)
+./job_portal/candidate/forms.py:41:1: E305 expected 2 blank lines after class or function definition, found 1
+./job_portal/candidate/forms.py:41:80: E501 line too long (91 > 79 characters)
+./job_portal/candidate/forms.py:43:1: E302 expected 2 blank lines, found 1
+./job_portal/candidate/forms.py:49:80: E501 line too long (91 > 79 characters)
+./job_portal/candidate/forms.py:50:80: E501 line too long (89 > 79 characters)
+./job_portal/candidate/forms.py:51:80: E501 line too long (151 > 79 characters)
+./job_portal/candidate/forms.py:54:1: E305 expected 2 blank lines after class or function definition, found 1
+./job_portal/candidate/forms.py:54:80: E501 line too long (82 > 79 characters)
+./job_portal/candidate/forms.py:56:1: E302 expected 2 blank lines, found 1
+./job_portal/candidate/forms.py:92:5: E301 expected 1 blank line, found 0
+./job_portal/candidate/forms.py:95:80: E501 line too long (85 > 79 characters)
+./job_portal/candidate/forms.py:97:1: W293 blank line contains whitespace
+./job_portal/candidate/migrations/0001_initial.py:17:80: E501 line too long (117 > 79 characters)
+./job_portal/candidate/migrations/0001_initial.py:24:80: E501 line too long (117 > 79 characters)
+./job_portal/candidate/migrations/0001_initial.py:32:80: E501 line too long (117 > 79 characters)
+./job_portal/candidate/migrations/0001_initial.py:35:80: E501 line too long (87 > 79 characters)
+./job_portal/candidate/migrations/0003_candidate_delete_app_user_remove_job_position_and_more.py:18:80: E501 line too long (117 > 79 characters)
+./job_portal/candidate/migrations/0003_candidate_delete_app_user_remove_job_position_and_more.py:74:80: E501 line too long (104 > 79 characters)
+./job_portal/candidate/migrations/0003_candidate_delete_app_user_remove_job_position_and_more.py:79:80: E501 line too long (97 > 79 characters)
+./job_portal/candidate/migrations/0004_alter_candidate_resume.py:10:80: E501 line too long (85 > 79 characters)
+./job_portal/candidate/migrations/0004_alter_candidate_resume.py:17:80: E501 line too long (116 > 79 characters)
+./job_portal/candidate/migrations/0005_alter_candidate_resume.py:17:80: E501 line too long (128 > 79 characters)
+./job_portal/candidate/migrations/0006_remove_resume_filename_job_status_application.py:27:80: E501 line too long (117 > 79 characters)
+./job_portal/candidate/migrations/0006_remove_resume_filename_job_status_application.py:29:80: E501 line too long (144 > 79 characters)
+./job_portal/candidate/migrations/0006_remove_resume_filename_job_status_application.py:30:80: E501 line too long (108 > 79 characters)
+./job_portal/candidate/migrations/0007_alter_application_job_delete_job.py:18:80: E501 line too long (100 > 79 characters)
+./job_portal/candidate/migrations/0008_skill_experience_education.py:17:80: E501 line too long (117 > 79 characters)
+./job_portal/candidate/migrations/0008_skill_experience_education.py:19:80: E501 line too long (114 > 79 characters)
+./job_portal/candidate/migrations/0008_skill_experience_education.py:25:80: E501 line too long (117 > 79 characters)
+./job_portal/candidate/migrations/0008_skill_experience_education.py:30:80: E501 line too long (142 > 79 characters)
+./job_portal/candidate/migrations/0008_skill_experience_education.py:36:80: E501 line too long (117 > 79 characters)
+./job_portal/candidate/migrations/0008_skill_experience_education.py:41:80: E501 line too long (141 > 79 characters)
+./job_portal/candidate/migrations/0010_experience_description.py:9:80: E501 line too long (88 > 79 characters)
+./job_portal/candidate/migrations/0011_project.py:17:80: E501 line too long (117 > 79 characters)
+./job_portal/candidate/migrations/0011_project.py:22:80: E501 line too long (139 > 79 characters)
+./job_portal/candidate/migrations/0012_notification.py:17:80: E501 line too long (117 > 79 characters)
+./job_portal/candidate/migrations/0012_notification.py:20:80: E501 line too long (144 > 79 characters)
+./job_portal/candidate/models.py:4:1: F401 'employer.models.Employer' imported but unused
+./job_portal/candidate/tests.py:4:80: E501 line too long (85 > 79 characters)
+./job_portal/candidate/tests.py:9:1: W293 blank line contains whitespace
+./job_portal/candidate/tests.py:17:1: W293 blank line contains whitespace
+./job_portal/candidate/tests.py:18:80: E501 line too long (90 > 79 characters)
+./job_portal/candidate/tests.py:32:80: E501 line too long (94 > 79 characters)
+./job_portal/candidate/tests.py:43:80: E501 line too long (94 > 79 characters)
+./job_portal/candidate/tests.py:54:80: E501 line too long (94 > 79 characters)
+./job_portal/candidate/tests.py:58:1: E303 too many blank lines (3)
+./job_portal/candidate/tests.py:63:80: E501 line too long (99 > 79 characters)
+./job_portal/candidate/tests.py:64:80: E501 line too long (99 > 79 characters)
+./job_portal/candidate/tests.py:65:80: E501 line too long (114 > 79 characters)
+./job_portal/candidate/tests.py:67:80: E501 line too long (96 > 79 characters)
+./job_portal/candidate/tests.py:71:80: E501 line too long (83 > 79 characters)
+./job_portal/candidate/tests.py:71:84: W291 trailing whitespace
+./job_portal/candidate/tests.py:73:10: W291 trailing whitespace
+./job_portal/candidate/tests.py:74:80: E501 line too long (93 > 79 characters)
+./job_portal/candidate/tests.py:83:80: E501 line too long (87 > 79 characters)
+./job_portal/candidate/tests.py:88:80: E501 line too long (104 > 79 characters)
+./job_portal/candidate/tests.py:118:80: E501 line too long (83 > 79 characters)
+./job_portal/candidate/tests.py:119:80: E501 line too long (103 > 79 characters)
+./job_portal/candidate/tests.py:129:80: E501 line too long (83 > 79 characters)
+./job_portal/candidate/tests.py:130:80: E501 line too long (103 > 79 characters)
+./job_portal/candidate/tests.py:169:80: E501 line too long (81 > 79 characters)
+./job_portal/candidate/tests.py:173:1: W391 blank line at end of file
+./job_portal/candidate/urls.py:10:80: E501 line too long (81 > 79 characters)
+./job_portal/candidate/urls.py:11:80: E501 line too long (81 > 79 characters)
+./job_portal/candidate/urls.py:20:80: E501 line too long (80 > 79 characters)
+./job_portal/candidate/urls.py:21:80: E501 line too long (87 > 79 characters)
+./job_portal/candidate/views.py:4:1: F401 'django.views.generic' imported but unused
+./job_portal/candidate/views.py:6:1: F401 'django.shortcuts.get_object_or_404' imported but unused
+./job_portal/candidate/views.py:7:80: E501 line too long (111 > 79 characters)
+./job_portal/candidate/views.py:12:1: E302 expected 2 blank lines, found 1
+./job_portal/candidate/views.py:24:5: F841 local variable 'c' is assigned to but never used
+./job_portal/candidate/views.py:36:4: E114 indentation is not a multiple of 4 (comment)
+./job_portal/candidate/views.py:43:80: E501 line too long (80 > 79 characters)
+./job_portal/candidate/views.py:94:1: W293 blank line contains whitespace
+./job_portal/candidate/views.py:111:80: E501 line too long (96 > 79 characters)
+./job_portal/candidate/views.py:117:1: E302 expected 2 blank lines, found 1
+./job_portal/candidate/views.py:118:80: E501 line too long (86 > 79 characters)
+./job_portal/candidate/views.py:129:8: E111 indentation is not a multiple of 4
+./job_portal/candidate/views.py:129:80: E501 line too long (97 > 79 characters)
+./job_portal/candidate/views.py:134:1: E303 too many blank lines (3)
+./job_portal/candidate/views.py:160:80: E501 line too long (154 > 79 characters)
+./job_portal/candidate/views.py:223:80: E501 line too long (154 > 79 characters)
+./job_portal/candidate/views.py:315:80: E501 line too long (89 > 79 characters)
+./job_portal/candidate/views.py:331:80: E501 line too long (87 > 79 characters)
+./job_portal/candidate/views.py:375:1: W391 blank line at end of file
+./job_portal/csaadmin/admin.py:1:1: F401 'django.contrib.admin' imported but unused
+./job_portal/csaadmin/admin.py:2:1: W391 blank line at end of file
+./job_portal/csaadmin/models.py:1:1: F401 'django.db.models' imported but unused
+./job_portal/csaadmin/models.py:2:1: F401 'employer.models.Job' imported but unused
+./job_portal/csaadmin/models.py:2:1: F401 'employer.models.Employer' imported but unused
+./job_portal/csaadmin/models.py:3:1: F401 'candidate.models.Candidate' imported but unused
+./job_portal/csaadmin/models.py:4:1: F401 'user.models.User' imported but unused
+./job_portal/csaadmin/models.py:4:29: W292 no newline at end of file
+./job_portal/csaadmin/tests.py:4:1: E302 expected 2 blank lines, found 1
+./job_portal/csaadmin/tests.py:10:73: W292 no newline at end of file
+./job_portal/csaadmin/urls.py:12:80: E501 line too long (94 > 79 characters)
+./job_portal/csaadmin/urls.py:13:80: E501 line too long (98 > 79 characters)
+./job_portal/csaadmin/urls.py:14:80: E501 line too long (91 > 79 characters)
+./job_portal/csaadmin/urls.py:15:80: E501 line too long (88 > 79 characters)
+./job_portal/csaadmin/urls.py:18:80: E501 line too long (94 > 79 characters)
+./job_portal/csaadmin/urls.py:20:80: E501 line too long (87 > 79 characters)
+./job_portal/csaadmin/urls.py:21:80: E501 line too long (93 > 79 characters)
+./job_portal/csaadmin/urls.py:23:1: W391 blank line at end of file
+./job_portal/csaadmin/views.py:5:1: F401 'django.contrib.auth.hashers.make_password' imported but unused
+./job_portal/csaadmin/views.py:7:1: E302 expected 2 blank lines, found 1
+./job_portal/csaadmin/views.py:18:1: E302 expected 2 blank lines, found 1
+./job_portal/csaadmin/views.py:20:41: W291 trailing whitespace
+./job_portal/csaadmin/views.py:34:1: E302 expected 2 blank lines, found 1
+./job_portal/csaadmin/views.py:36:41: W291 trailing whitespace
+./job_portal/csaadmin/views.py:38:80: E501 line too long (87 > 79 characters)
+./job_portal/csaadmin/views.py:40:1: E302 expected 2 blank lines, found 1
+./job_portal/csaadmin/views.py:42:41: W291 trailing whitespace
+./job_portal/csaadmin/views.py:44:80: E501 line too long (84 > 79 characters)
+./job_portal/csaadmin/views.py:46:1: E302 expected 2 blank lines, found 1
+./job_portal/csaadmin/views.py:48:41: W291 trailing whitespace
+./job_portal/csaadmin/views.py:52:1: E302 expected 2 blank lines, found 1
+./job_portal/csaadmin/views.py:54:41: W291 trailing whitespace
+./job_portal/csaadmin/views.py:59:1: E302 expected 2 blank lines, found 1
+./job_portal/csaadmin/views.py:61:41: W291 trailing whitespace
+./job_portal/csaadmin/views.py:66:1: E302 expected 2 blank lines, found 1
+./job_portal/csaadmin/views.py:68:41: W291 trailing whitespace
+./job_portal/csaadmin/views.py:73:1: E302 expected 2 blank lines, found 1
+./job_portal/csaadmin/views.py:77:80: E501 line too long (87 > 79 characters)
+./job_portal/csaadmin/views.py:79:1: E302 expected 2 blank lines, found 1
+./job_portal/csaadmin/views.py:83:80: E501 line too long (84 > 79 characters)
+./job_portal/csaadmin/views.py:85:1: E302 expected 2 blank lines, found 1
+./job_portal/csaadmin/views.py:95:1: E302 expected 2 blank lines, found 1
+./job_portal/csaadmin/views.py:100:80: E501 line too long (81 > 79 characters)
+./job_portal/csaadmin/views.py:102:1: E302 expected 2 blank lines, found 1
+./job_portal/csaadmin/views.py:104:41: W291 trailing whitespace
+./job_portal/csaadmin/views.py:109:1: E302 expected 2 blank lines, found 1
+./job_portal/csaadmin/views.py:111:41: W291 trailing whitespace
+./job_portal/csaadmin/views.py:115:1: E302 expected 2 blank lines, found 1
+./job_portal/csaadmin/views.py:120:12: E225 missing whitespace around operator
+./job_portal/csaadmin/views.py:131:16: E225 missing whitespace around operator
+./job_portal/csaadmin/views.py:132:80: E501 line too long (134 > 79 characters)
+./job_portal/csaadmin/views.py:134:64: W291 trailing whitespace
+./job_portal/csaadmin/views.py:137:1: E302 expected 2 blank lines, found 1
+./job_portal/csaadmin/views.py:142:12: E225 missing whitespace around operator
+./job_portal/csaadmin/views.py:154:16: E225 missing whitespace around operator
+./job_portal/csaadmin/views.py:155:80: E501 line too long (134 > 79 characters)
+./job_portal/csaadmin/views.py:157:64: W291 trailing whitespace
+./job_portal/csaadmin/views.py:158:1: W293 blank line contains whitespace
+./job_portal/csaadmin/views.py:159:73: W292 no newline at end of file
+./job_portal/employer/admin.py:2:1: F401 '.models.Job' imported but unused
+./job_portal/employer/forms.py:24:80: E501 line too long (120 > 79 characters)
+./job_portal/employer/forms.py:25:80: E501 line too long (100 > 79 characters)
+./job_portal/employer/forms.py:42:80: E501 line too long (108 > 79 characters)
+./job_portal/employer/forms.py:47:80: E501 line too long (80 > 79 characters)
+./job_portal/employer/forms.py:54:1: E303 too many blank lines (4)
+./job_portal/employer/forms.py:57:80: E501 line too long (82 > 79 characters)
+./job_portal/employer/forms.py:75:80: E501 line too long (85 > 79 characters)
+./job_portal/employer/forms.py:76:21: W292 no newline at end of file
+./job_portal/employer/migrations/0001_initial.py:19:80: E501 line too long (117 > 79 characters)
+./job_portal/employer/migrations/0001_initial.py:28:80: E501 line too long (117 > 79 characters)
+./job_portal/employer/migrations/0001_initial.py:34:80: E501 line too long (107 > 79 characters)
+./job_portal/employer/migrations/0002_job_employer.py:17:80: E501 line too long (129 > 79 characters)
+./job_portal/employer/migrations/0004_alter_job_employer.py:17:80: E501 line too long (105 > 79 characters)
+./job_portal/employer/models.py:13:1: E302 expected 2 blank lines, found 1
+./job_portal/employer/models.py:14:13: E225 missing whitespace around operator
+./job_portal/employer/models.py:17:11: E225 missing whitespace around operator
+./job_portal/employer/models.py:22:1: W293 blank line contains whitespace
+./job_portal/employer/models.py:24:46: W292 no newline at end of file
+./job_portal/employer/tests.py:1:1: F401 'django.test.TestCase' imported but unused
+./job_portal/employer/urls.py:5:80: E501 line too long (84 > 79 characters)
+./job_portal/employer/urls.py:17:80: E501 line too long (94 > 79 characters)
+./job_portal/employer/urls.py:18:80: E501 line too long (92 > 79 characters)
+./job_portal/employer/urls.py:19:80: E501 line too long (94 > 79 characters)
+./job_portal/employer/urls.py:20:80: E501 line too long (103 > 79 characters)
+./job_portal/employer/urls.py:24:80: E501 line too long (80 > 79 characters)
+./job_portal/employer/urls.py:25:80: E501 line too long (91 > 79 characters)
+./job_portal/employer/urls.py:26:80: E501 line too long (91 > 79 characters)
+./job_portal/employer/urls.py:28:80: E501 line too long (106 > 79 characters)
+./job_portal/employer/urls.py:29:80: E501 line too long (106 > 79 characters)
+./job_portal/employer/urls.py:30:80: E501 line too long (129 > 79 characters)
+./job_portal/employer/urls.py:31:80: E501 line too long (116 > 79 characters)
+./job_portal/employer/urls.py:33:1: W391 blank line at end of file
+./job_portal/employer/views.py:2:80: E501 line too long (95 > 79 characters)
+./job_portal/employer/views.py:7:1: F811 redefinition of unused 'redirect' from line 1
+./job_portal/employer/views.py:7:1: F811 redefinition of unused 'get_object_or_404' from line 1
+./job_portal/employer/views.py:7:1: F401 'django.shortcuts.redirect' imported but unused
+./job_portal/employer/views.py:19:80: E501 line too long (90 > 79 characters)
+./job_portal/employer/views.py:30:80: E501 line too long (134 > 79 characters)
+./job_portal/employer/views.py:31:80: E501 line too long (93 > 79 characters)
+./job_portal/employer/views.py:33:1: W293 blank line contains whitespace
+./job_portal/employer/views.py:36:1: E302 expected 2 blank lines, found 1
+./job_portal/employer/views.py:42:80: E501 line too long (86 > 79 characters)
+./job_portal/employer/views.py:53:8: E111 indentation is not a multiple of 4
+./job_portal/employer/views.py:53:80: E501 line too long (97 > 79 characters)
+./job_portal/employer/views.py:56:1: E302 expected 2 blank lines, found 1
+./job_portal/employer/views.py:63:80: E501 line too long (90 > 79 characters)
+./job_portal/employer/views.py:68:80: E501 line too long (139 > 79 characters)
+./job_portal/employer/views.py:69:80: E501 line too long (93 > 79 characters)
+./job_portal/employer/views.py:72:80: E501 line too long (83 > 79 characters)
+./job_portal/employer/views.py:82:80: E501 line too long (90 > 79 characters)
+./job_portal/employer/views.py:87:80: E501 line too long (120 > 79 characters)
+./job_portal/employer/views.py:88:80: E501 line too long (93 > 79 characters)
+./job_portal/employer/views.py:91:80: E501 line too long (83 > 79 characters)
+./job_portal/employer/views.py:112:5: F841 local variable 'employer' is assigned to but never used
+./job_portal/employer/views.py:119:5: F841 local variable 'candidates' is assigned to but never used
+./job_portal/employer/views.py:129:5: F841 local variable 'employer' is assigned to but never used
+./job_portal/employer/views.py:284:80: E501 line too long (86 > 79 characters)
+./job_portal/employer/views.py:294:80: E501 line too long (91 > 79 characters)
+./job_portal/job_portal/settings.py:24:80: E501 line too long (81 > 79 characters)
+./job_portal/job_portal/settings.py:94:80: E501 line too long (91 > 79 characters)
+./job_portal/job_portal/settings.py:97:80: E501 line too long (81 > 79 characters)
+./job_portal/job_portal/settings.py:100:80: E501 line too long (82 > 79 characters)
+./job_portal/job_portal/settings.py:103:80: E501 line too long (83 > 79 characters)
+./job_portal/user/admin.py:1:1: F401 'django.contrib.admin' imported but unused
+./job_portal/user/forms.py:25:80: E501 line too long (81 > 79 characters)
+./job_portal/user/migrations/0001_initial.py:17:80: E501 line too long (117 > 79 characters)
+./job_portal/user/models.py:4:1: E302 expected 2 blank lines, found 1
+./job_portal/user/models.py:9:80: E501 line too long (101 > 79 characters)
+./job_portal/user/tests.py:1:1: F401 'django.test.TestCase' imported but unused
+./job_portal/user/views.py:2:1: F401 'django.contrib.auth.hashers.make_password' imported but unused
+./job_portal/user/views.py:3:1: F401 'django.shortcuts.get_object_or_404' imported but unused
+./job_portal/user/views.py:36:1: W293 blank line contains whitespace
+./job_portal/user/views.py:41:1: W293 blank line contains whitespace
+./job_portal/user/views.py:71:80: E501 line too long (82 > 79 characters)
+./job_portal/user/views.py:75:1: W293 blank line contains whitespace
+./job_portal/user/views.py:77:80: E501 line too long (101 > 79 characters)
+./job_portal/user/views.py:80:1: W293 blank line contains whitespace
