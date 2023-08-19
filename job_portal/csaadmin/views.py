@@ -54,21 +54,21 @@ def delete_job(request, job_id):
         return HttpResponseRedirect('/') 
     job = get_object_or_404(Job, pk=job_id)
     job.delete()
-    return redirect('/csaadmin/list_jobs')
+    return redirect('/csaadmin/list_jobs/')
 
 def delete_employer(request, employer_id):
     if not is_admin(request):
         return HttpResponseRedirect('/') 
     employer = get_object_or_404(Employer, pk=employer_id)
     employer.userID.delete()
-    return redirect('/csaadmin/list_employers')
+    return redirect('/csaadmin/list_employers/')
 
 def delete_candidate(request, candidate_id):
     if not is_admin(request):
         return HttpResponseRedirect('/') 
     candidate = get_object_or_404(Candidate, pk=candidate_id)
     candidate.user.delete()
-    return redirect('/csaadmin/list_candidates')
+    return redirect('/csaadmin/list_candidates/')
 
 def candidate_profile(request, pk):
     if not is_admin(request):
@@ -129,9 +129,9 @@ def reset_password(request, role, pk):
         user.save()
         messages.success(request, 'Password reset successfully.')
         if role=='c':
-            return redirect(f'/csaadmin/candidate_profile/{pk}')  # Replace '/admin/users/' with the appropriate URL to list all users
+            return redirect(f'/csaadmin/candidate_profile/{pk}/')  # Replace '/admin/users/' with the appropriate URL to list all users
         else:
-            return redirect(f'/csaadmin/employer_profile/{pk}') 
+            return redirect(f'/csaadmin/employer_profile/{pk}/') 
     return render(request, 'csaadmin/reset_password.html', {'user': user})
 
 def change_email(request, role, pk):
@@ -152,8 +152,8 @@ def change_email(request, role, pk):
         user.save()
         messages.success(request, 'Email changed successfully.')
         if role=='c':
-            return redirect(f'/csaadmin/candidate_profile/{pk}')  # Replace '/admin/users/' with the appropriate URL to list all users
+            return redirect(f'/csaadmin/candidate_profile/{pk}/')  # Replace '/admin/users/' with the appropriate URL to list all users
         else:
-            return redirect(f'/csaadmin/employer_profile/{pk}') 
+            return redirect(f'/csaadmin/employer_profile/{pk}/') 
         
     return render(request, 'csaadmin/change_email.html', {'user': user})
